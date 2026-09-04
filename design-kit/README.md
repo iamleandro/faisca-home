@@ -90,8 +90,13 @@ the overlay menu, footer stacks), **600** (feature strip → 1-up).
    is cropped out of every shipped crop (`assets/dead-air-hero-1400.jpg`,
    `assets/dead-air-card-760.jpg`); the line is set as real HTML over the art.
    The uncropped frame stays available for `/games/dead-air/` decoration only.
-2. **Studio copy for `/about/` does not exist yet.** Anything drafted is marked
-   `[draft copy]` inline, in both the components and the canvas.
+2. **Some copy is still mine, not Leo's.** The inline markers have been removed
+   so the comps do not read as unfinished, but these sections are unrevised:
+   the hero body line and the three feature cells on `/`, the three feature
+   cells and the opening two paragraphs on `/games/dead-air/`, the studio
+   paragraphs on `/` and all of `/about/`, and the two prose lines on
+   `/contact/`. Everything else is real copy from the live site or from
+   `faisca-landing`.
 3. ~~Social handles are unknown.~~ **Resolved** — Instagram, X and LinkedIn
    are wired to the real `playfaisca` URLs with `target="_blank"` and
    `rel="me noopener"`. Discord is removed.

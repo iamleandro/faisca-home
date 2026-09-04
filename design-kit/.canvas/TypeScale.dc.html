@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <style>
+    body {
+      margin: 0; background: #09090B; color: #F4EFE6;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #FB793E; text-decoration: none; }
+    a:hover { color: #FD9463; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .disp { font-family: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", sans-serif; }
+    .eyebrow {
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #9A9388;
+    }
+    .rule { height: 1px; background: #28282F; }
+    .meta { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 10.5px; color: #7E7767; line-height: 1.5; }
+    .stepname { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 11px; color: #FB793E; letter-spacing: -0.01em; }
+    .specrow { display: grid; grid-template-columns: 112px 1fr; gap: 22px; align-items: baseline; padding: 13px 0; border-bottom: 1px solid #1E1E24; }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 44px; padding: 56px 60px 64px; background: #09090B;">
+
+  <div style="display: flex; flex-direction: column; gap: 22px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+      <div class="eyebrow">Faisca Games · Design kit · Step 02</div>
+      <div class="eyebrow" style="color: #FB793E;">Type</div>
+    </div>
+    <div class="rule"></div>
+    <div style="display: flex; gap: 48px; align-items: flex-end;">
+      <h1 class="disp" style="margin: 0; font-size: 82px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC; max-width: 520px;">THREE FACES,<br>ZERO LICENCES</h1>
+      <p style="margin: 0 0 6px; font-size: 15px; line-height: 1.5; color: #9A9388; max-width: 420px; text-wrap: pretty;">All three are SIL OFL 1.1 — free to self-host on Pages and free to embed in the game canvas. ~95 KB over the wire, latin subset, variable display axis.</p>
+    </div>
+  </div>
+
+  <!-- the three faces -->
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 22px; background: #121215; border: 1px solid #28282F;">
+      <div class="eyebrow" style="color: #FBB924;">Display</div>
+      <div class="disp" style="font-size: 58px; font-weight: 800; line-height: 0.9; letter-spacing: -0.02em; color: #FCF9EC;">Big Shoulders</div>
+      <div class="meta">SIL OFL 1.1 · variable 400–900<br>Condensed industrial grotesque.<br>Hero, section headings, score numerals, screen titles.</div>
+      <div class="mono" style="font-size: 11px; color: #7E7767;">fallback → Arial Narrow</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 22px; background: #121215; border: 1px solid #28282F;">
+      <div class="eyebrow" style="color: #FBB924;">Text</div>
+      <div style="font-size: 40px; font-weight: 600; line-height: 1.06; letter-spacing: -0.01em; color: #FCF9EC;">IBM Plex Sans</div>
+      <div class="meta">SIL OFL 1.1 · 400 / 500 / 600<br>Engineered, not neutral.<br>Body copy, nav, buttons, form labels.</div>
+      <div class="mono" style="font-size: 11px; color: #7E7767;">fallback → system sans</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 22px; background: #121215; border: 1px solid #28282F;">
+      <div class="eyebrow" style="color: #FBB924;">Mono</div>
+      <div class="mono" style="font-size: 34px; font-weight: 500; line-height: 1.06; letter-spacing: -0.02em; color: #FCF9EC;">IBM Plex Mono</div>
+      <div class="meta">SIL OFL 1.1 · 400 / 500<br>Rhymes with the typewriter note in the key art.<br>HUD readouts, dispatch lines, eyebrows, band ticks.</div>
+      <div class="mono" style="font-size: 11px; color: #7E7767;">fallback → SF Mono, Menlo</div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- scale -->
+  <div style="display: flex; flex-direction: column; gap: 18px;">
+    <div style="display: flex; gap: 14px; align-items: baseline;">
+      <div class="eyebrow" style="color: #FBB924;">Fluid scale</div>
+      <div class="mono" style="font-size: 12px; color: #9A9388;">clamp() interpolated 390px → 1440px · specimens shown at the 1440 ceiling</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+      <div class="specrow">
+        <div style="display: flex; flex-direction: column; gap: 3px;"><div class="stepname">--step-8</div><div class="meta">56 → 108px<br>hero display</div></div>
+        <div class="disp" style="font-size: 108px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC;">A SPARK</div>
+      </div>
+      <div class="specrow">
+        <div style="display: flex; flex-direction: column; gap: 3px;"><div class="stepname">--step-7</div><div class="meta">48 → 84px<br>page titles</div></div>
+        <div class="disp" style="font-size: 84px; font-weight: 800; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC;">DEAD AIR: ASHMERE</div>
+      </div>
+      <div class="specrow">
+        <div style="display: flex; flex-direction: column; gap: 3px;"><div class="stepname">--step-6</div><div class="meta">41 → 64px<br>section headings</div></div>
+        <div class="disp" style="font-size: 64px; font-weight: 800; line-height: 0.86; letter-spacing: -0.02em; color: #F4EFE6;">SIGNAL LOCK</div>
+      </div>
+      <div class="specrow">
+        <div style="display: flex; flex-direction: column; gap: 3px;"><div class="stepname">--step-5</div><div class="meta">35 → 50px<br>score numerals</div></div>
+        <div class="disp" style="font-size: 50px; font-weight: 700; line-height: 1.06; letter-spacing: -0.01em; color: #FBB924; font-variant-numeric: tabular-nums;">04 820</div>
+      </div>
+      <div class="specrow">
+        <div style="display: flex; flex-direction: column; gap: 3px;"><div class="stepname">--step-4</div><div class="meta">30 → 40px<br>card titles</div></div>
+        <div class="disp" style="font-size: 40px; font-weight: 700; line-height: 1.06; letter-spacing: -0.01em; color: #F4EFE6;">ROUND OVER</div>
+      </div>
+      <div class="specrow">
+        <div style="display: flex; flex-direction: column; gap: 3px;"><div class="stepname">--step-3</div><div class="meta">26 → 32px<br>lede</div></div>
+        <div style="font-size: 32px; font-weight: 400; line-height: 1.25; letter-spacing: -0.01em; color: #F4EFE6;">A spark, then a game.</div>
+      </div>
+      <div class="specrow">
+        <div style="display: flex; flex-direction: column; gap: 3px;"><div class="stepname">--step-2</div><div class="meta">22.5 → 26px<br>subheads</div></div>
+        <div style="font-size: 26px; font-weight: 500; line-height: 1.25; color: #F4EFE6;">Listen closer. The truth is in the traffic.</div>
+      </div>
+      <div class="specrow">
+        <div style="display: flex; flex-direction: column; gap: 3px;"><div class="stepname">--step-1</div><div class="meta">19 → 21px<br>large body</div></div>
+        <div style="font-size: 21px; font-weight: 400; line-height: 1.5; color: #F4EFE6;">Faisca Games is a two-person studio in Toronto.</div>
+      </div>
+      <div class="specrow">
+        <div style="display: flex; flex-direction: column; gap: 3px;"><div class="stepname">--step-0</div><div class="meta">16 → 17px<br>body · nav · buttons</div></div>
+        <div style="font-size: 17px; font-weight: 400; line-height: 1.5; color: #F4EFE6; max-width: 62ch;">Scan the band, hold the needle inside the lock window, log the lead before the sixty seconds run out. Phantom signals do not count.</div>
+      </div>
+      <div class="specrow">
+        <div style="display: flex; flex-direction: column; gap: 3px;"><div class="stepname">--step--1</div><div class="meta">13.5 → 14px<br>captions · legal</div></div>
+        <div style="font-size: 14px; font-weight: 400; line-height: 1.65; color: #9A9388;">Dead Air: Ashmere — Coming soon. © Faisca Games Inc.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- modifiers -->
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div class="eyebrow" style="color: #FBB924;">Leading</div>
+      <div class="meta" style="font-size: 11.5px; line-height: 1.9;">
+        --leading-flat &nbsp;&nbsp;0.86 &nbsp;· step-6 and up<br>
+        --leading-tight &nbsp;1.06 &nbsp;· step-4 / 5<br>
+        --leading-snug &nbsp;&nbsp;1.25 &nbsp;· step-2 / 3<br>
+        --leading-body &nbsp;&nbsp;1.5 &nbsp;&nbsp;· running copy<br>
+        --leading-loose &nbsp;1.65 &nbsp;· captions, legal
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div class="eyebrow" style="color: #FBB924;">Tracking</div>
+      <div class="meta" style="font-size: 11.5px; line-height: 1.9;">
+        --track-display &nbsp;-0.02em · display<br>
+        --track-tight &nbsp;&nbsp;&nbsp;-0.01em<br>
+        --track-normal &nbsp;&nbsp;0<br>
+        --track-wide &nbsp;&nbsp;&nbsp;&nbsp;0.08em &nbsp;· band ticks<br>
+        --track-caps &nbsp;&nbsp;&nbsp;&nbsp;0.16em &nbsp;· eyebrows
+      </div>
+      <div class="mono" style="font-size: 11px; color: #7E7767; line-height: 1.5;">0.16em is carried over from the live site's <span style="color:#9A9388;">.studio</span> rule.</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div class="eyebrow" style="color: #FBB924;">Numerals</div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div class="disp" style="font-size: 30px; font-weight: 700; color: #FBB924; font-variant-numeric: tabular-nums;">00 000 &nbsp; 11 111</div>
+        <div class="mono" style="font-size: 11px; color: #7E7767; line-height: 1.55;">Every HUD readout sets <span style="color:#9A9388;">font-variant-numeric: tabular-nums</span>. Score, timer and best all count without the layout twitching.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

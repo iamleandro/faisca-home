@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #09090B; color: #F4EFE6;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased; }
+    a { color: #FB793E; text-decoration: none; }
+    a:hover { color: #FD9463; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .disp { font-family: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", sans-serif; }
+    .eyebrow { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: #9A9388; }
+    .rule { height: 1px; background: #28282F; }
+    .frame { position: relative; width: 100%; height: 315px; background: #010101; border: 1px solid #28282F; overflow: hidden; }
+    .scan { position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+      background: repeating-linear-gradient(180deg, rgba(0,0,0,0.30) 0 1px, rgba(0,0,0,0) 1px 3px); }
+    .vig { position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(120% 90% at 50% 46%, rgba(0,0,0,0) 38%, rgba(0,0,0,0.7) 100%); }
+    .veil { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 12px; text-align: center; padding: 26px; background: rgba(1,1,1,0.87); }
+    .cta { height: 44px; padding: 0 26px; border: 0; background: #FB793E; color: #140901;
+      font-family: "Big Shoulders Display", "Arial Narrow", sans-serif; font-size: 20px; font-weight: 800;
+      letter-spacing: 0.09em; cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+    .ghost { height: 44px; padding: 0 22px; background: none; border: 1px solid #34343D; color: #F4EFE6;
+      font-family: "Big Shoulders Display", "Arial Narrow", sans-serif; font-size: 20px; font-weight: 800;
+      letter-spacing: 0.09em; cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+    .hudlab { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 9px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: #7E7767; }
+    .hudval { font-family: "Big Shoulders Display", "Arial Narrow", sans-serif; font-weight: 800;
+      line-height: 1; font-variant-numeric: tabular-nums; }
+    .cap { display: flex; flex-direction: column; gap: 4px; }
+    .capname { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 12px; color: #FB793E; }
+    .capnote { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 10.5px; color: #7E7767; line-height: 1.55; }
+    .band { position: absolute; left: 40px; right: 40px; top: 50%; transform: translateY(-50%); height: 74px; }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 36px; padding: 50px 40px 56px; background: #09090B;">
+
+  <div style="display: flex; flex-direction: column; gap: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+      <div class="eyebrow">Faisca Games · Design kit · Step 03</div>
+      <div class="eyebrow" style="color: #FB793E;">Signal Lock — the four screens</div>
+    </div>
+    <div class="rule"></div>
+    <div style="display: flex; gap: 40px; align-items: flex-end;">
+      <h1 class="disp" style="margin: 0; font-size: 68px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC;">FOUR STATES,<br>ONE SURFACE</h1>
+      <p style="margin: 0 0 6px; font-size: 14px; line-height: 1.5; color: #9A9388; max-width: 420px; text-wrap: pretty;">Every screen is an overlay on the live stage, never a route change — the band keeps drifting behind the veil so the player never loses their place. Shipped in <span class="mono" style="color: #F4EFE6;">game/screens.html</span>.</p>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 40px;">
+
+    <!-- START -->
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div class="frame">
+        <div style="position: absolute; left: 40px; right: 40px; top: 54%; height: 60px; opacity: 0.16; color: #2C941B;">
+          <svg width="100%" height="60" viewBox="0 0 240 60" preserveAspectRatio="none" fill="none"><path d="M0 30 L12 18 L24 40 L36 22 L48 36 L60 14 L72 42 L84 26 L96 34 L108 16 L120 44 L132 24 L144 38 L156 20 L168 40 L180 28 L192 32 L204 18 L216 42 L228 26 L240 30" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"></path></svg>
+        </div>
+        <div class="veil">
+          <div class="hudlab" style="color: #9A9388;">Dead Air: Ashmere</div>
+          <div class="disp" style="font-size: 54px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC;">SIGNAL LOCK</div>
+          <p style="margin: 0; max-width: 330px; font-size: 12.5px; line-height: 1.5; color: #9A9388; text-wrap: pretty;">Sixty seconds on the Ashmere band. Tune the needle onto a signal, hold LOG until the window closes. Phantoms cost you three seconds.</p>
+          <div style="display: flex; gap: 10px; padding-top: 4px;">
+            <button class="cta" type="button">TUNE IN</button>
+          </div>
+          <div class="mono" style="font-size: 10px; color: #7E7767; padding-top: 2px;">&#8592; &#8594; tune &nbsp;·&nbsp; space to hold</div>
+        </div>
+        <div class="scan"></div><div class="vig"></div>
+      </div>
+      <div class="cap">
+        <div class="capname">start</div>
+        <div class="capnote">Autofocus lands on TUNE IN. The rules paragraph is the only body copy in the game — everything else is one line or a number. Best score is hidden here on a first visit and appears once localStorage has one.</div>
+      </div>
+    </div>
+
+    <!-- PAUSE -->
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div class="frame">
+        <div style="position: absolute; top: 14px; left: 20px; right: 20px; display: flex; justify-content: space-between;">
+          <div style="display: flex; flex-direction: column; gap: 3px;"><div class="hudlab">Score</div><div class="hudval" style="font-size: 24px; color: #FBB924;">01 240</div></div>
+          <div style="display: flex; flex-direction: column; gap: 3px; align-items: center;"><div class="hudlab">Time</div><div class="hudval" style="font-size: 30px; color: #FCF9EC;">0:31</div></div>
+          <div style="display: flex; flex-direction: column; gap: 3px; align-items: flex-end;"><div class="hudlab">Best</div><div class="hudval" style="font-size: 24px; color: #9A9388;">02 180</div></div>
+        </div>
+        <div class="band">
+          <svg width="100%" height="74" viewBox="0 0 1000 74" preserveAspectRatio="none" fill="none">
+            <path d="M0 62 H1000" stroke="#28282F" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+            <g stroke="#28282F" stroke-width="1" vector-effect="non-scaling-stroke"><path d="M0 62V50M200 62V50M400 62V50M600 62V50M800 62V50M1000 62V50"></path></g>
+          </svg>
+        </div>
+        <div class="veil" style="background: rgba(1,1,1,0.8);">
+          <div class="disp" style="font-size: 56px; font-weight: 900; line-height: 0.86; color: #FCF9EC;">PAUSED</div>
+          <div class="mono" style="font-size: 11.5px; color: #9A9388;">The band keeps drifting without you.</div>
+          <div style="display: flex; gap: 10px; padding-top: 6px;">
+            <button class="cta" type="button">RESUME</button>
+            <button class="ghost" type="button">GIVE UP</button>
+          </div>
+        </div>
+        <div class="scan"></div><div class="vig"></div>
+      </div>
+      <div class="cap">
+        <div class="capname">pause</div>
+        <div class="capnote">Veil is lighter (0.80 vs 0.87) so the HUD numbers stay legible behind it — the player is checking the clock, not leaving. Esc, the pause button and a window blur all land here. Autofocus on RESUME.</div>
+      </div>
+    </div>
+
+    <!-- ROUND END -->
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div class="frame">
+        <div class="veil">
+          <div class="disp" style="font-size: 50px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC;">ROUND OVER</div>
+          <div class="mono" style="font-size: 11.5px; color: #9A9388;">Leads filed. Ashmere goes quiet until the next shift.</div>
+          <div style="display: flex; gap: 34px; padding: 8px 0 4px;">
+            <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;"><div class="hudlab">Score</div><div class="hudval" style="font-size: 38px; color: #FBB924;">02 460</div></div>
+            <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;"><div class="hudlab">Leads</div><div class="hudval" style="font-size: 38px; color: #F4EFE6;">07</div></div>
+            <div style="display: flex; flex-direction: column; gap: 4px; align-items: center;"><div class="hudlab">Best</div><div class="hudval" style="font-size: 38px; color: #6BE04D;">02 460</div></div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="cta" type="button">RUN IT AGAIN</button>
+            <button class="ghost" type="button">BACK TO SITE</button>
+          </div>
+        </div>
+        <div class="scan"></div><div class="vig"></div>
+      </div>
+      <div class="cap">
+        <div class="capname">round end</div>
+        <div class="capnote">Best turns <span style="color:#6BE04D;">--game-locked</span> only when this round beat it; otherwise it stays <span style="color:#9A9388;">--color-text-mute</span>. That colour change is the entire celebration — no confetti, no modal stack.</div>
+      </div>
+    </div>
+
+    <!-- FAIL -->
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div class="frame">
+        <div class="veil" style="background: rgba(1,1,1,0.93);">
+          <div class="disp" style="font-size: 62px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #C4402A;">DEAD AIR.</div>
+          <div class="mono" style="font-size: 11.5px; color: #9A9388; max-width: 340px; line-height: 1.6;">Sixty seconds, nothing logged. The band was busy — you were not.</div>
+          <div style="display: flex; gap: 10px; padding-top: 8px;">
+            <button class="cta" type="button">TRY AGAIN</button>
+          </div>
+          <div class="mono" style="font-size: 10px; color: #7E7767; padding-top: 2px;">Hold LOG. The window will not close on its own.</div>
+        </div>
+        <div class="scan"></div><div class="vig"></div>
+      </div>
+      <div class="cap">
+        <div class="capname">fail — zero leads</div>
+        <div class="capnote">Not a game-over, a shrug: heaviest veil, no score row at all, and one line of coaching. The title borrows the game&#39;s own name for the joke, which is why it is the only place <span style="color:#C4402A;">--game-lost</span> is used at display size.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

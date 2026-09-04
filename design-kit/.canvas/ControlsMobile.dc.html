@@ -1,0 +1,284 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #010101; color: #F4EFE6;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased; }
+    a { color: #FB793E; text-decoration: none; }
+    a:hover { color: #FD9463; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .disp { font-family: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", sans-serif; }
+    .hudlab { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 9.5px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: #7E7767; }
+    .hudval { font-family: "Big Shoulders Display", "Arial Narrow", sans-serif; font-weight: 800;
+      line-height: 1; font-variant-numeric: tabular-nums; }
+    .nudge { width: 72px; height: 64px; display: flex; align-items: center; justify-content: center;
+      background: #121215; border: 1px solid #28282F; color: #9A9388; padding: 0; cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+    .nudge:active { background: #1E1E24; color: #F4EFE6; }
+    .nudge:focus-visible { outline: 2px solid #FBB924; outline-offset: 2px; }
+    .logbig { flex: 1; height: 64px; border: 0; cursor: pointer; background: #FB793E; color: #140901;
+      font-family: "Big Shoulders Display", "Arial Narrow", sans-serif; font-size: 28px; font-weight: 800;
+      letter-spacing: 0.1em; touch-action: none;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); }
+    .logbig[data-held="1"] { background: #E05F26; }
+    .logbig:focus-visible { outline: 2px solid #FBB924; outline-offset: 3px; }
+    .tool { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+      background: rgba(18,18,21,0.8); border: 1px solid #28282F; color: #9A9388; padding: 0; cursor: pointer; }
+    .tool[aria-pressed="true"] { color: #FB793E; border-color: rgba(251,121,62,0.34); }
+    .tool:focus-visible { outline: 2px solid #FBB924; outline-offset: 2px; }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; height: 844px; background: #010101; overflow: hidden;">
+
+  <!-- HUD -->
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 10px; gap: 12px; flex: none;">
+    <div style="display: flex; flex-direction: column; gap: 3px;">
+      <div class="hudlab">Score</div><div class="hudval" style="font-size: 26px; color: #FBB924;">{{scoreText}}</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 3px; align-items: center;">
+      <div class="hudlab">Time</div><div class="hudval" style="font-size: 34px; color: {{timerColor}};">{{timerText}}</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 3px; align-items: flex-end;">
+      <div class="hudlab">Best</div><div class="hudval" style="font-size: 26px; color: #9A9388;">{{bestText}}</div>
+    </div>
+  </div>
+
+  <!-- 3:4 stage -->
+  <div style="position: relative; margin: 0 16px; height: 477px; background: #010101; border: 1px solid #1E1E24; overflow: hidden; flex: none;">
+    <div style="position: absolute; left: 0; right: 0; top: 40%; height: 90px; opacity: {{waveOpacity}}; color: #2C941B; pointer-events: none;">
+      <svg width="100%" height="90" viewBox="0 0 240 60" preserveAspectRatio="none" fill="none">
+        <path d="{{wavePath}}" stroke="currentColor" stroke-width="0.9" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+
+    <!-- the dial: full-height drag surface, horizontal travel -->
+    <div onPointerDown="{{onBandDown}}" onPointerMove="{{onBandMove}}" onPointerUp="{{onBandUp}}" onPointerCancel="{{onBandUp}}" style="position: absolute; left: 0; right: 0; top: 0; bottom: 96px; touch-action: none; cursor: ew-resize;">
+      <div style="position: absolute; left: 14px; right: 14px; bottom: 96px; height: 16px; color: #28282F;">
+        <svg width="100%" height="16" viewBox="0 0 1000 16" preserveAspectRatio="none" fill="none">
+          <path d="M0 16 H1000" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"></path>
+          <g stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"><path d="M0 16V4M200 16V4M400 16V4M600 16V4M800 16V4M1000 16V4"></path></g>
+          <g stroke="currentColor" stroke-width="1" opacity="0.5" vector-effect="non-scaling-stroke"><path d="M100 16v-6M300 16v-6M500 16v-6M700 16v-6M900 16v-6"></path></g>
+        </svg>
+      </div>
+
+      <sc-for list="{{signals}}" as="sg" hint-placeholder-count="4">
+        <div style="position: absolute; bottom: 132px; left: {{sg.left}}%; margin-left: -14px; opacity: {{sg.opacity}}; pointer-events: none;">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+            <path d="{{sg.d}}" fill="{{sg.fill}}" stroke="{{sg.stroke}}" stroke-width="{{sg.sw}}" stroke-dasharray="{{sg.dash}}" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </sc-for>
+
+      <div style="position: absolute; bottom: 112px; height: 96px; left: {{win.left}}%; width: {{win.w}}%; border: {{win.border}}; background: {{win.fill}}; opacity: {{win.opacity}}; pointer-events: none;"></div>
+
+      <div style="position: absolute; top: 112px; bottom: 112px; left: {{needleLeft}}%; width: 0; pointer-events: none;">
+        <div style="position: absolute; top: 12px; bottom: 0; left: -1.5px; width: 3px; background: {{stateColor}}; box-shadow: {{needleGlow}};"></div>
+        <div style="position: absolute; top: 0; left: -7px; width: 14px; height: 16px; background: {{stateColor}}; clip-path: polygon(50% 100%, 100% 0, 0 0);"></div>
+      </div>
+    </div>
+
+    <!-- meter + dispatch, inside the stage -->
+    <div style="position: absolute; left: 14px; right: 14px; bottom: 16px; display: flex; flex-direction: column; gap: 10px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <div class="hudlab">Lock</div>
+        <div class="mono" style="font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: {{stateColor}};">{{stateName}}</div>
+      </div>
+      <div style="height: 8px; background: #121215; border: 1px solid #28282F; position: relative; overflow: hidden;">
+        <div style="position: absolute; inset: 0 auto 0 0; width: {{lockPct}}%; background: {{stateColor}};"></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 9px; min-height: 18px;">
+        <div style="width: 5px; height: 5px; flex: none; background: {{dispatchDot}};"></div>
+        <div class="mono" style="font-size: 11.5px; line-height: 1.35; color: {{dispatchColor}};">{{dispatch}}</div>
+      </div>
+    </div>
+
+    <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 8px;">
+      <button class="tool" type="button" onClick="{{toggleMute}}" aria-pressed="{{mutedAttr}}" aria-label="Mute">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{muteIcon}}"></path></svg>
+      </button>
+      <button class="tool" type="button" onClick="{{togglePause}}" aria-pressed="{{pausedAttr}}" aria-label="Pause">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{pauseIcon}}"></path></svg>
+      </button>
+      <button class="tool" type="button" onClick="{{toggleFx}}" aria-pressed="{{fxAttr}}" aria-label="Reduce effects">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{fxIcon}}"></path></svg>
+      </button>
+    </div>
+
+    <sc-if value="{{showReady}}" hint-placeholder-val="{{true}}">
+      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 26px; text-align: center; background: rgba(1,1,1,0.9);">
+        <div class="disp" style="font-size: 52px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC;">SIGNAL<br>LOCK</div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #9A9388; text-wrap: pretty;">Drag anywhere on the dial. Hold LOG until the window closes.</p>
+        <button class="logbig" style="flex: none; width: 190px;" type="button" onClick="{{start}}">TUNE IN</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{showOver}}" hint-placeholder-val="{{false}}">
+      <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 26px; text-align: center; background: rgba(1,1,1,0.92);">
+        <div class="disp" style="font-size: 46px; font-weight: 900; line-height: 0.86; color: {{overColor}};">{{overTitle}}</div>
+        <div style="display: flex; gap: 26px;">
+          <div style="display: flex; flex-direction: column; gap: 3px; align-items: center;"><div class="hudlab">Score</div><div class="hudval" style="font-size: 32px; color: #FBB924;">{{scoreText}}</div></div>
+          <div style="display: flex; flex-direction: column; gap: 3px; align-items: center;"><div class="hudlab">Leads</div><div class="hudval" style="font-size: 32px; color: #F4EFE6;">{{loggedText}}</div></div>
+        </div>
+        <button class="logbig" style="flex: none; width: 190px;" type="button" onClick="{{start}}">AGAIN</button>
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- thumb zone -->
+  <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 16px 0; flex: none;">
+    <div style="display: flex; gap: 10px; align-items: stretch;">
+      <button class="nudge" type="button" onPointerDown="{{nudgeLeftDown}}" onPointerUp="{{nudgeUp}}" onPointerLeave="{{nudgeUp}}" aria-label="Tune down">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 L8 12 L15 19"></path></svg>
+      </button>
+      <button class="logbig" type="button" onPointerDown="{{onLogDown}}" onPointerUp="{{onLogUp}}" onPointerLeave="{{onLogUp}}" onPointerCancel="{{onLogUp}}" data-held="{{heldAttr}}">LOG</button>
+      <button class="nudge" type="button" onPointerDown="{{nudgeRightDown}}" onPointerUp="{{nudgeUp}}" onPointerLeave="{{nudgeUp}}" aria-label="Tune up">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5 L16 12 L9 19"></path></svg>
+      </button>
+    </div>
+    <div class="mono" style="font-size: 10px; letter-spacing: 0.05em; color: #7E7767; text-align: center;">64 px controls · 10 px gaps · 34 px reserved below for the home indicator</div>
+  </div>
+
+  <!-- safe-area reservation, drawn only so the spec is visible; ships as padding-bottom: env(safe-area-inset-bottom) -->
+  <div style="height: 34px; flex: none;"></div>
+</div>
+</x-dc>
+
+<script data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.LOCK_MS = 1200; this.ROUND_MS = 60000;
+    this.C = { idle:"#6E7A70", near:"#DA8D23", locking:"#FBB924", locked:"#6BE04D", lost:"#C4402A", phantom:"#6B655C" };
+    this.LINES = ["Ashmere docks. Two voices, one radio.", "Numbers on the harbour band.",
+      "The night bus driver called it in.", "Weather station, but the wind is wrong.",
+      "A child reading street names.", "Same message. Fourth time tonight."];
+    this.keys = { left: false, right: false };
+    this.dragging = false; this.seed = 90210;
+    this.state = { phase: "ready", needle: 50, signals: this.makeSignals(), holding: false, lockPct: 0,
+      flash: "", flashAt: 0, score: 0, best: 0, logged: 0, timeLeft: this.ROUND_MS,
+      dispatch: "Waiting on the band.", dispatchN: 0, muted: false, paused: false, reduceFx: false,
+      wave: this.makeWave() };
+    this.loop = this.loop.bind(this);
+  }
+  rnd() { this.seed = (this.seed * 1103515245 + 12345) & 0x7fffffff; return this.seed / 0x7fffffff; }
+  makeWave() { var pts = [], x, env, y;
+    for (x = 0; x <= 240; x += 3) { env = Math.sin(x / 240 * Math.PI) * 0.55 + 0.45;
+      y = 30 - (this.rnd() * 2 - 1) * 20 * env - Math.sin(x / 17) * 3 * env; pts.push(x + " " + y.toFixed(1)); }
+    return "M" + pts.join(" L"); }
+  makeSignals() { var out = [], i;
+    for (i = 0; i < 4; i++) out.push({ id: i, pos: 14 + i * 22 + this.rnd() * 8, vel: (this.rnd() * 2 - 1) * 0.22, phantom: i === 1 || i === 3 });
+    return out; }
+  componentDidMount() { this.last = Date.now(); this.raf = requestAnimationFrame(this.loop); }
+  componentWillUnmount() { if (this.raf) cancelAnimationFrame(this.raf); }
+  loop() { var now = Date.now(); var dt = Math.min(50, now - this.last); this.last = now; this.tick(dt); this.raf = requestAnimationFrame(this.loop); }
+  tick(dt) {
+    var s = this.state;
+    if (s.phase !== "playing" || s.paused) { if (s.lockPct > 0) this.setState({ lockPct: 0 }); return; }
+    var needle = s.needle, k = dt / 16;
+    if (this.keys.left) needle -= 0.62 * k;
+    if (this.keys.right) needle += 0.62 * k;
+    needle = Math.max(3, Math.min(97, needle));
+    var signals = s.signals.map(function (g) { var p = g.pos + g.vel * k, v = g.vel;
+      if (p < 6) { p = 6; v = -v; } if (p > 94) { p = 94; v = -v; }
+      return { id: g.id, pos: p, vel: v, phantom: g.phantom }; });
+    var near = null, bd = 1e9, i, d;
+    for (i = 0; i < signals.length; i++) { d = Math.abs(signals[i].pos - needle); if (d < bd) { bd = d; near = signals[i]; } }
+    var lockPct = s.lockPct, winW = 7 - 4.5 * (lockPct / 100), inside = near && bd <= winW / 2;
+    var score = s.score, logged = s.logged, timeLeft = s.timeLeft - dt;
+    var dispatch = s.dispatch, dispatchN = s.dispatchN, flash = s.flash, flashAt = s.flashAt;
+    if (inside && s.holding) { lockPct += (dt / this.LOCK_MS) * 100; }
+    else { if (lockPct > 34) { flash = "lost"; flashAt = Date.now(); } lockPct -= (dt / 380) * 100; }
+    if (lockPct < 0) lockPct = 0;
+    if (lockPct >= 100) {
+      lockPct = 0;
+      if (near.phantom) { timeLeft -= 3000; flash = "lost"; flashAt = Date.now(); dispatch = "Phantom. Nothing there."; }
+      else { score += 100 + Math.round(Math.max(0, timeLeft) / 1000) * 2; logged += 1; flash = "locked"; flashAt = Date.now();
+        dispatch = this.LINES[dispatchN % this.LINES.length]; dispatchN += 1; }
+      var self = this, hit = near.id;
+      signals = signals.map(function (g) { if (g.id !== hit) return g;
+        var p = 6 + self.rnd() * 88; if (Math.abs(p - needle) < 18) p = p > needle ? p + 18 : p - 18;
+        return { id: g.id, pos: Math.max(6, Math.min(94, p)), vel: (self.rnd() * 2 - 1) * 0.3, phantom: self.rnd() < 0.4 }; });
+    }
+    var phase = s.phase, best = s.best;
+    if (timeLeft <= 0) { timeLeft = 0; phase = "over"; if (score > best) best = score; }
+    this.setState({ needle: needle, signals: signals, lockPct: lockPct, score: score, logged: logged,
+      timeLeft: timeLeft, dispatch: dispatch, dispatchN: dispatchN, flash: flash, flashAt: flashAt, phase: phase, best: best });
+  }
+  setNeedleFromX(x, r) { var p = ((x - r.left) / r.width) * 100; this.setState({ needle: Math.max(3, Math.min(97, p)) }); }
+  pad(n, w) { var t = String(Math.max(0, Math.round(n))); while (t.length < w) t = "0" + t; return t; }
+  begin() { this.keys.left = false; this.keys.right = false; this.last = Date.now();
+    this.setState({ phase: "playing", needle: 50, signals: this.makeSignals(), lockPct: 0, holding: false,
+      score: 0, logged: 0, timeLeft: this.ROUND_MS, paused: false, flash: "", flashAt: 0, dispatch: "Band open. Find something." }); }
+
+  renderVals() {
+    var s = this.state, C = this.C, self = this, now = Date.now();
+    var flashing = s.flash && (now - s.flashAt) < 460 ? s.flash : "";
+    var near = null, bd = 1e9, i, d;
+    for (i = 0; i < s.signals.length; i++) { d = Math.abs(s.signals[i].pos - s.needle); if (d < bd) { bd = d; near = s.signals[i]; } }
+    var winW = 7 - 4.5 * (s.lockPct / 100), inside = near && bd <= winW / 2;
+    var st = "idle";
+    if (flashing === "locked") st = "locked";
+    else if (flashing === "lost") st = "lost";
+    else if (inside && s.holding && s.lockPct > 0) st = "locking";
+    else if (near && bd <= 7) st = "near";
+    if (s.phase !== "playing") st = "idle";
+    var stateColor = C[st], lit = st === "near" || st === "locking" || st === "locked";
+    var signals = s.signals.map(function (g) {
+      var isNear = Math.abs(g.pos - s.needle) <= 7;
+      if (g.phantom) return { id: g.id, left: g.pos, opacity: isNear ? 0.95 : 0.5,
+        d: "M16 4 L28 16 L16 28 L4 16 Z", fill: "none", stroke: C.phantom, sw: 1.8, dash: "4 4" };
+      return { id: g.id, left: g.pos, opacity: isNear ? 1 : 0.62,
+        d: "M16 4 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -8 0 v-16 a4 4 0 0 1 4 -4 Z",
+        fill: isNear ? stateColor : C.near, stroke: "none", sw: 0, dash: "none" }; });
+    var win = { left: 0, w: 0, border: "0", fill: "none", opacity: 0 };
+    if (s.phase === "playing" && near && bd <= 9) {
+      win.left = Math.max(0, near.pos - winW / 2); win.w = winW; win.opacity = 1;
+      win.border = (st === "lost" ? "2px dashed " : "2px solid ") + stateColor;
+      win.fill = st === "locked" ? "rgba(107,224,77,0.16)" : (st === "locking" ? "rgba(251,185,36,0.07)" : "none"); }
+    var secs = Math.ceil(s.timeLeft / 1000);
+    return {
+      wavePath: s.wave, waveOpacity: s.reduceFx ? 0.1 : (lit ? 0.3 : 0.17),
+      scoreText: this.pad(s.score, 5), bestText: this.pad(s.best, 5), loggedText: this.pad(s.logged, 2),
+      timerText: Math.floor(secs / 60) + ":" + this.pad(secs % 60, 2),
+      timerColor: secs <= 10 && s.phase === "playing" ? C.lost : "#FCF9EC",
+      needleLeft: s.needle, needleGlow: s.reduceFx || !lit ? "none" : "0 0 14px " + stateColor,
+      stateColor: stateColor, stateName: st, lockPct: s.lockPct, signals: signals, win: win,
+      dispatch: s.dispatch,
+      dispatchColor: s.dispatch.indexOf("Phantom") === 0 ? C.lost : "#F4EFE6",
+      dispatchDot: s.dispatch.indexOf("Phantom") === 0 ? C.lost : C.locked,
+      heldAttr: s.holding ? "1" : "0", mutedAttr: s.muted ? "true" : "false",
+      pausedAttr: s.paused ? "true" : "false", fxAttr: s.reduceFx ? "true" : "false",
+      muteIcon: s.muted ? "M4 9v6h4l5 4V5L8 9H4z M17 10l5 4 M22 10l-5 4" : "M4 9v6h4l5 4V5L8 9H4z M17 9a4 4 0 0 1 0 6",
+      pauseIcon: s.paused ? "M7 4.5 L19.5 12 L7 19.5 Z" : "M9 5v14 M15 5v14",
+      fxIcon: s.reduceFx ? "M2 12h20" : "M2 12h3l2.5-6 3 12 3-9 2.5 3h6",
+      showReady: s.phase === "ready", showOver: s.phase === "over",
+      overTitle: s.logged === 0 ? "DEAD AIR." : "ROUND OVER",
+      overColor: s.logged === 0 ? C.lost : "#FCF9EC",
+      onBandDown: function (e) { var el = e.currentTarget, r = el.getBoundingClientRect();
+        try { el.setPointerCapture(e.pointerId); } catch (err) {} self.dragging = true; self.setNeedleFromX(e.clientX, r); },
+      onBandMove: function (e) { if (!self.dragging) return; self.setNeedleFromX(e.clientX, e.currentTarget.getBoundingClientRect()); },
+      onBandUp: function () { self.dragging = false; },
+      onLogDown: function (e) { e.preventDefault(); self.setState({ holding: true }); },
+      onLogUp: function () { self.setState({ holding: false }); },
+      nudgeLeftDown: function (e) { e.preventDefault(); self.keys.left = true; },
+      nudgeRightDown: function (e) { e.preventDefault(); self.keys.right = true; },
+      nudgeUp: function () { self.keys.left = false; self.keys.right = false; },
+      toggleMute: function () { self.setState({ muted: !self.state.muted }); },
+      togglePause: function () { self.setState({ paused: !self.state.paused }); },
+      toggleFx: function () { self.setState({ reduceFx: !self.state.reduceFx }); },
+      start: function () { self.begin(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

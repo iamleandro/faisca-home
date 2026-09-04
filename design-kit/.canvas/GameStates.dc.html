@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap">
+  <style>
+    body {
+      margin: 0; background: #09090B; color: #F4EFE6;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #FB793E; text-decoration: none; }
+    a:hover { color: #FD9463; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .disp { font-family: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", sans-serif; }
+    .eyebrow {
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #9A9388;
+    }
+    .rule { height: 1px; background: #28282F; }
+    .card { display: flex; flex-direction: column; gap: 0; background: #121215; border: 1px solid #28282F; }
+    .card-h { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid #1E1E24; }
+    .card-b { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+    .dot { width: 14px; height: 14px; flex: none; }
+    .name { font-family: "Big Shoulders Display", "Arial Narrow", sans-serif; font-size: 24px; font-weight: 800; letter-spacing: 0.01em; line-height: 1; }
+    .tokline { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 11px; color: #7E7767; line-height: 1.6; }
+    .note { font-size: 12.5px; line-height: 1.5; color: #9A9388; text-wrap: pretty; }
+    .stage { background: #010101; border: 1px solid #1E1E24; display: block; }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 40px; padding: 56px 60px 64px; background: #09090B;">
+
+  <div style="display: flex; flex-direction: column; gap: 22px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+      <div class="eyebrow">Faisca Games · Design kit · Step 02</div>
+      <div class="eyebrow" style="color: #FB793E;">Signal Lock — state colours</div>
+    </div>
+    <div class="rule"></div>
+    <div style="display: flex; gap: 48px; align-items: flex-end;">
+      <h1 class="disp" style="margin: 0; font-size: 76px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC; max-width: 480px;">HUE IS THE<br>SECOND CHANNEL</h1>
+      <p style="margin: 0 0 6px; font-size: 15px; line-height: 1.5; color: #9A9388; max-width: 430px; text-wrap: pretty;">Every state carries a marker shape and a luminance step as well as a colour, so the tuner still reads with deuteranopia, with protanopia, and on a phone in daylight.</p>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+
+    <div class="card">
+      <div class="card-h"><div class="dot" style="background: #6E7A70;"></div><div class="name" style="color: #6E7A70;">IDLE</div></div>
+      <div class="card-b">
+        <svg class="stage" width="100%" height="98" viewBox="0 0 330 98" preserveAspectRatio="none" fill="none">
+          <path d="M14 66 H316" stroke="#28282F" stroke-width="1"/>
+          <g stroke="#28282F" stroke-width="1"><path d="M14 60v6M54 60v6M94 60v6M134 60v6M174 60v6M214 60v6M254 60v6M294 60v6"/></g>
+          <path d="M165 24 V78" stroke="#6E7A70" stroke-width="2"/>
+        </svg>
+        <div class="tokline">--game-idle &nbsp;#6E7A70 &nbsp;· 4.17:1</div>
+        <div class="note">No signal within range. Thin 2px needle, no glow, no ring. The band ticks stay at <span class="mono" style="color:#F4EFE6;">--color-line</span>.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="dot" style="background: #DA8D23;"></div><div class="name" style="color: #DA8D23;">NEAR</div></div>
+      <div class="card-b">
+        <svg class="stage" width="100%" height="98" viewBox="0 0 330 98" preserveAspectRatio="none" fill="none">
+          <path d="M14 66 H316" stroke="#28282F" stroke-width="1"/>
+          <g stroke="#28282F" stroke-width="1"><path d="M14 60v6M54 60v6M94 60v6M134 60v6M174 60v6M214 60v6M254 60v6M294 60v6"/></g>
+          <rect x="126" y="20" width="78" height="62" stroke="#DA8D23" stroke-width="1.5" stroke-opacity="0.55"/>
+          <path d="M165 18 V84" stroke="#DA8D23" stroke-width="3"/>
+          <circle cx="165" cy="51" r="3" fill="#DA8D23"/>
+        </svg>
+        <div class="tokline">--game-near &nbsp;#DA8D23 &nbsp;· 6.96:1</div>
+        <div class="note">Needle is inside the catch radius. Lock window draws as a wide outline; needle thickens to 3px and warms.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="dot" style="background: #FBB924;"></div><div class="name" style="color: #FBB924;">LOCKING</div></div>
+      <div class="card-b">
+        <svg class="stage" width="100%" height="98" viewBox="0 0 330 98" preserveAspectRatio="none" fill="none">
+          <path d="M14 66 H316" stroke="#28282F" stroke-width="1"/>
+          <g stroke="#28282F" stroke-width="1"><path d="M14 60v6M54 60v6M94 60v6M134 60v6M174 60v6M214 60v6M254 60v6M294 60v6"/></g>
+          <rect x="126" y="20" width="78" height="62" stroke="#FBB924" stroke-width="1" stroke-opacity="0.25"/>
+          <rect x="146" y="30" width="38" height="42" stroke="#FBB924" stroke-width="2"/>
+          <path d="M165 18 V84" stroke="#FBB924" stroke-width="3"/>
+          <path d="M146 88 H184" stroke="#FBB924" stroke-width="4"/>
+          <path d="M126 88 H146" stroke="#FBB924" stroke-width="4" stroke-opacity="0.22"/>
+          <path d="M184 88 H204" stroke="#FBB924" stroke-width="4" stroke-opacity="0.22"/>
+        </svg>
+        <div class="tokline">--game-locking &nbsp;#FBB924 &nbsp;· 10.7:1</div>
+        <div class="note">Holding. The window contracts over ~1.2 s and the lock meter under the band fills left-to-right. Window edges pulse at 2 Hz.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="dot" style="background: #6BE04D;"></div><div class="name" style="color: #6BE04D;">LOCKED</div></div>
+      <div class="card-b">
+        <svg class="stage" width="100%" height="98" viewBox="0 0 330 98" preserveAspectRatio="none" fill="none">
+          <path d="M14 66 H316" stroke="#28282F" stroke-width="1"/>
+          <g stroke="#28282F" stroke-width="1"><path d="M14 60v6M54 60v6M94 60v6M134 60v6M174 60v6M214 60v6M254 60v6M294 60v6"/></g>
+          <rect x="151" y="26" width="28" height="50" fill="#6BE04D" fill-opacity="0.16" stroke="#6BE04D" stroke-width="2.5"/>
+          <path d="M165 14 V88" stroke="#6BE04D" stroke-width="3.5"/>
+          <g stroke="#6BE04D" stroke-width="2" stroke-linecap="round">
+            <path d="M165 6 v-4M145 20 l-6-6M185 20 l6-6M133 51 h-8M197 51 h8"/>
+          </g>
+          <path d="M151 88 H179" stroke="#6BE04D" stroke-width="4"/>
+        </svg>
+        <div class="tokline">--game-locked &nbsp;#6BE04D &nbsp;· 11.0:1</div>
+        <div class="note">Lead logged. Window snaps shut and fills, spark burst fires from the needle head, dispatch line prints below the stage.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="dot" style="background: #C4402A;"></div><div class="name" style="color: #C4402A;">LOST</div></div>
+      <div class="card-b">
+        <svg class="stage" width="100%" height="98" viewBox="0 0 330 98" preserveAspectRatio="none" fill="none">
+          <path d="M14 66 H316" stroke="#28282F" stroke-width="1"/>
+          <g stroke="#28282F" stroke-width="1"><path d="M14 60v6M54 60v6M94 60v6M134 60v6M174 60v6M214 60v6M254 60v6M294 60v6"/></g>
+          <rect x="126" y="20" width="78" height="62" stroke="#C4402A" stroke-width="2" stroke-dasharray="7 7"/>
+          <path d="M165 22 V80" stroke="#C4402A" stroke-width="2" stroke-dasharray="5 5"/>
+          <path d="M126 88 H204" stroke="#C4402A" stroke-width="4" stroke-opacity="0.3"/>
+        </svg>
+        <div class="tokline">--game-lost &nbsp;#C4402A &nbsp;· 3.66:1</div>
+        <div class="note">Needle slipped out before the hold completed. Window and needle both break into dashes — the dash pattern is what reads, not the red.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h"><div class="dot" style="background: #6B655C;"></div><div class="name" style="color: #6B655C;">PHANTOM</div></div>
+      <div class="card-b">
+        <svg class="stage" width="100%" height="98" viewBox="0 0 330 98" preserveAspectRatio="none" fill="none">
+          <path d="M14 66 H316" stroke="#28282F" stroke-width="1"/>
+          <g stroke="#28282F" stroke-width="1"><path d="M14 60v6M54 60v6M94 60v6M134 60v6M174 60v6M214 60v6M254 60v6M294 60v6"/></g>
+          <path d="M96 40 l14 14 -14 14 -14 -14 Z" stroke="#6B655C" stroke-width="1.8" stroke-dasharray="4 4"/>
+          <path d="M234 44 h20 M234 64 h20" stroke="#6B655C" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <ellipse cx="244" cy="54" rx="16" ry="18" stroke="#6B655C" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <path d="M165 30 V72" stroke="#6E7A70" stroke-width="2"/>
+        </svg>
+        <div class="tokline">--game-phantom &nbsp;#6B655C &nbsp;· 3.24:1</div>
+        <div class="note">Decoy. Hollow dashed diamond, never a filled lozenge, and it jitters ±2px at 8 Hz. Locking one costs 3 s off the clock.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- honest adjacency note -->
+  <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 44px;">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div class="eyebrow" style="color: #FBB924;">Where colour alone is not enough</div>
+      <p class="note" style="font-size: 13px;">Three pairs in this ramp sit close in luminance. Colour cannot carry them, so each is separated by form. This is stated rather than hidden because the coding agent has to implement the form, not just the token.</p>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: grid; grid-template-columns: 150px 46px 1fr; gap: 14px; align-items: center; padding: 9px 0; border-bottom: 1px solid #1E1E24;">
+          <div class="mono" style="font-size: 11px; color: #F4EFE6;">locking / locked</div>
+          <div class="mono" style="font-size: 12px; color: #C4402A;">1.03</div>
+          <div class="mono" style="font-size: 11px; color: #9A9388;">sequential, never co-present · outline → filled + burst</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 150px 46px 1fr; gap: 14px; align-items: center; padding: 9px 0; border-bottom: 1px solid #1E1E24;">
+          <div class="mono" style="font-size: 11px; color: #F4EFE6;">near / phantom</div>
+          <div class="mono" style="font-size: 12px; color: #C4402A;">2.15</div>
+          <div class="mono" style="font-size: 11px; color: #9A9388;">co-present · filled lozenge vs dashed hollow diamond</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 150px 46px 1fr; gap: 14px; align-items: center; padding: 9px 0; border-bottom: 1px solid #1E1E24;">
+          <div class="mono" style="font-size: 11px; color: #F4EFE6;">locked / lost</div>
+          <div class="mono" style="font-size: 12px; color: #6BE04D;">3.01</div>
+          <div class="mono" style="font-size: 11px; color: #9A9388;">solid stroke vs 7-7 dash · clears 3:1 on its own</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div class="eyebrow" style="color: #FBB924;">Retuned from the first pass</div>
+      <div style="display: flex; gap: 12px;">
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 7px;">
+          <div style="height: 54px; background: #4FD12F;"></div>
+          <div class="mono" style="font-size: 10.5px; color: #7E7767;">#4FD12F locked</div>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 7px;">
+          <div style="height: 54px; background: #F0644A;"></div>
+          <div class="mono" style="font-size: 10.5px; color: #7E7767;">#F0644A lost</div>
+        </div>
+        <div style="width: 62px; display: flex; align-items: center; justify-content: center; padding-bottom: 18px;">
+          <div class="mono" style="font-size: 15px; color: #C4402A;">1.58</div>
+        </div>
+      </div>
+      <p class="note" style="font-size: 12.5px;">The obvious green/red pair measured 1.58:1 against each other — indistinguishable without colour vision. Locked moved up to <span class="mono" style="color:#6BE04D;">#6BE04D</span> and lost moved down to <span class="mono" style="color:#C4402A;">#C4402A</span>, which puts 3.01:1 between them while both still clear 3:1 on the stage black.</p>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

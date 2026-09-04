@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <style>
+    body {
+      margin: 0;
+      background: #09090B;
+      color: #F4EFE6;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #FB793E; text-decoration: none; }
+    a:hover { color: #FD9463; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .disp { font-family: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", sans-serif; }
+    .eyebrow {
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #9A9388;
+    }
+    .rule { height: 1px; background: #28282F; }
+    .chip { position: relative; overflow: hidden; }
+    .scan {
+      position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, rgba(0,0,0,0) 1px 3px);
+    }
+    .row { display: grid; grid-template-columns: 26px 1fr 74px 52px; gap: 10px; align-items: center; padding: 7px 0; }
+    .tok { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 12px; color: #F4EFE6; letter-spacing: -0.01em; }
+    .hex { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 11px; color: #9A9388; }
+    .cr  { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 11px; text-align: right; }
+    .sw  { width: 26px; height: 26px; }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 44px; padding: 56px 60px 64px; background: #09090B;">
+
+  <!-- masthead -->
+  <div style="display: flex; flex-direction: column; gap: 22px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+      <div class="eyebrow">Faisca Games · Design kit · Step 02</div>
+      <div class="eyebrow" style="color: #FB793E;">Palette</div>
+    </div>
+    <div class="rule"></div>
+    <div style="display: flex; gap: 48px; align-items: flex-end;">
+      <h1 class="disp" style="margin: 0; font-size: 82px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC; max-width: 560px;">EXTRACTED,<br>NOT INVENTED</h1>
+      <p style="margin: 0 0 6px; font-size: 15px; line-height: 1.5; color: #9A9388; max-width: 400px; text-wrap: pretty;">Every colour below was sampled out of <span class="mono" style="color:#F4EFE6;">logo.png</span> and <span class="mono" style="color:#F4EFE6;">deadair.png</span> by pixel frequency. The neutral ramp is derived from the logo plate hue so the mark never shows a seam against the page.</p>
+    </div>
+  </div>
+
+  <!-- source: logo -->
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; gap: 14px; align-items: baseline;">
+      <div class="eyebrow" style="color: #FBB924;">Source</div>
+      <div class="mono" style="font-size: 12px; color: #9A9388;">logo.png — 300 × 300</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px;">
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 104px; background: #FBB924;"><div class="scan"></div></div>
+        <div class="tok">--brand-spark</div><div class="hex">#FBB924 · star core, 81% of star px</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 104px; background: #FB793E;"><div class="scan"></div></div>
+        <div class="tok">--brand-ember</div><div class="hex">#FB793E · rays, warm</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 104px; background: #FD6B4B;"><div class="scan"></div></div>
+        <div class="tok">--brand-ember-hot</div><div class="hex">#FD6B4B · rays, red-leaning</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 104px; background: #FCF9EC;"><div class="scan"></div></div>
+        <div class="tok">--brand-paper</div><div class="hex">#FCF9EC · FAISCA wordmark</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 104px; background: #121215; border: 1px solid #28282F;"><div class="scan"></div></div>
+        <div class="tok">--brand-ground</div><div class="hex">#121215 · logo field</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- source: key art -->
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div style="display: flex; gap: 14px; align-items: baseline;">
+      <div class="eyebrow" style="color: #FBB924;">Source</div>
+      <div class="mono" style="font-size: 12px; color: #9A9388;">deadair.png — 1536 × 1024</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px;">
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 88px; background: #010101; border: 1px solid #28282F;"><div class="scan"></div></div>
+        <div class="tok" style="font-size: 11px;">--art-void</div><div class="hex" style="font-size: 10px;">#010101 · ground</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 88px; background: #2B1401;"><div class="scan"></div></div>
+        <div class="tok" style="font-size: 11px;">--art-grain</div><div class="hex" style="font-size: 10px;">#2B1401 · desk timber</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 88px; background: #BB7B03;"><div class="scan"></div></div>
+        <div class="tok" style="font-size: 11px;">--art-vu</div><div class="hex" style="font-size: 10px;">#BB7B03 · VU face</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 88px; background: #DA8D23;"><div class="scan"></div></div>
+        <div class="tok" style="font-size: 11px;">--art-amber</div><div class="hex" style="font-size: 10px;">#DA8D23 · lit paper</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 88px; background: #F2B44B;"><div class="scan"></div></div>
+        <div class="tok" style="font-size: 11px;">--art-lamp</div><div class="hex" style="font-size: 10px;">#F2B44B · lamp glow</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 88px; background: #FBD483;"><div class="scan"></div></div>
+        <div class="tok" style="font-size: 11px;">--art-lamp-hi</div><div class="hex" style="font-size: 10px;">#FBD483 · hotspot</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <div class="chip" style="height: 88px; background: #2C941B;"><div class="scan"></div></div>
+        <div class="tok" style="font-size: 11px;">--art-crt</div><div class="hex" style="font-size: 10px;">#2C941B · CRT trace</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- semantic tokens -->
+  <div style="display: flex; flex-direction: column; gap: 20px;">
+    <div style="display: flex; gap: 14px; align-items: baseline;">
+      <div class="eyebrow" style="color: #FBB924;">Semantic tokens</div>
+      <div class="mono" style="font-size: 12px; color: #9A9388;">ratios measured against --color-panel #121215</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px;">
+
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div class="eyebrow" style="padding-bottom: 8px; border-bottom: 1px solid #28282F;">Grounds &amp; edges</div>
+        <div class="row"><div class="sw" style="background:#010101; border:1px solid #28282F;"></div><div class="tok">--color-void</div><div class="hex">#010101</div><div class="cr" style="color:#7E7767;">art</div></div>
+        <div class="row"><div class="sw" style="background:#09090B; border:1px solid #28282F;"></div><div class="tok">--color-bg</div><div class="hex">#09090B</div><div class="cr" style="color:#7E7767;">—</div></div>
+        <div class="row"><div class="sw" style="background:#0E0E11; border:1px solid #28282F;"></div><div class="tok">--color-surface</div><div class="hex">#0E0E11</div><div class="cr" style="color:#7E7767;">—</div></div>
+        <div class="row"><div class="sw" style="background:#121215; border:1px solid #28282F;"></div><div class="tok">--color-panel</div><div class="hex">#121215</div><div class="cr" style="color:#7E7767;">—</div></div>
+        <div class="row"><div class="sw" style="background:#1E1E24;"></div><div class="tok">--color-panel-raised</div><div class="hex">#1E1E24</div><div class="cr" style="color:#7E7767;">—</div></div>
+        <div class="row"><div class="sw" style="background:#2B1401;"></div><div class="tok">--color-grain</div><div class="hex">#2B1401</div><div class="cr" style="color:#7E7767;">art</div></div>
+        <div class="row"><div class="sw" style="background:#28282F;"></div><div class="tok">--color-line</div><div class="hex">#28282F</div><div class="cr" style="color:#7E7767;">—</div></div>
+        <div class="row"><div class="sw" style="background:#34343D;"></div><div class="tok">--color-line-strong</div><div class="hex">#34343D</div><div class="cr" style="color:#7E7767;">—</div></div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div class="eyebrow" style="padding-bottom: 8px; border-bottom: 1px solid #28282F;">Text</div>
+        <div class="row"><div class="sw" style="background:#F4EFE6;"></div><div class="tok">--color-text</div><div class="hex">#F4EFE6</div><div class="cr" style="color:#6BE04D;">16.3</div></div>
+        <div class="row"><div class="sw" style="background:#FCF9EC;"></div><div class="tok">--color-text-hi</div><div class="hex">#FCF9EC</div><div class="cr" style="color:#6BE04D;">17.7</div></div>
+        <div class="row"><div class="sw" style="background:#9A9388;"></div><div class="tok">--color-text-mute</div><div class="hex">#9A9388</div><div class="cr" style="color:#6BE04D;">6.15</div></div>
+        <div class="row"><div class="sw" style="background:#7E7767;"></div><div class="tok" style="color:#9A9388;">--color-text-dim</div><div class="hex">#7E7767</div><div class="cr" style="color:#FBB924;">4.20</div></div>
+        <div class="row"><div class="sw" style="background:#140901; border:1px solid #28282F;"></div><div class="tok">--color-text-on-accent</div><div class="hex">#140901</div><div class="cr" style="color:#6BE04D;">7.39</div></div>
+        <div style="margin-top: 14px; padding: 12px 14px; background: #121215; border-left: 2px solid #FBB924;">
+          <div class="mono" style="font-size: 11px; line-height: 1.5; color: #9A9388;"><span style="color:#FBB924;">4.20</span> — <span style="color:#F4EFE6;">--color-text-dim</span> is under 4.5:1 on purpose. Disabled controls only, never running copy.</div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div class="eyebrow" style="padding-bottom: 8px; border-bottom: 1px solid #28282F;">Interactive</div>
+        <div class="row"><div class="sw" style="background:#FB793E;"></div><div class="tok">--color-accent</div><div class="hex">#FB793E</div><div class="cr" style="color:#6BE04D;">7.04</div></div>
+        <div class="row"><div class="sw" style="background:#FD9463;"></div><div class="tok">--color-accent-hover</div><div class="hex">#FD9463</div><div class="cr" style="color:#6BE04D;">8.54</div></div>
+        <div class="row"><div class="sw" style="background:#E05F26;"></div><div class="tok">--color-accent-press</div><div class="hex">#E05F26</div><div class="cr" style="color:#6BE04D;">5.19</div></div>
+        <div class="row"><div class="sw" style="background:#FBB924;"></div><div class="tok">--color-signal</div><div class="hex">#FBB924</div><div class="cr" style="color:#6BE04D;">10.7</div></div>
+        <div class="row"><div class="sw" style="background:#FDD26A;"></div><div class="tok">--color-signal-hi</div><div class="hex">#FDD26A</div><div class="cr" style="color:#6BE04D;">13.0</div></div>
+        <div class="row"><div class="sw" style="background:#F2B44B;"></div><div class="tok">--color-lamp</div><div class="hex">#F2B44B</div><div class="cr" style="color:#6BE04D;">10.2</div></div>
+        <div class="row"><div class="sw" style="background:#DA8D23;"></div><div class="tok">--color-amber</div><div class="hex">#DA8D23</div><div class="cr" style="color:#6BE04D;">6.96</div></div>
+        <div class="row"><div class="sw" style="background:#2C941B;"></div><div class="tok">--color-crt</div><div class="hex">#2C941B</div><div class="cr" style="color:#6BE04D;">4.77</div></div>
+        <div class="row"><div class="sw" style="background:#6BE04D;"></div><div class="tok">--color-crt-hi</div><div class="hex">#6BE04D</div><div class="cr" style="color:#6BE04D;">11.0</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- the correction -->
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px;">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div class="eyebrow" style="color: #C4402A;">One correction to the live site</div>
+      <div style="display: flex; gap: 14px; align-items: stretch;">
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+          <div class="chip" style="height: 62px; background: #C4621C; display: flex; align-items: center; justify-content: center;"><span class="mono" style="font-size: 13px; color: #140901;">4.48 : 1</span></div>
+          <div class="hex">was <span style="color:#F4EFE6;">--ember #C4621C</span></div>
+          <div class="mono" style="font-size: 11px; color: #C4402A;">fails body text</div>
+        </div>
+        <div style="display: flex; align-items: center; padding-top: 20px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9A9388" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"></path><path d="M13 6l6 6-6 6"></path></svg>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+          <div class="chip" style="height: 62px; background: #FB793E; display: flex; align-items: center; justify-content: center;"><span class="mono" style="font-size: 13px; color: #140901;">7.04 : 1</span></div>
+          <div class="hex">now <span style="color:#F4EFE6;">--color-accent #FB793E</span></div>
+          <div class="mono" style="font-size: 11px; color: #6BE04D;">passes AAA</div>
+        </div>
+      </div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.55; color: #9A9388; text-wrap: pretty;">The fix was already in the logo. <span class="mono" style="color:#F4EFE6;">#C4621C</span> is a darkened interpretation of the ray orange; the ray orange itself is <span class="mono" style="color:#F4EFE6;">#FB793E</span> and it clears 4.5:1 with room to spare. Same hue family, same warmth, legal for running copy.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div class="eyebrow">Carried over unchanged</div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.55; color: #9A9388; text-wrap: pretty;">The live site already ships semantic custom properties. Four survive as-is, three get corrected values under the same intent:</p>
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div class="row" style="grid-template-columns: 26px 1fr 1fr;"><div class="sw" style="background:#F4EFE6;"></div><div class="tok" style="color:#9A9388;">--ink</div><div class="tok">--color-text · kept</div></div>
+        <div class="row" style="grid-template-columns: 26px 1fr 1fr;"><div class="sw" style="background:#9A9388;"></div><div class="tok" style="color:#9A9388;">--mute</div><div class="tok">--color-text-mute · kept</div></div>
+        <div class="row" style="grid-template-columns: 26px 1fr 1fr;"><div class="sw" style="background:#28282F;"></div><div class="tok" style="color:#9A9388;">--line #2A2A2A</div><div class="tok">--color-line #28282F</div></div>
+        <div class="row" style="grid-template-columns: 26px 1fr 1fr;"><div class="sw" style="background:#FBB924;"></div><div class="tok" style="color:#9A9388;">--spark #FFCC33</div><div class="tok">--color-signal #FBB924</div></div>
+        <div class="row" style="grid-template-columns: 26px 1fr 1fr;"><div class="sw" style="background:#2C941B;"></div><div class="tok" style="color:#9A9388;">--signal #247A54</div><div class="tok">--color-crt #2C941B</div></div>
+      </div>
+      <p style="margin: 0; font-size: 12px; line-height: 1.55; color: #7E7767; text-wrap: pretty;">The old <span class="mono">--signal</span> was a blue-green that appears nowhere in the key art. The oscilloscope trace is a true green, <span class="mono" style="color:#9A9388;">#2C941B</span>.</p>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

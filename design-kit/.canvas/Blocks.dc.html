@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #09090B; color: #F4EFE6;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased; }
+    a { color: #FB793E; text-decoration: none; }
+    a:hover { color: #FD9463; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .disp { font-family: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", sans-serif; }
+    .eyebrow { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: #9A9388; }
+    .rule { height: 1px; background: #28282F; }
+    .lbl { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 11px; color: #FB793E; }
+    .st { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 10px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #7E7767; }
+    .note { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 10.5px; color: #7E7767; line-height: 1.6; }
+    .card { display: flex; flex-direction: column; background: #121215; border: 1px solid #28282F; overflow: hidden; }
+    .tag { display: inline-flex; align-items: center; height: 26px; padding: 0 11px; background: #1E1E24;
+      color: #FBB924; font-family: "IBM Plex Mono", Menlo, monospace; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%); }
+    .soc { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+      border: 1px solid #28282F; color: #9A9388; }
+    .soc:hover { color: #FB793E; border-color: rgba(251,121,62,0.34); }
+    .flink { font-size: 14px; color: #9A9388; }
+    .flink:hover { color: #F4EFE6; }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 40px; padding: 50px 48px 56px; background: #09090B;">
+
+  <div style="display: flex; flex-direction: column; gap: 18px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+      <div class="eyebrow">Faisca Games · Design kit · Step 03</div>
+      <div class="eyebrow" style="color: #FB793E;">components/card-game · feature-strip · footer</div>
+    </div>
+    <div class="rule"></div>
+    <h1 class="disp" style="margin: 0; font-size: 60px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC;">BLOCKS</h1>
+  </div>
+
+  <!-- card-game -->
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div class="lbl">.card-game — default / hover / focus-visible</div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+
+      <a class="card" href="#" style="text-decoration: none;">
+        <div style="position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: #010101;">
+          <img src="cardart.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(1,1,1,0) 40%, rgba(18,18,21,0.94) 100%);"></div>
+          <div style="position: absolute; top: 13px; left: 13px;"><span class="tag">In development</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 9px; padding: 20px 22px 24px;">
+          <h3 class="disp" style="margin: 0; font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: -0.01em; color: #FCF9EC;">DEAD AIR: ASHMERE</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #9A9388;">Listen closer. The truth is in the traffic.</p>
+        </div>
+      </a>
+
+      <a class="card" href="#" style="text-decoration: none; border-color: rgba(251,121,62,0.34);">
+        <div style="position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: #010101;">
+          <img src="cardart.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.035);">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(1,1,1,0) 40%, rgba(18,18,21,0.94) 100%);"></div>
+          <div style="position: absolute; top: 13px; left: 13px;"><span class="tag">In development</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 9px; padding: 20px 22px 24px;">
+          <h3 class="disp" style="margin: 0; font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: -0.01em; color: #FB793E;">DEAD AIR: ASHMERE</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #9A9388;">Listen closer. The truth is in the traffic.</p>
+        </div>
+      </a>
+
+      <a class="card" href="#" style="text-decoration: none; outline: 2px solid #FBB924; outline-offset: 3px;">
+        <div style="position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: #010101;">
+          <img src="cardart.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(1,1,1,0) 40%, rgba(18,18,21,0.94) 100%);"></div>
+          <div style="position: absolute; top: 13px; left: 13px;"><span class="tag">In development</span></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 9px; padding: 20px 22px 24px;">
+          <h3 class="disp" style="margin: 0; font-size: 34px; font-weight: 800; line-height: 1; letter-spacing: -0.01em; color: #FCF9EC;">DEAD AIR: ASHMERE</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #9A9388;">Listen closer. The truth is in the traffic.</p>
+        </div>
+      </a>
+    </div>
+    <div class="note">Whole card is one <span style="color:#9A9388;">&lt;a&gt;</span> — no nested link, no separate "read more". Hover moves the art 1.035× behind a fixed frame and the title to <span style="color:#9A9388;">--color-accent</span>; the border warms to <span style="color:#9A9388;">--color-line-accent</span>. Under reduced motion the scale is dropped and only the colour changes. Caption is real copy from the current site.</div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- feature-strip -->
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div class="lbl">.feature-strip — 3-up at 1440 / 820, stacks at 390</div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: #28282F; border: 1px solid #28282F;">
+      <div style="display: flex; flex-direction: column; gap: 12px; padding: 30px 28px 34px; background: #0E0E11;">
+        <div style="color: #FB793E;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2.5-6 3 12 3-9 2.5 3h6"></path></svg></div>
+        <h3 class="disp" style="margin: 0; font-size: 27px; font-weight: 800; line-height: 1.06; color: #FCF9EC;">NO DOWNLOAD</h3>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #9A9388;">Signal Lock runs in the page. Sixty seconds, one tab, nothing installed. <span style="color: #7E7767;">[draft copy]</span></p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; padding: 30px 28px 34px; background: #0E0E11;">
+        <div style="color: #FB793E;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"></path><path d="M17 9a4 4 0 0 1 0 6"></path></svg></div>
+        <h3 class="disp" style="margin: 0; font-size: 27px; font-weight: 800; line-height: 1.06; color: #FCF9EC;">PLAYS SILENT</h3>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #9A9388;">Audio is off until you ask for it, and nothing in the game depends on hearing it. <span style="color: #7E7767;">[draft copy]</span></p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; padding: 30px 28px 34px; background: #0E0E11;">
+        <div style="color: #FB793E;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7v5l3.2 2"></path></svg></div>
+        <h3 class="disp" style="margin: 0; font-size: 27px; font-weight: 800; line-height: 1.06; color: #FCF9EC;">SIXTY SECONDS</h3>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: #9A9388;">One round is shorter than the queue for a coffee. Beat your own number. <span style="color: #7E7767;">[draft copy]</span></p>
+      </div>
+    </div>
+    <div class="note">Cells are separated by the container&#39;s 1 px grid gap showing through, not by per-cell borders — one hairline between neighbours instead of two stacked. Icons are 26 px on the same stroke grid as everything else.</div>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- footer -->
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div class="lbl">.site-footer</div>
+    <div style="background: #0E0E11; border: 1px solid #28282F;">
+      <div style="display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 44px; padding: 44px 40px 36px;">
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; align-items: center; gap: 13px;">
+            <img src="faiscamark.png" alt="Faisca Games" style="width: 40px; height: 40px; display: block;">
+            <div class="mono" style="font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #F4EFE6;">Faisca</div>
+          </div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #9A9388; max-width: 34ch;">A spark, then a game.</p>
+          <a href="mailto:contact@faisca.gg" style="font-size: 15px; color: #F4EFE6; border-bottom: 1px solid #34343D; align-self: flex-start; padding-bottom: 2px;">contact@faisca.gg</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 13px;">
+          <div class="st">Games</div>
+          <a class="flink" href="/games/dead-air/">Dead Air: Ashmere</a>
+          <a class="flink" href="#play">Signal Lock</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 13px;">
+          <div class="st">Legal</div>
+          <a class="flink" href="/support/dead-air/">Dead Air Support</a>
+          <a class="flink" href="/privacy/dead-air/">Dead Air Privacy</a>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 40px 26px; border-top: 1px solid #28282F;">
+        <div class="mono" style="font-size: 12px; color: #7E7767;">© Faisca Games Inc. · Toronto</div>
+        <div style="display: flex; gap: 10px;">
+          <a class="soc" href="#" aria-label="Instagram"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+          <a class="soc" href="#" aria-label="X"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M5 5 L19 19"></path><path d="M19 5 L5 19"></path></svg></a>
+          <a class="soc" href="#" aria-label="LinkedIn"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5"></rect><path d="M7.6 10.6V17"></path><path d="M7.6 7.4v.6"></path><path d="M11.4 17v-6.4"></path><path d="M11.4 13.4a2.5 2.5 0 0 1 5 0V17"></path></svg></a>
+          <a class="soc" href="#" aria-label="Discord"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M8.7 17.4c-2.4-.6-3.9-2.1-3.9-2.1.3-3.9 1.6-6.4 1.6-6.4A9.2 9.2 0 0 1 9.6 7.2l.6 1.2a11.6 11.6 0 0 1 3.6 0l.6-1.2a9.2 9.2 0 0 1 3.2 1.7s1.3 2.5 1.6 6.4c0 0-1.5 1.5-3.9 2.1l-.8-1.3"></path><circle cx="9.7" cy="13" r="1.1" fill="currentColor" stroke="none"></circle><circle cx="14.3" cy="13" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="note">Both existing URLs are kept verbatim. At 390 the three columns stack and the © row wraps above the icons; the icon row keeps its 44 px targets and gains <span style="color:#9A9388;">padding-bottom: env(safe-area-inset-bottom)</span>.</div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

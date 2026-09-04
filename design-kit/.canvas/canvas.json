@@ -1,0 +1,251 @@
+{
+  "pages": [
+    {
+      "id": "foundations",
+      "name": "Foundations"
+    },
+    {
+      "id": "components",
+      "name": "Components"
+    },
+    {
+      "id": "signal-lock",
+      "name": "Signal Lock"
+    },
+    {
+      "id": "comps",
+      "name": "Page comps"
+    }
+  ],
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "page": "foundations",
+      "x": 0,
+      "y": 0,
+      "w": 1240,
+      "h": 1820,
+      "title": "Palette"
+    },
+    {
+      "file": "TypeScale.dc.html",
+      "page": "foundations",
+      "x": 1360,
+      "y": 0,
+      "w": 1240,
+      "h": 1900,
+      "title": "Type scale"
+    },
+    {
+      "file": "GameStates.dc.html",
+      "page": "foundations",
+      "x": 2720,
+      "y": 0,
+      "w": 1240,
+      "h": 1320,
+      "title": "Game state colours"
+    },
+    {
+      "file": "Hero.dc.html",
+      "page": "components",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 920,
+      "title": "Hero — 1440"
+    },
+    {
+      "file": "Nav.dc.html",
+      "page": "components",
+      "x": 1560,
+      "y": 0,
+      "w": 1240,
+      "h": 1180,
+      "title": "Nav"
+    },
+    {
+      "file": "Controls.dc.html",
+      "page": "components",
+      "x": 2920,
+      "y": 0,
+      "w": 1240,
+      "h": 1220,
+      "title": "Buttons, headings, social"
+    },
+    {
+      "file": "Blocks.dc.html",
+      "page": "components",
+      "x": 4280,
+      "y": 0,
+      "w": 1240,
+      "h": 1620,
+      "title": "Card, feature strip, footer"
+    },
+    {
+      "file": "MenuMobile.dc.html",
+      "page": "components",
+      "x": 5640,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Mobile menu — 390"
+    },
+    {
+      "file": "SignalLock.dc.html",
+      "page": "signal-lock",
+      "x": 0,
+      "y": 0,
+      "w": 1240,
+      "h": 800,
+      "title": "Signal Lock — playable",
+      "is_interactive": true
+    },
+    {
+      "file": "ControlsMobile.dc.html",
+      "page": "signal-lock",
+      "x": 1360,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Mobile controls — playable",
+      "is_interactive": true
+    },
+    {
+      "file": "GameScreens.dc.html",
+      "page": "signal-lock",
+      "x": 1870,
+      "y": 0,
+      "w": 1240,
+      "h": 1200,
+      "title": "The four screens"
+    },
+    {
+      "file": "CompHome1440.dc.html",
+      "page": "comps",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 4000,
+      "title": "/ — 1440",
+      "print": "flow"
+    },
+    {
+      "file": "CompHome820.dc.html",
+      "page": "comps",
+      "x": 1560,
+      "y": 0,
+      "w": 820,
+      "h": 4300,
+      "title": "/ — 820",
+      "print": "flow"
+    },
+    {
+      "file": "CompHome390.dc.html",
+      "page": "comps",
+      "x": 2500,
+      "y": 0,
+      "w": 390,
+      "h": 4800,
+      "title": "/ — 390",
+      "print": "flow"
+    },
+    {
+      "file": "CompDeadAir.dc.html",
+      "page": "comps",
+      "x": 3010,
+      "y": 0,
+      "w": 1440,
+      "h": 2400,
+      "title": "/games/dead-air/",
+      "print": "flow"
+    },
+    {
+      "file": "CompAbout.dc.html",
+      "page": "comps",
+      "x": 4570,
+      "y": 0,
+      "w": 1440,
+      "h": 1900,
+      "title": "/about/",
+      "print": "flow"
+    },
+    {
+      "file": "CompSupport.dc.html",
+      "page": "comps",
+      "x": 6130,
+      "y": 0,
+      "w": 1440,
+      "h": 9600,
+      "title": "/support/dead-air/",
+      "print": "flow"
+    },
+    {
+      "file": "CompPrivacy.dc.html",
+      "page": "comps",
+      "x": 7690,
+      "y": 0,
+      "w": 1440,
+      "h": 19200,
+      "title": "/privacy/dead-air/",
+      "print": "flow"
+    },
+    {
+      "file": "CompContact.dc.html",
+      "page": "comps",
+      "x": 9250,
+      "y": 0,
+      "w": 1440,
+      "h": 1600,
+      "title": "/contact/",
+      "print": "flow"
+    },
+    {
+      "file": "Comp404.dc.html",
+      "page": "comps",
+      "x": 10810,
+      "y": 0,
+      "w": 1440,
+      "h": 1100,
+      "title": "/404",
+      "print": "flow"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "note-foundations",
+      "page": "foundations",
+      "x": 0,
+      "y": -210,
+      "w": 640,
+      "text": "STEP 02 — signed off. Palette extracted from logo.png and deadair.png, fluid type scale, and the Signal Lock state ramp with its contrast report.\n\nThe two corrections to the live site are on the Palette board: --ember moved to the logo's real ray orange, and --signal moved to the key art's real CRT green."
+    },
+    {
+      "id": "note-components",
+      "page": "components",
+      "x": 0,
+      "y": -230,
+      "w": 700,
+      "text": "STEP 03 — signed off. Every state is drawn: default, hover, focus-visible, active, disabled.\n\nDiscord is removed. Instagram, X and LinkedIn now point at the real playfaisca URLs, with target=_blank and rel=\"me noopener\".\n\nShipped as self-contained files under design-kit/components/ — each links ../tokens.css and opens in a browser with no build step."
+    },
+    {
+      "id": "note-game",
+      "page": "signal-lock",
+      "x": 0,
+      "y": -230,
+      "w": 720,
+      "text": "STEP 03 — signed off. The two left artboards are PLAYABLE, not comps.\n\nDesktop: click the stage first, then arrow keys to tune and hold SPACE to log. Or drag the band with the mouse and hold the LOG button.\nMobile: drag anywhere on the dial, hold LOG. The arrows are the fallback for anyone who cannot drag.\n\nHold-to-log confirmed: the meter only fills while you are inside the window AND holding."
+    },
+    {
+      "id": "note-comps",
+      "page": "comps",
+      "x": 0,
+      "y": -250,
+      "w": 760,
+      "text": "STEP 04 — page comps for all seven routes, plus the home page at 1440, 820 and 390.\n\nThese are not drawings. Every comp is rendered from design-kit/comps/_site.css, which is assembled verbatim from the component files — so what you see here is what the components actually do, not a picture of what they should do.\n\n/support/dead-air/ and /privacy/dead-air/ now carry your REAL copy, poured in from faisca-landing. Checked word by word against the source: nothing dropped, including the postal address and the Brazilian LGPD section. Design untouched — the copy just runs through the existing section-heading, prose and linklist components.\n\nmotion.md documents all 25 animations with reduced-motion fallbacks."
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "comps"
+  }
+}

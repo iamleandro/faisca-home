@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>section-heading — Faisca design kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ---------- demo chrome (not shipped) ---------- */
+
+    body { margin: 0; background: var(--color-bg); color: var(--color-text);
+      font-family: var(--font-text); font-size: var(--step-0); line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased; }
+    .kit { max-width: 1440px; margin: 0 auto; padding: var(--space-2xl) var(--gutter) var(--space-4xl); }
+    .kit-head { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-2xl);
+      justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-lg); }
+    .kit-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-accent); }
+    .kit-h1 { margin: var(--space-lg) 0 0; font-family: var(--font-display); font-size: var(--step-6);
+      font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+      letter-spacing: var(--track-display); color: var(--color-text-hi); }
+    .kit-lede { margin: var(--space-sm) 0 0; max-width: 68ch; color: var(--color-text-mute);
+      font-size: var(--step-0); text-wrap: pretty; }
+    .kit-block { margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md); }
+    .kit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-mute); }
+    .kit-note { font-family: var(--font-mono); font-size: 11.5px; line-height: 1.65;
+      color: var(--color-text-dim); max-width: 84ch; }
+    .kit-note b { color: var(--color-text-mute); font-weight: 400; }
+    .kit-frame { border: 1px solid var(--color-line); background: var(--color-panel); overflow: hidden; }
+    .kit-grid { display: grid; gap: var(--space-lg); }
+    .kit-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .kit-state { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-dim); }
+
+/* ---------- section-heading — SHIP THIS BLOCK ---------- */
+/* States double up: .x:hover and .x.is-hover share one rule, so the static
+   demo below shows exactly what the browser renders. Drop the .is-* classes
+   when porting; keep the pseudo-classes. */
+.section-heading { display: flex; flex-direction: column; gap: var(--space-sm); }
+.section-heading__eyebrow { display: flex; align-items: center; gap: var(--space-sm);
+  font-family: var(--font-mono); font-size: var(--step--1); font-weight: 500;
+  letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-signal); }
+.section-heading__eyebrow::before { content: ""; width: 26px; height: 2px; flex: none;
+  background: var(--color-accent); }
+.section-heading__title { margin: 0; font-family: var(--font-display); font-size: var(--step-6);
+  font-weight: var(--weight-display); line-height: var(--leading-flat);
+  letter-spacing: var(--track-display); color: var(--color-text-hi); }
+.section-heading__body { margin: 0; max-width: 52ch; color: var(--color-text-mute);
+  line-height: var(--leading-body); text-wrap: pretty; }
+.section-heading--center { align-items: center; text-align: center; }
+</style>
+</head>
+<body>
+<div class="kit">
+  <header class="kit-head">
+    <div class="kit-name">Faisca design kit · components/section-heading</div>
+    <div class="kit-name" style="color: var(--color-text-dim);">tokens.css required</div>
+  </header>
+  <h1 class="kit-h1">SECTION HEADING</h1>
+  <p class="kit-lede">Three parts: an accent dash with a mono eyebrow, the display heading, one line of body. Only the heading is required.</p>
+  <div class="kit-block">
+    <div class="kit-label">full</div>
+    <div class="kit-frame" style="padding: var(--space-2xl);">
+      <div class="section-heading">
+        <div class="section-heading__eyebrow">Now in the workshop</div>
+        <h2 class="section-heading__title">DEAD AIR: ASHMERE</h2>
+        <p class="section-heading__body">A night-shift radio operator, one town, and a frequency that answers back. <span style="color: var(--color-text-dim);">[draft copy]</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="kit-block">
+    <div class="kit-label">heading only</div>
+    <div class="kit-frame" style="padding: var(--space-2xl);">
+      <div class="section-heading"><h2 class="section-heading__title">THE STUDIO</h2></div>
+    </div>
+  </div>
+  <div class="kit-block">
+    <div class="kit-label">centred variant — used once, above the game</div>
+    <div class="kit-frame" style="padding: var(--space-2xl);">
+      <div class="section-heading section-heading--center">
+        <div class="section-heading__eyebrow">Playable now</div>
+        <h2 class="section-heading__title">SIGNAL LOCK</h2>
+        <p class="section-heading__body">Sixty seconds on the Ashmere band. No download, no account. <span style="color: var(--color-text-dim);">[draft copy]</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="kit-block"><div class="kit-note">The 26&nbsp;× 2&nbsp;px dash is the only purely decorative element in the kit. It earns its place by giving the mono eyebrow an optical left edge that lines up with the display cap-height above it.</div></div>
+</div>
+</body>
+</html>

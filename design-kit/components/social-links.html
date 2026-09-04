@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>social-links — Faisca design kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ---------- demo chrome (not shipped) ---------- */
+
+    body { margin: 0; background: var(--color-bg); color: var(--color-text);
+      font-family: var(--font-text); font-size: var(--step-0); line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased; }
+    .kit { max-width: 1440px; margin: 0 auto; padding: var(--space-2xl) var(--gutter) var(--space-4xl); }
+    .kit-head { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-2xl);
+      justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-lg); }
+    .kit-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-accent); }
+    .kit-h1 { margin: var(--space-lg) 0 0; font-family: var(--font-display); font-size: var(--step-6);
+      font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+      letter-spacing: var(--track-display); color: var(--color-text-hi); }
+    .kit-lede { margin: var(--space-sm) 0 0; max-width: 68ch; color: var(--color-text-mute);
+      font-size: var(--step-0); text-wrap: pretty; }
+    .kit-block { margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md); }
+    .kit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-mute); }
+    .kit-note { font-family: var(--font-mono); font-size: 11.5px; line-height: 1.65;
+      color: var(--color-text-dim); max-width: 84ch; }
+    .kit-note b { color: var(--color-text-mute); font-weight: 400; }
+    .kit-frame { border: 1px solid var(--color-line); background: var(--color-panel); overflow: hidden; }
+    .kit-grid { display: grid; gap: var(--space-lg); }
+    .kit-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .kit-state { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-dim); }
+
+/* ---------- social-links — SHIP THIS BLOCK ---------- */
+/* States double up: .x:hover and .x.is-hover share one rule, so the static
+   demo below shows exactly what the browser renders. Drop the .is-* classes
+   when porting; keep the pseudo-classes. */
+.social-links { display: flex; gap: var(--space-xs); list-style: none; margin: 0; padding: 0; }
+.social-links__link { display: flex; align-items: center; justify-content: center;
+  width: var(--tap-min); height: var(--tap-min); border: 1px solid var(--color-line);
+  color: var(--color-text-mute);
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+.social-links__link svg { width: 21px; height: 21px; }
+.social-links__link:hover, .social-links__link.is-hover {
+  color: var(--color-accent); border-color: var(--color-line-accent); }
+.social-links__link:focus-visible, .social-links__link.is-focus {
+  outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.social-links__link:active, .social-links__link.is-active { color: var(--color-accent-press); }
+@media (prefers-reduced-motion: reduce) { .social-links__link { transition: none; } }
+</style>
+</head>
+<body>
+<div class="kit">
+  <header class="kit-head">
+    <div class="kit-name">Faisca design kit · components/social-links</div>
+    <div class="kit-name" style="color: var(--color-text-dim);">tokens.css required</div>
+  </header>
+  <h1 class="kit-h1">SOCIAL LINKS</h1>
+  <p class="kit-lede">Four 44&nbsp;× 44&nbsp;px targets on one 24&nbsp;px stroke grid. No visible text, so each aria-label is the only accessible name.</p>
+  <div class="kit-block">
+    <div class="kit-label">default</div>
+    <div class="kit-frame" style="padding: var(--space-xl);">
+      <ul class="social-links">
+        <li><a class="social-links__link" href="https://www.instagram.com/playfaisca/" target="_blank" rel="me noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a></li>
+        <li><a class="social-links__link" href="https://x.com/playfaisca" target="_blank" rel="me noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M5 5 L19 19"/><path d="M19 5 L5 19"/></svg></a></li>
+        <li><a class="social-links__link" href="#" aria-label="Linkedin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M7.6 10.6V17"/><path d="M7.6 7.4v.6"/><path d="M11.4 17v-6.4"/><path d="M11.4 13.4a2.5 2.5 0 0 1 5 0V17"/></svg></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="kit-block">
+    <div class="kit-label">hover · focus · active</div>
+    <div class="kit-frame" style="padding: var(--space-xl);">
+      <ul class="social-links">
+        <li><a class="social-links__link is-hover" href="https://www.instagram.com/playfaisca/" target="_blank" rel="me noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a></li>
+        <li><a class="social-links__link is-focus" href="https://x.com/playfaisca" target="_blank" rel="me noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M5 5 L19 19"/><path d="M19 5 L5 19"/></svg></a></li>
+        <li><a class="social-links__link is-active" href="#" aria-label="Linkedin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M7.6 10.6V17"/><path d="M7.6 7.4v.6"/><path d="M11.4 17v-6.4"/><path d="M11.4 13.4a2.5 2.5 0 0 1 5 0V17"/></svg></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="kit-block"><div class="kit-note">Brand glyphs are redrawn as strokes on the same grid as the rest of the icon set rather than dropped in as official filled marks — they sit beside the HUD icons in the footer, and two icon styles in one row reads as a mistake. Swap in official marks if a platform&#39;s brand terms require it.</div></div>
+</div>
+</body>
+</html>

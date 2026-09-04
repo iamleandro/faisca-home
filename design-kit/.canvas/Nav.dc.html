@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #09090B; color: #F4EFE6;
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased; }
+    a { color: #FB793E; text-decoration: none; }
+    a:hover { color: #FD9463; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .disp { font-family: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", sans-serif; }
+    .eyebrow { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: #9A9388; }
+    .rule { height: 1px; background: #28282F; }
+    .lbl { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 11px; color: #FB793E; }
+    .note { font-family: "IBM Plex Mono", Menlo, monospace; font-size: 10.5px; color: #7E7767; line-height: 1.6; }
+    .nl { display: inline-flex; align-items: center; height: 44px; padding: 0 4px; font-size: 15px;
+      font-weight: 500; color: #F4EFE6; position: relative; }
+    .play { display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border: 1px solid #FB793E;
+      color: #FB793E; font-family: "Big Shoulders Display", "Arial Narrow", sans-serif; font-size: 19px;
+      font-weight: 800; letter-spacing: 0.09em;
+      clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px)); }
+  </style>
+</helmet>
+
+<div style="display: flex; flex-direction: column; gap: 34px; padding: 50px 48px 56px; background: #09090B;">
+
+  <div style="display: flex; flex-direction: column; gap: 18px;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+      <div class="eyebrow">Faisca Games · Design kit · Step 03</div>
+      <div class="eyebrow" style="color: #FB793E;">components/nav</div>
+    </div>
+    <div class="rule"></div>
+    <h1 class="disp" style="margin: 0; font-size: 60px; font-weight: 900; line-height: 0.86; letter-spacing: -0.02em; color: #FCF9EC;">STICKY NAV</h1>
+  </div>
+
+  <!-- state 1: over art -->
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div class="lbl">.site-nav — top of page, over the hero art</div>
+    <div style="position: relative; height: 132px; overflow: hidden; border: 1px solid #28282F;">
+      <img src="heroart.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 300px; object-fit: cover; object-position: center 30%;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(1,1,1,0.78), rgba(1,1,1,0.2));"></div>
+      <div style="position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px; gap: 32px;">
+        <div style="display: flex; align-items: center; gap: 13px;">
+          <img src="faiscamark.png" alt="Faisca Games" style="width: 36px; height: 36px; display: block;">
+          <div class="mono" style="font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #F4EFE6;">Faisca</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 30px;">
+          <a class="nl" href="#">Games</a><a class="nl" href="#">About</a><a class="nl" href="#">Support</a><a class="nl" href="#">Contact</a>
+          <a class="play" href="#">PLAY</a>
+        </div>
+      </div>
+    </div>
+    <div class="note">No background, no border. The hero&#39;s own top gradient does the legibility work — the nav adds nothing that would band against the art.</div>
+  </div>
+
+  <!-- state 2: scrolled -->
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div class="lbl">.site-nav.is-stuck — after 64 px of scroll</div>
+    <div style="position: relative; height: 132px; overflow: hidden; border: 1px solid #28282F; background: #0E0E11;">
+      <div style="position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px; gap: 32px; background: rgba(9,9,11,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid #28282F;">
+        <div style="display: flex; align-items: center; gap: 13px;">
+          <img src="faiscamark.png" alt="Faisca Games" style="width: 30px; height: 30px; display: block;">
+          <div class="mono" style="font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #F4EFE6;">Faisca</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 30px;">
+          <a class="nl" style="color: #FB793E;" href="#">Games</a><a class="nl" href="#">About</a><a class="nl" href="#">Support</a><a class="nl" href="#">Contact</a>
+          <a class="play" href="#">PLAY</a>
+        </div>
+      </div>
+      <div style="position: absolute; top: 76px; left: 32px; right: 32px;">
+        <div class="note" style="color: #7E7767;">page content scrolls under</div>
+      </div>
+    </div>
+    <div class="note">Mark drops 36 → 30 px and the bar gains <span style="color:#9A9388;">rgba(9,9,11,0.9)</span> + 10 px blur + a 1 px <span style="color:#9A9388;">--color-line</span> rule. Height is unchanged at 76 px so nothing below shifts.</div>
+  </div>
+
+  <!-- link states -->
+  <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div class="lbl">link states — every one is a 44 px tall hit area</div>
+    <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; padding: 22px 26px; background: #121215; border: 1px solid #28282F;">
+      <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+        <span class="nl">Games</span><div class="note">default<br>--color-text</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+        <span class="nl" style="color: #FB793E;">Games</span><div class="note">hover<br>--color-accent</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+        <span class="nl" style="outline: 2px solid #FBB924; outline-offset: 2px;">Games</span><div class="note">focus-visible<br>2 px --color-focus</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+        <span class="nl" style="color: #E05F26;">Games</span><div class="note">active<br>--color-accent-press</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+        <span class="nl" style="color: #FCF9EC; box-shadow: inset 0 -2px 0 #FB793E;">Games</span><div class="note">aria-current=page<br>2 px underline</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile bar -->
+  <div style="display: flex; gap: 26px; align-items: flex-start;">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div class="lbl">390 — bar collapses, menu goes full-screen</div>
+      <div style="width: 390px; border: 1px solid #28282F; background: #0E0E11;">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #28282F;">
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <img src="faiscamark.png" alt="Faisca Games" style="width: 30px; height: 30px; display: block;">
+            <div class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #F4EFE6;">Faisca</div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <a class="play" style="height: 44px; font-size: 17px; padding: 0 16px;" href="#">PLAY</a>
+            <button type="button" aria-label="Menu" style="width: 44px; height: 44px; background: none; border: 1px solid #28282F; color: #F4EFE6; display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+            </button>
+          </div>
+        </div>
+        <div style="height: 46px;"></div>
+      </div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 12px; padding-top: 26px;">
+      <div class="note" style="font-size: 12px; line-height: 1.7;">
+        <span style="color: #F4EFE6;">Breakpoint</span> — links collapse below 820 px.<br>
+        <span style="color: #F4EFE6;">PLAY stays visible at every width.</span> It is the page&#39;s one primary action, so it never hides behind the hamburger.<br>
+        <span style="color: #F4EFE6;">Top inset</span> — the bar adds <span class="mono" style="color: #9A9388;">padding-top: env(safe-area-inset-top)</span> so it clears the notch without a painted fake status bar.<br>
+        <span style="color: #F4EFE6;">Hamburger</span> — 44 × 44, <span class="mono" style="color: #9A9388;">aria-expanded</span> toggles, focus returns to it when the overlay closes.
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>controls-mobile — Faisca design kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ---------- demo chrome (not shipped) ---------- */
+
+
+    body { margin: 0; background: var(--color-bg); color: var(--color-text);
+      font-family: var(--font-text); font-size: var(--step-0); line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased; }
+    .kit { max-width: 1440px; margin: 0 auto; padding: var(--space-2xl) var(--gutter) var(--space-4xl); }
+    .kit-head { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-2xl);
+      justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-lg); }
+    .kit-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-accent); }
+    .kit-h1 { margin: var(--space-lg) 0 0; font-family: var(--font-display); font-size: var(--step-6);
+      font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+      letter-spacing: var(--track-display); color: var(--color-text-hi); }
+    .kit-lede { margin: var(--space-sm) 0 0; max-width: 68ch; color: var(--color-text-mute);
+      font-size: var(--step-0); text-wrap: pretty; }
+    .kit-block { margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md); }
+    .kit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-mute); }
+    .kit-note { font-family: var(--font-mono); font-size: 11.5px; line-height: 1.65;
+      color: var(--color-text-dim); max-width: 84ch; }
+    .kit-note b { color: var(--color-text-mute); font-weight: 400; }
+    .kit-frame { border: 1px solid var(--color-line); background: var(--color-panel); overflow: hidden; }
+    .kit-grid { display: grid; gap: var(--space-lg); }
+    .kit-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .kit-state { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-dim); }
+
+
+/* ---------- controls-mobile — SHIP THIS BLOCK ---------- */
+.stage { position: relative; aspect-ratio: 16 / 9; background: var(--color-void);
+  border: 1px solid var(--color-line); overflow: hidden; touch-action: none;
+  -webkit-user-select: none; user-select: none; }
+.stage:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.stage--portrait { aspect-ratio: 3 / 4; }
+.stage__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage__scan { position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background: repeating-linear-gradient(180deg, rgba(0,0,0,0.30) 0 1px, rgba(0,0,0,0) 1px 3px); }
+.stage__vignette { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 46%, rgba(0,0,0,0) 38%, rgba(0,0,0,0.72) 100%); }
+.stage.is-reduced .stage__scan { display: none; }
+.controls { display: flex; flex-direction: column; gap: 10px;
+  padding: var(--space-md) var(--gutter) 0;
+  padding-bottom: calc(var(--space-md) + var(--safe-b)); }
+.controls__row { display: flex; gap: 10px; align-items: stretch; }
+.controls__nudge { width: 72px; height: 64px; flex: none; display: flex; align-items: center;
+  justify-content: center; padding: 0; cursor: pointer; background: var(--color-panel);
+  border: 1px solid var(--color-line); color: var(--color-text-mute); clip-path: var(--clip-button); }
+.controls__nudge svg { width: 24px; height: 24px; }
+.controls__nudge:active, .controls__nudge.is-active {
+  background: var(--color-panel-raised); color: var(--color-text); }
+.controls__nudge:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.controls__log { flex: 1; height: 64px; border: 0; cursor: pointer; touch-action: none;
+  background: var(--color-accent); color: var(--color-text-on-accent);
+  font-family: var(--font-display); font-size: var(--step-4); font-weight: var(--weight-display);
+  letter-spacing: 0.1em; clip-path: var(--clip-button); }
+.controls__log:active, .controls__log.is-held { background: var(--color-accent-press); }
+.controls__log:disabled { background: var(--color-panel-raised); color: var(--color-text-dim);
+  cursor: not-allowed; }
+.controls__log:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+.controls__hint { font-family: var(--font-mono); font-size: 10px; color: var(--color-text-dim);
+  text-align: center; }
+</style>
+</head>
+<body>
+<div class="kit">
+  <header class="kit-head">
+    <div class="kit-name">Faisca design kit · game/controls-mobile</div>
+    <div class="kit-name" style="color: var(--color-text-dim);">tokens.css required</div>
+  </header>
+  <h1 class="kit-h1">MOBILE CONTROLS</h1>
+  <p class="kit-lede">Drag anywhere on the dial, hold LOG. The arrows are the fallback for anyone who cannot drag.</p>
+  <div class="kit-block">
+    <div class="kit-label">390 — portrait stage + thumb zone</div>
+    <div class="kit-frame" style="padding: var(--space-lg); display: flex; justify-content: center; background: var(--color-bg);">
+      <div style="width: 358px; display: flex; flex-direction: column; gap: var(--space-md);">
+        <div class="stage stage--portrait">
+          <div class="hud" style="position: absolute; inset: 0;"></div>
+          <div style="position: absolute; left: 14px; right: 14px; bottom: 120px;">
+            <svg viewBox="0 0 330 60" width="100%" height="60" fill="none" aria-hidden="true">
+              <path d="M8 50 H322" stroke="var(--color-line)" stroke-width="1"/>
+              <g stroke="var(--color-line)" stroke-width="1"><path d="M8 50v-10M86 50v-6M165 50v-10M243 50v-6M322 50v-10"/></g>
+              <path d="M120 18 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -8 0 v-14 a4 4 0 0 1 4 -4 Z" fill="var(--game-near)" fill-opacity="0.62"/>
+              <path d="M250 20 L262 30 L250 40 L238 30 Z" fill="none" stroke="var(--game-phantom)" stroke-width="1.8" stroke-dasharray="4 4"/>
+              <rect x="150" y="10" width="30" height="46" fill="var(--game-locking)" fill-opacity="0.07" stroke="var(--game-locking)" stroke-width="2"/>
+              <path d="M165 4 V56" stroke="var(--game-locking)" stroke-width="3"/>
+            </svg>
+          </div>
+          <div style="position: absolute; left: 14px; right: 14px; bottom: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <div class="hud__meter-head"><span class="hud__label">Lock</span><span class="hud__state" style="color: var(--game-locking); font-size: 9.5px;">locking</span></div>
+            <div class="hud__meter-track"><div class="hud__meter-fill" style="width: 48%; background: var(--game-locking);"></div></div>
+            <div class="hud__dispatch"><span class="hud__dispatch-dot" style="width: 5px; height: 5px;"></span><span class="hud__dispatch-text" style="font-size: 11.5px;">Numbers on the harbour band.</span></div>
+          </div>
+          <div class="stage__scan"></div><div class="stage__vignette"></div>
+        </div>
+        <div class="controls">
+          <div class="controls__row">
+            <button class="controls__nudge" type="button" aria-label="Tune down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5L8 12l7 7"/></svg></button>
+            <button class="controls__log" type="button">LOG</button>
+            <button class="controls__nudge" type="button" aria-label="Tune up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+          <div class="controls__hint">64 px controls · 10 px gaps · safe-area inset below</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kit-block">
+    <div class="kit-label">control states — default · held · disabled · focus</div>
+    <div class="kit-frame" style="padding: var(--space-xl); display: grid; gap: var(--space-md); max-width: 420px;">
+      <div class="controls__row"><button class="controls__nudge" type="button" aria-label="Tune down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5L8 12l7 7"/></svg></button><button class="controls__log" type="button">LOG</button></div>
+      <div class="controls__row"><button class="controls__nudge is-active" type="button" aria-label="Tune down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5L8 12l7 7"/></svg></button><button class="controls__log is-held" type="button">LOG</button></div>
+      <div class="controls__row"><button class="controls__nudge" type="button" disabled aria-label="Tune down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5L8 12l7 7"/></svg></button><button class="controls__log" type="button" disabled>LOG</button></div>
+      <div class="controls__row"><button class="controls__nudge" type="button" style="outline: var(--focus-ring); outline-offset: var(--focus-offset);" aria-label="Tune down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5L8 12l7 7"/></svg></button><button class="controls__log" type="button" style="outline: var(--focus-ring); outline-offset: 3px;">LOG</button></div>
+    </div>
+  </div>
+  <div class="kit-block"><div class="kit-note">LOG is 64&nbsp;px tall and takes the full width between the arrows because it is held, not tapped — a held control needs somewhere forgiving to rest a thumb. <b>No fake status bar and no fake keyboard</b>: the real ones render on top, and the layout reserves <b>env(safe-area-inset-bottom)</b> instead. The dial drag surface is the whole upper stage, not a thin strip, so a thumb anywhere above the meter tunes. Set <b>touch-action: none</b> on both or the browser will steal the drag for scrolling.</div></div>
+</div>
+</body>
+</html>

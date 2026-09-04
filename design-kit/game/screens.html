@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>screens — Faisca design kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ---------- demo chrome (not shipped) ---------- */
+
+
+    body { margin: 0; background: var(--color-bg); color: var(--color-text);
+      font-family: var(--font-text); font-size: var(--step-0); line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased; }
+    .kit { max-width: 1440px; margin: 0 auto; padding: var(--space-2xl) var(--gutter) var(--space-4xl); }
+    .kit-head { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-2xl);
+      justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-lg); }
+    .kit-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-accent); }
+    .kit-h1 { margin: var(--space-lg) 0 0; font-family: var(--font-display); font-size: var(--step-6);
+      font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+      letter-spacing: var(--track-display); color: var(--color-text-hi); }
+    .kit-lede { margin: var(--space-sm) 0 0; max-width: 68ch; color: var(--color-text-mute);
+      font-size: var(--step-0); text-wrap: pretty; }
+    .kit-block { margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md); }
+    .kit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-mute); }
+    .kit-note { font-family: var(--font-mono); font-size: 11.5px; line-height: 1.65;
+      color: var(--color-text-dim); max-width: 84ch; }
+    .kit-note b { color: var(--color-text-mute); font-weight: 400; }
+    .kit-frame { border: 1px solid var(--color-line); background: var(--color-panel); overflow: hidden; }
+    .kit-grid { display: grid; gap: var(--space-lg); }
+    .kit-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .kit-state { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-dim); }
+
+
+/* ---------- screens — SHIP THIS BLOCK ---------- */
+.stage { position: relative; aspect-ratio: 16 / 9; background: var(--color-void);
+  border: 1px solid var(--color-line); overflow: hidden; touch-action: none;
+  -webkit-user-select: none; user-select: none; }
+.stage:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.stage--portrait { aspect-ratio: 3 / 4; }
+.stage__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage__scan { position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background: repeating-linear-gradient(180deg, rgba(0,0,0,0.30) 0 1px, rgba(0,0,0,0) 1px 3px); }
+.stage__vignette { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 46%, rgba(0,0,0,0) 38%, rgba(0,0,0,0.72) 100%); }
+.stage.is-reduced .stage__scan { display: none; }
+.screen { position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: var(--space-md); text-align: center;
+  padding: var(--space-xl); background: rgba(1, 1, 1, 0.87); }
+.screen--pause { background: rgba(1, 1, 1, 0.8); }
+.screen--fail  { background: rgba(1, 1, 1, 0.93); }
+.screen__eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-text-mute); }
+.screen__title { margin: 0; font-family: var(--font-display); font-size: var(--step-7);
+  font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+  letter-spacing: var(--track-display); color: var(--color-text-hi); }
+.screen__title--fail { color: var(--game-lost); }
+.screen__body { margin: 0; max-width: 42ch; font-size: var(--step--1);
+  line-height: var(--leading-body); color: var(--color-text-mute); text-wrap: pretty; }
+.screen__mono { font-family: var(--font-mono); font-size: var(--step--1); color: var(--color-text-mute); }
+.screen__stats { display: flex; gap: var(--space-2xl); padding: var(--space-xs) 0; }
+.screen__stat { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.screen__actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); justify-content: center; }
+.screen__hint { font-family: var(--font-mono); font-size: 10px; color: var(--color-text-dim); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; height: var(--tap-min);
+  padding: 0 var(--space-lg); border: 0; cursor: pointer; font-family: var(--font-display);
+  font-size: var(--step-2); font-weight: var(--weight-display); letter-spacing: var(--track-wide);
+  clip-path: var(--clip-button); }
+.btn--primary { background: var(--color-accent); color: var(--color-text-on-accent); }
+.btn--primary:hover { background: var(--color-accent-hover); }
+.btn--secondary { background: none; border: 1px solid var(--color-line-strong); color: var(--color-text); }
+.btn--secondary:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.btn:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+
+.screen { animation: screen-in var(--dur-base) var(--ease-out) both; }
+@keyframes screen-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .screen { animation: none; } }
+</style>
+</head>
+<body>
+<div class="kit">
+  <header class="kit-head">
+    <div class="kit-name">Faisca design kit · game/screens</div>
+    <div class="kit-name" style="color: var(--color-text-dim);">tokens.css required</div>
+  </header>
+  <h1 class="kit-h1">SCREENS</h1>
+  <p class="kit-lede">Start, pause, round end, fail. All four are overlays on the live stage — the band keeps drifting behind the veil, so no screen is a route change.</p>
+  <div class="kit-block">
+    <div class="kit-label">start</div>
+    <div class="kit-frame" style="padding: var(--space-lg); background: var(--color-bg);">
+      <div class="stage">
+        <div class="screen">
+          <div class="screen__eyebrow">Dead Air: Ashmere</div>
+          <h2 class="screen__title">SIGNAL LOCK</h2>
+          <p class="screen__body">Sixty seconds on the Ashmere band. Tune the needle onto a signal, hold LOG until the window closes, and log the lead. Phantoms cost you three seconds.</p>
+          <div class="screen__actions"><button class="btn btn--primary" type="button" autofocus>TUNE IN</button></div>
+          <div class="screen__hint">← → tune &nbsp;·&nbsp; space to hold</div>
+        </div>
+        <div class="stage__scan"></div><div class="stage__vignette"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kit-block">
+    <div class="kit-label">pause — lighter veil, HUD stays readable behind it</div>
+    <div class="kit-frame" style="padding: var(--space-lg); background: var(--color-bg);">
+      <div class="stage">
+        <div class="hud"><div class="hud__top">
+          <div class="hud__stat"><span class="hud__label">Score</span><span class="hud__value hud__value--score">01 240</span></div>
+          <div class="hud__stat hud__stat--center"><span class="hud__label">Time</span><span class="hud__value hud__value--time">0:31</span></div>
+          <div class="hud__stat hud__stat--right"><span class="hud__label">Best</span><span class="hud__value hud__value--best">02 180</span></div>
+        </div></div>
+        <div class="screen screen--pause">
+          <h2 class="screen__title">PAUSED</h2>
+          <div class="screen__mono">The band keeps drifting without you.</div>
+          <div class="screen__actions">
+            <button class="btn btn--primary" type="button">RESUME</button>
+            <button class="btn btn--secondary" type="button">GIVE UP</button>
+          </div>
+        </div>
+        <div class="stage__scan"></div><div class="stage__vignette"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kit-block">
+    <div class="kit-label">round end — best goes green only when this round beat it</div>
+    <div class="kit-frame" style="padding: var(--space-lg); background: var(--color-bg);">
+      <div class="stage">
+        <div class="screen">
+          <h2 class="screen__title">ROUND OVER</h2>
+          <div class="screen__mono">Leads filed. Ashmere goes quiet until the next shift.</div>
+          <div class="screen__stats">
+            <div class="screen__stat"><span class="hud__label">Score</span><span class="hud__value hud__value--score">02 460</span></div>
+            <div class="screen__stat"><span class="hud__label">Leads</span><span class="hud__value">07</span></div>
+            <div class="screen__stat"><span class="hud__label">Best</span><span class="hud__value" style="color: var(--game-locked);">02 460</span></div>
+          </div>
+          <div class="screen__actions">
+            <button class="btn btn--primary" type="button">RUN IT AGAIN</button>
+            <button class="btn btn--secondary" type="button">BACK TO SITE</button>
+          </div>
+        </div>
+        <div class="stage__scan"></div><div class="stage__vignette"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kit-block">
+    <div class="kit-label">fail — zero leads logged</div>
+    <div class="kit-frame" style="padding: var(--space-lg); background: var(--color-bg);">
+      <div class="stage">
+        <div class="screen screen--fail">
+          <h2 class="screen__title screen__title--fail">DEAD AIR.</h2>
+          <div class="screen__mono" style="max-width: 40ch;">Sixty seconds, nothing logged. The band was busy — you were not.</div>
+          <div class="screen__actions"><button class="btn btn--primary" type="button">TRY AGAIN</button></div>
+          <div class="screen__hint">Hold LOG. The window will not close on its own.</div>
+        </div>
+        <div class="stage__scan"></div><div class="stage__vignette"></div>
+      </div>
+    </div>
+  </div>
+  <div class="kit-block"><div class="kit-note">Veil opacity is the hierarchy: <b>0.80 pause</b> (you are checking the clock, the HUD must stay readable), <b>0.87 start and round end</b>, <b>0.93 fail</b> (nothing behind it is worth reading). The fail screen shows no score row at all — a row of zeroes is a scolding. Each screen sets <b>role="dialog" aria-modal="true"</b>, moves focus to its primary button, and traps Tab; the game loop pauses while any of them is open.</div></div>
+</div>
+</body>
+</html>

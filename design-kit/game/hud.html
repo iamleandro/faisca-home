@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hud — Faisca design kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ---------- demo chrome (not shipped) ---------- */
+
+
+    body { margin: 0; background: var(--color-bg); color: var(--color-text);
+      font-family: var(--font-text); font-size: var(--step-0); line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased; }
+    .kit { max-width: 1440px; margin: 0 auto; padding: var(--space-2xl) var(--gutter) var(--space-4xl); }
+    .kit-head { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-2xl);
+      justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-lg); }
+    .kit-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-accent); }
+    .kit-h1 { margin: var(--space-lg) 0 0; font-family: var(--font-display); font-size: var(--step-6);
+      font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+      letter-spacing: var(--track-display); color: var(--color-text-hi); }
+    .kit-lede { margin: var(--space-sm) 0 0; max-width: 68ch; color: var(--color-text-mute);
+      font-size: var(--step-0); text-wrap: pretty; }
+    .kit-block { margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md); }
+    .kit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-mute); }
+    .kit-note { font-family: var(--font-mono); font-size: 11.5px; line-height: 1.65;
+      color: var(--color-text-dim); max-width: 84ch; }
+    .kit-note b { color: var(--color-text-mute); font-weight: 400; }
+    .kit-frame { border: 1px solid var(--color-line); background: var(--color-panel); overflow: hidden; }
+    .kit-grid { display: grid; gap: var(--space-lg); }
+    .kit-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .kit-state { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-dim); }
+
+
+/* ---------- hud — SHIP THIS BLOCK ---------- */
+.stage { position: relative; aspect-ratio: 16 / 9; background: var(--color-void);
+  border: 1px solid var(--color-line); overflow: hidden; touch-action: none;
+  -webkit-user-select: none; user-select: none; }
+.stage:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.stage--portrait { aspect-ratio: 3 / 4; }
+.stage__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage__scan { position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background: repeating-linear-gradient(180deg, rgba(0,0,0,0.30) 0 1px, rgba(0,0,0,0) 1px 3px); }
+.stage__vignette { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 46%, rgba(0,0,0,0) 38%, rgba(0,0,0,0.72) 100%); }
+.stage.is-reduced .stage__scan { display: none; }
+.hud { position: absolute; inset: 0; pointer-events: none; }
+.hud > * { pointer-events: auto; }
+
+.hud__top { position: absolute; top: 0; left: 0; right: 0; display: flex;
+  align-items: flex-start; justify-content: space-between; gap: var(--space-lg);
+  padding: var(--space-lg) var(--space-xl);
+  padding-top: calc(var(--space-lg) + var(--safe-t)); }
+.hud__stat { display: flex; flex-direction: column; gap: 5px; }
+.hud__stat--center { align-items: center; }
+.hud__stat--right { align-items: flex-end; }
+.hud__label { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-text-dim); }
+.hud__value { font-family: var(--font-display); font-weight: var(--weight-display);
+  font-size: var(--step-5); line-height: 1; font-variant-numeric: tabular-nums;
+  color: var(--color-text-hi); }
+.hud__value--score { color: var(--color-signal); }
+.hud__value--best { color: var(--color-text-mute); }
+.hud__value--time { font-size: var(--step-6); }
+.hud__value--urgent { color: var(--game-lost); }
+
+.hud__meter { display: flex; flex-direction: column; gap: 9px; }
+.hud__meter-head { display: flex; justify-content: space-between; align-items: baseline; }
+.hud__state { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-caps);
+  text-transform: uppercase; }
+.hud__meter-track { height: 8px; background: var(--color-panel);
+  border: 1px solid var(--color-line); position: relative; overflow: hidden; }
+.hud__meter-fill { position: absolute; inset: 0 auto 0 0; width: 0;
+  transition: width 60ms linear; }
+
+.hud__dispatch { display: flex; align-items: center; gap: var(--space-sm); min-height: 24px; }
+.hud__dispatch-dot { width: 6px; height: 6px; flex: none; background: var(--game-locked); }
+.hud__dispatch-text { font-family: var(--font-mono); font-size: var(--step--1); color: var(--color-text); }
+.hud__dispatch--phantom .hud__dispatch-dot { background: var(--game-lost); }
+.hud__dispatch--phantom .hud__dispatch-text { color: var(--game-lost); }
+
+.hud__tools { position: absolute; right: var(--space-xl); bottom: var(--space-lg);
+  display: flex; gap: 10px; }
+.hud__tool { width: var(--tap-min); height: var(--tap-min); display: flex; align-items: center;
+  justify-content: center; padding: 0; cursor: pointer; background: rgba(18, 18, 21, 0.82);
+  border: 1px solid var(--color-line); color: var(--color-text-mute);
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+.hud__tool svg { width: 22px; height: 22px; }
+.hud__tool:hover { color: var(--color-text); border-color: var(--color-line-strong); }
+.hud__tool:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.hud__tool[aria-pressed="true"] { color: var(--color-accent); border-color: var(--color-line-accent); }
+
+.hud__hint { position: absolute; left: var(--space-xl); bottom: var(--space-lg);
+  font-family: var(--font-mono); font-size: 11px; line-height: 1.7;
+  color: var(--color-text-dim); max-width: 26ch; }
+.hud__kbd { border: 1px solid var(--color-line-strong); padding: 2px 6px;
+  background: var(--color-panel); color: var(--color-text); }
+
+@media (prefers-reduced-motion: reduce) { .hud__meter-fill, .hud__tool { transition: none; } }
+</style>
+</head>
+<body>
+<div class="kit">
+  <header class="kit-head">
+    <div class="kit-name">Faisca design kit · game/hud</div>
+    <div class="kit-name" style="color: var(--color-text-dim);">tokens.css required</div>
+  </header>
+  <h1 class="kit-h1">HUD</h1>
+  <p class="kit-lede">Score, timer, best, lock meter, dispatch line and three toggles, drawn over the canvas — all DOM, no text rendered into the bitmap.</p>
+  <div class="kit-block">
+    <div class="kit-label">full HUD over the 16:9 stage</div>
+    <div class="kit-frame" style="padding: var(--space-lg); background: var(--color-bg);">
+      <div class="stage" tabindex="0">
+        <div class="hud">
+          <div class="hud__top">
+            <div class="hud__stat"><span class="hud__label">Score</span><span class="hud__value hud__value--score">01 240</span></div>
+            <div class="hud__stat hud__stat--center"><span class="hud__label">Time</span><span class="hud__value hud__value--time">0:31</span></div>
+            <div class="hud__stat hud__stat--right"><span class="hud__label">Best</span><span class="hud__value hud__value--best">02 180</span></div>
+          </div>
+          <div style="position: absolute; left: var(--space-3xl); right: var(--space-3xl); top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: var(--space-lg);">
+            <svg viewBox="0 0 960 176" width="100%" height="176" fill="none" aria-hidden="true">
+        <path d="M20 150 H940" stroke="var(--color-line)" stroke-width="1"/>
+        <g stroke="var(--color-line)" stroke-width="1"><path d="M20 150v-14M135 150v-9M250 150v-14M365 150v-9M480 150v-14M595 150v-9M710 150v-14M825 150v-9M940 150v-14"/></g>
+        <path d="M240 60 a5 5 0 0 1 5 5 v24 a5 5 0 0 1 -10 0 v-24 a5 5 0 0 1 5 -5 Z" fill="var(--game-near)" fill-opacity="0.62"/>
+        <path d="M700 62 L714 76 L700 90 L686 76 Z" fill="none" stroke="var(--game-phantom)" stroke-width="1.8" stroke-dasharray="4 4"/>
+        <rect x="410" y="20" width="140" height="112" fill="none" stroke="var(--game-locking)" stroke-width="1" stroke-opacity="0.25"/><rect x="446" y="30" width="68" height="92" fill="var(--game-locking)" fill-opacity="0.07" stroke="var(--game-locking)" stroke-width="2"/>
+        <path d="M480 14 V134" stroke="var(--game-locking)" stroke-width="3"/><path d="M473 8 h14 l-7 10 Z" fill="var(--game-locking)"/>
+      </svg>
+            <div class="hud__meter">
+              <div class="hud__meter-head"><span class="hud__label">Lock</span><span class="hud__state" style="color: var(--game-locking);">locking</span></div>
+              <div class="hud__meter-track"><div class="hud__meter-fill" style="width: 62%; background: var(--game-locking);"></div></div>
+            </div>
+            <div class="hud__dispatch"><span class="hud__dispatch-dot"></span><span class="hud__dispatch-text">The ferry never left. Someone is still aboard.</span></div>
+          </div>
+          <div class="hud__hint">Click the stage first.<br><span class="hud__kbd">←</span> <span class="hud__kbd">→</span> tune &nbsp; <span class="hud__kbd">space</span> hold to log</div>
+          <div class="hud__tools">
+            <button class="hud__tool" type="button" aria-label="Mute" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button>
+            <button class="hud__tool" type="button" aria-label="Pause" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg></button>
+            <button class="hud__tool" type="button" aria-label="Reduce effects" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h3l2.5-6 3 12 3-9 2.5 3h6"/></svg></button>
+          </div>
+        </div>
+        <div class="stage__scan"></div><div class="stage__vignette"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kit-block">
+    <div class="kit-label">the five band states</div>
+    <div class="kit-frame" style="padding: var(--space-xl); display: grid; gap: var(--space-xl);">
+      <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--space-lg); align-items: center;">
+        <div><div class="hud__state" style="color: var(--game-idle);">idle</div><div class="kit-state" style="margin-top: 4px;">--game-idle</div></div>
+        <div style="background: var(--color-void); border: 1px solid var(--color-panel-raised); padding: var(--space-sm) var(--space-md);">
+          <svg viewBox="0 0 960 176" width="100%" height="176" fill="none" aria-hidden="true">
+        <path d="M20 150 H940" stroke="var(--color-line)" stroke-width="1"/>
+        <g stroke="var(--color-line)" stroke-width="1"><path d="M20 150v-14M135 150v-9M250 150v-14M365 150v-9M480 150v-14M595 150v-9M710 150v-14M825 150v-9M940 150v-14"/></g>
+        <path d="M240 60 a5 5 0 0 1 5 5 v24 a5 5 0 0 1 -10 0 v-24 a5 5 0 0 1 5 -5 Z" fill="var(--game-near)" fill-opacity="0.62"/>
+        <path d="M700 62 L714 76 L700 90 L686 76 Z" fill="none" stroke="var(--game-phantom)" stroke-width="1.8" stroke-dasharray="4 4"/>
+        
+        <path d="M480 14 V134" stroke="var(--game-idle)" stroke-width="3"/><path d="M473 8 h14 l-7 10 Z" fill="var(--game-idle)"/>
+      </svg>
+          <div class="kit-note" style="margin-top: var(--space-2xs);">no signal in range · thin needle, no window</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--space-lg); align-items: center;">
+        <div><div class="hud__state" style="color: var(--game-near);">near</div><div class="kit-state" style="margin-top: 4px;">--game-near</div></div>
+        <div style="background: var(--color-void); border: 1px solid var(--color-panel-raised); padding: var(--space-sm) var(--space-md);">
+          <svg viewBox="0 0 960 176" width="100%" height="176" fill="none" aria-hidden="true">
+        <path d="M20 150 H940" stroke="var(--color-line)" stroke-width="1"/>
+        <g stroke="var(--color-line)" stroke-width="1"><path d="M20 150v-14M135 150v-9M250 150v-14M365 150v-9M480 150v-14M595 150v-9M710 150v-14M825 150v-9M940 150v-14"/></g>
+        <path d="M240 60 a5 5 0 0 1 5 5 v24 a5 5 0 0 1 -10 0 v-24 a5 5 0 0 1 5 -5 Z" fill="var(--game-near)" fill-opacity="0.62"/>
+        <path d="M700 62 L714 76 L700 90 L686 76 Z" fill="none" stroke="var(--game-phantom)" stroke-width="1.8" stroke-dasharray="4 4"/>
+        <rect x="410" y="20" width="140" height="112" fill="none" stroke="var(--game-near)" stroke-width="1.5" stroke-opacity="0.55"/>
+        <path d="M480 14 V134" stroke="var(--game-near)" stroke-width="3"/><path d="M473 8 h14 l-7 10 Z" fill="var(--game-near)"/>
+      </svg>
+          <div class="kit-note" style="margin-top: var(--space-2xs);">inside the catch radius · window outlines, needle warms</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--space-lg); align-items: center;">
+        <div><div class="hud__state" style="color: var(--game-locking);">locking</div><div class="kit-state" style="margin-top: 4px;">--game-locking</div></div>
+        <div style="background: var(--color-void); border: 1px solid var(--color-panel-raised); padding: var(--space-sm) var(--space-md);">
+          <svg viewBox="0 0 960 176" width="100%" height="176" fill="none" aria-hidden="true">
+        <path d="M20 150 H940" stroke="var(--color-line)" stroke-width="1"/>
+        <g stroke="var(--color-line)" stroke-width="1"><path d="M20 150v-14M135 150v-9M250 150v-14M365 150v-9M480 150v-14M595 150v-9M710 150v-14M825 150v-9M940 150v-14"/></g>
+        <path d="M240 60 a5 5 0 0 1 5 5 v24 a5 5 0 0 1 -10 0 v-24 a5 5 0 0 1 5 -5 Z" fill="var(--game-near)" fill-opacity="0.62"/>
+        <path d="M700 62 L714 76 L700 90 L686 76 Z" fill="none" stroke="var(--game-phantom)" stroke-width="1.8" stroke-dasharray="4 4"/>
+        <rect x="410" y="20" width="140" height="112" fill="none" stroke="var(--game-locking)" stroke-width="1" stroke-opacity="0.25"/><rect x="446" y="30" width="68" height="92" fill="var(--game-locking)" fill-opacity="0.07" stroke="var(--game-locking)" stroke-width="2"/>
+        <path d="M480 14 V134" stroke="var(--game-locking)" stroke-width="3"/><path d="M473 8 h14 l-7 10 Z" fill="var(--game-locking)"/>
+      </svg>
+          <div class="kit-note" style="margin-top: var(--space-2xs);">holding · window contracts over 1.2 s, meter fills</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--space-lg); align-items: center;">
+        <div><div class="hud__state" style="color: var(--game-locked);">locked</div><div class="kit-state" style="margin-top: 4px;">--game-locked</div></div>
+        <div style="background: var(--color-void); border: 1px solid var(--color-panel-raised); padding: var(--space-sm) var(--space-md);">
+          <svg viewBox="0 0 960 176" width="100%" height="176" fill="none" aria-hidden="true">
+        <path d="M20 150 H940" stroke="var(--color-line)" stroke-width="1"/>
+        <g stroke="var(--color-line)" stroke-width="1"><path d="M20 150v-14M135 150v-9M250 150v-14M365 150v-9M480 150v-14M595 150v-9M710 150v-14M825 150v-9M940 150v-14"/></g>
+        <path d="M240 60 a5 5 0 0 1 5 5 v24 a5 5 0 0 1 -10 0 v-24 a5 5 0 0 1 5 -5 Z" fill="var(--game-near)" fill-opacity="0.62"/>
+        <path d="M700 62 L714 76 L700 90 L686 76 Z" fill="none" stroke="var(--game-phantom)" stroke-width="1.8" stroke-dasharray="4 4"/>
+        <rect x="452" y="26" width="56" height="100" fill="var(--game-locked)" fill-opacity="0.16" stroke="var(--game-locked)" stroke-width="2.5"/>
+        <path d="M480 14 V134" stroke="var(--game-locked)" stroke-width="3"/><path d="M473 8 h14 l-7 10 Z" fill="var(--game-locked)"/>
+      </svg>
+          <div class="kit-note" style="margin-top: var(--space-2xs);">logged · window snaps shut and fills, spark fires</div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 120px 1fr; gap: var(--space-lg); align-items: center;">
+        <div><div class="hud__state" style="color: var(--game-lost);">lost</div><div class="kit-state" style="margin-top: 4px;">--game-lost</div></div>
+        <div style="background: var(--color-void); border: 1px solid var(--color-panel-raised); padding: var(--space-sm) var(--space-md);">
+          <svg viewBox="0 0 960 176" width="100%" height="176" fill="none" aria-hidden="true">
+        <path d="M20 150 H940" stroke="var(--color-line)" stroke-width="1"/>
+        <g stroke="var(--color-line)" stroke-width="1"><path d="M20 150v-14M135 150v-9M250 150v-14M365 150v-9M480 150v-14M595 150v-9M710 150v-14M825 150v-9M940 150v-14"/></g>
+        <path d="M240 60 a5 5 0 0 1 5 5 v24 a5 5 0 0 1 -10 0 v-24 a5 5 0 0 1 5 -5 Z" fill="var(--game-near)" fill-opacity="0.62"/>
+        <path d="M700 62 L714 76 L700 90 L686 76 Z" fill="none" stroke="var(--game-phantom)" stroke-width="1.8" stroke-dasharray="4 4"/>
+        <rect x="410" y="20" width="140" height="112" fill="none" stroke="var(--game-lost)" stroke-width="2" stroke-dasharray="7 7"/>
+        <path d="M480 22 V130" stroke="var(--game-lost)" stroke-width="2" stroke-dasharray="5 5"/>
+      </svg>
+          <div class="kit-note" style="margin-top: var(--space-2xs);">slipped out · window and needle break into dashes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kit-block">
+    <div class="kit-label">toggle states — off · on · focus</div>
+    <div class="kit-frame" style="padding: var(--space-xl);">
+      <div class="kit-row">
+        <button class="hud__tool" type="button" aria-pressed="false" aria-label="Mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button>
+        <button class="hud__tool" type="button" aria-pressed="true" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 10l5 4"/><path d="M22 10l-5 4"/></svg></button>
+        <button class="hud__tool" type="button" aria-pressed="false" aria-label="Pause" style="outline: var(--focus-ring); outline-offset: var(--focus-offset);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg></button>
+        <button class="hud__tool" type="button" aria-pressed="true" aria-label="Reduce effects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M2 12h20"/></svg></button>
+        <span class="kit-state">44 × 44 · aria-pressed carries the state</span>
+      </div>
+    </div>
+  </div>
+  <div class="kit-block"><div class="kit-note">Everything here is DOM over the canvas, never text drawn into the bitmap — it stays selectable, translatable, zoomable and readable to a screen reader. Score and timer live in an <b>aria-live="polite"</b> region that announces only on a lock and at 10 seconds, not every frame. The timer turns <b>--game-lost</b> under 10 s, which is a colour change on top of a number that was already there, not colour as the only signal. Reduce effects removes the scanlines, the needle glow and the spark burst; it does not change any gameplay timing.</div></div>
+</div>
+</body>
+</html>

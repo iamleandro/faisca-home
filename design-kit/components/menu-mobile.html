@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>menu-mobile — Faisca design kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ---------- demo chrome (not shipped) ---------- */
+
+
+    body { margin: 0; background: var(--color-bg); color: var(--color-text);
+      font-family: var(--font-text); font-size: var(--step-0); line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased; }
+    .kit { max-width: 1440px; margin: 0 auto; padding: var(--space-2xl) var(--gutter) var(--space-4xl); }
+    .kit-head { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-2xl);
+      justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-lg); }
+    .kit-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-accent); }
+    .kit-h1 { margin: var(--space-lg) 0 0; font-family: var(--font-display); font-size: var(--step-6);
+      font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+      letter-spacing: var(--track-display); color: var(--color-text-hi); }
+    .kit-lede { margin: var(--space-sm) 0 0; max-width: 68ch; color: var(--color-text-mute);
+      font-size: var(--step-0); text-wrap: pretty; }
+    .kit-block { margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md); }
+    .kit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-mute); }
+    .kit-note { font-family: var(--font-mono); font-size: 11.5px; line-height: 1.65;
+      color: var(--color-text-dim); max-width: 84ch; }
+    .kit-note b { color: var(--color-text-mute); font-weight: 400; }
+    .kit-frame { border: 1px solid var(--color-line); background: var(--color-panel); overflow: hidden; }
+    .kit-grid { display: grid; gap: var(--space-lg); }
+    .kit-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .kit-state { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-dim); }
+
+
+/* ---------- menu-mobile — SHIP THIS BLOCK ---------- */
+.menu-mobile { position: fixed; inset: 0; z-index: var(--z-overlay);
+  display: flex; flex-direction: column; height: 100dvh;
+  background: var(--color-bg); overflow-y: auto; overscroll-behavior: contain;
+  padding-top: var(--safe-t); padding-bottom: var(--safe-b); }
+.menu-mobile[hidden] { display: none; }
+
+.menu-mobile__bar { display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-xs); padding: var(--space-sm) var(--gutter);
+  border-bottom: 1px solid var(--color-line); flex: none; }
+.menu-mobile__close { width: var(--tap-min); height: var(--tap-min); display: flex;
+  align-items: center; justify-content: center; padding: 0; cursor: pointer;
+  background: none; border: 1px solid var(--color-accent); color: var(--color-accent); }
+.menu-mobile__close:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+.menu-mobile__list { list-style: none; margin: 0; padding: var(--space-lg) var(--gutter) 0; flex: 1; }
+.menu-mobile__link { display: flex; align-items: center; justify-content: space-between;
+  min-height: 64px; border-bottom: 1px solid var(--color-panel-raised); text-decoration: none;
+  font-family: var(--font-display); font-size: var(--step-5); font-weight: var(--weight-display);
+  letter-spacing: var(--track-tight); color: var(--color-text-hi); }
+.menu-mobile__link svg { width: 22px; height: 22px; color: var(--color-text-dim); }
+.menu-mobile__link:hover, .menu-mobile__link.is-hover { color: var(--color-accent); }
+.menu-mobile__link:hover svg, .menu-mobile__link.is-hover svg { color: var(--color-accent); }
+.menu-mobile__link:focus-visible, .menu-mobile__link.is-focus {
+  outline: var(--focus-ring); outline-offset: -2px; }
+.menu-mobile__link[aria-current="page"] { color: var(--color-accent); }
+.menu-mobile__list li:last-child .menu-mobile__link { border-bottom: 0; }
+
+.menu-mobile__promo { margin: var(--space-lg) var(--gutter) 0; padding: var(--space-lg);
+  border: 1px solid var(--color-line); background: var(--color-panel);
+  display: flex; flex-direction: column; gap: var(--space-sm); }
+.menu-mobile__foot { display: flex; flex-direction: column; gap: var(--space-md);
+  padding: var(--space-xl) var(--gutter) var(--space-lg); flex: none; }
+
+.menu-mobile { animation: menu-in var(--dur-base) var(--ease-out) both; }
+@keyframes menu-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .menu-mobile { animation: none; } }
+
+.social-links { display: flex; gap: var(--space-xs); list-style: none; margin: 0; padding: 0; }
+.social-links__link { display: flex; align-items: center; justify-content: center;
+  width: var(--tap-min); height: var(--tap-min); border: 1px solid var(--color-line);
+  color: var(--color-text-mute); }
+.social-links__link svg { width: 21px; height: 21px; }
+.social-links__link:hover { color: var(--color-accent); border-color: var(--color-line-accent); }
+
+/* demo only: the overlay is position:fixed in production */
+.menu-demo .menu-mobile { position: relative; inset: auto; height: 780px; max-width: 390px; }
+</style>
+</head>
+<body>
+<div class="kit">
+  <header class="kit-head">
+    <div class="kit-name">Faisca design kit · components/menu-mobile</div>
+    <div class="kit-name" style="color: var(--color-text-dim);">tokens.css required</div>
+  </header>
+  <h1 class="kit-h1">MOBILE MENU</h1>
+  <p class="kit-lede">Full-screen overlay under 820&nbsp;px. Scroll locked, focus trapped, Esc closes and returns focus to the hamburger.</p>
+  <div class="kit-block">
+    <div class="kit-label">open — shown inline at 390 px; ships as position: fixed</div>
+    <div class="kit-frame menu-demo" style="padding: var(--space-lg); display: flex; justify-content: center;">
+      <div class="menu-mobile" id="menu">
+        <div class="menu-mobile__bar">
+          <a class="site-nav__brand" href="/" style="display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; color: var(--color-text);">
+            <img src="../assets/faisca-mark-120.png" alt="Faisca Games" style="width: 30px; height: 30px; display: block;">
+            <span style="font-family: var(--font-mono); font-size: var(--step--1); font-weight: 600; letter-spacing: var(--track-caps); text-transform: uppercase;">Faisca</span>
+          </a>
+          <div style="display: flex; gap: var(--space-xs); align-items: center;">
+            <a href="#play" style="display: inline-flex; align-items: center; height: var(--tap-min); padding: 0 var(--space-md); border: 1px solid var(--color-accent); color: var(--color-accent); font-family: var(--font-display); font-size: var(--step-1); font-weight: var(--weight-display); letter-spacing: var(--track-wide); text-decoration: none; clip-path: var(--clip-button);">PLAY</a>
+            <button class="menu-mobile__close" type="button" aria-label="Close menu" aria-expanded="true" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg></button>
+          </div>
+        </div>
+        <ul class="menu-mobile__list">
+          <li><a class="menu-mobile__link" href="/games/dead-air/">Games <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></li>
+          <li><a class="menu-mobile__link" href="/about/" aria-current="page">About <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></li>
+          <li><a class="menu-mobile__link" href="/support/dead-air/">Support <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></li>
+          <li><a class="menu-mobile__link" href="/contact/">Contact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></li>
+        </ul>
+        <div class="menu-mobile__promo">
+          <div style="font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-signal);">In the page</div>
+          <div style="font-family: var(--font-display); font-size: var(--step-4); font-weight: var(--weight-display); line-height: 1; color: var(--color-text-hi);">SIGNAL LOCK</div>
+          <p style="margin: 0; font-size: var(--step--1); color: var(--color-text-mute);">Sixty seconds on the Ashmere band.</p>
+        </div>
+        <div class="menu-mobile__foot">
+          <a href="mailto:contact@faisca.gg" style="align-self: flex-start; color: var(--color-text); text-decoration: none; border-bottom: 1px solid var(--color-line-strong); padding-bottom: 2px;">contact@faisca.gg</a>
+          <ul class="social-links">
+            <li><a class="social-links__link" href="https://www.instagram.com/playfaisca/" target="_blank" rel="me noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a></li>
+            <li><a class="social-links__link" href="https://x.com/playfaisca" target="_blank" rel="me noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M5 5 L19 19"/><path d="M19 5 L5 19"/></svg></a></li>
+            <li><a class="social-links__link" href="https://www.linkedin.com/company/playfaisca/" target="_blank" rel="me noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M7.6 10.6V17"/><path d="M7.6 7.4v.6"/><path d="M11.4 17v-6.4"/><path d="M11.4 13.4a2.5 2.5 0 0 1 5 0V17"/></svg></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kit-block">
+    <div class="kit-label">link states</div>
+    <div class="kit-frame" style="padding: var(--space-xl); max-width: 420px;">
+      <a class="menu-mobile__link" href="#">Games <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a class="menu-mobile__link is-hover" href="#">Games <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+      <a class="menu-mobile__link is-focus" href="#">Games <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+      <div class="kit-row" style="margin-top: var(--space-md);"><span class="kit-state">default</span><span class="kit-state">hover</span><span class="kit-state">focus-visible (inset)</span></div>
+    </div>
+  </div>
+  <div class="kit-block"><div class="kit-note">Rows are 64&nbsp;px, well over the 44&nbsp;px floor, because on a phone this list is the whole navigation and thumbs are imprecise. Focus offset is <b>-2px</b> here so the ring stays inside the row instead of overlapping the neighbour&#39;s border. Behaviour the coder owns: set <b>aria-expanded</b> on the hamburger, lock <b>body { overflow: hidden }</b> while open, trap Tab inside the overlay, and on close move focus back to the hamburger.</div></div>
+</div>
+</body>
+</html>

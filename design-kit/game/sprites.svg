@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- ===================================================================
+       Signal Lock — sprite sheet
+       Every sprite strokes/fills with currentColor so a single
+       colour: var(--game-*) on the <svg> host drives the whole state.
+       Usage:  <svg class="spr" style="color: var(--game-near)">
+                 <use href="/game/sprites.svg#spr-needle"></use>
+               </svg>
+       =================================================================== -->
+
+  <!-- Needle. Head at top, hairline shaft, foot mark on the band. -->
+  <symbol id="spr-needle" viewBox="0 0 24 120">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+      <path d="M12 10 V110"/>
+    </g>
+    <path d="M12 2 L18 12 L12 20 L6 12 Z" fill="currentColor"/>
+    <path d="M6 114 H18" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Band ruler. One repeatable 200-unit segment: 1 major + 4 minor. -->
+  <symbol id="spr-ticks" viewBox="0 0 200 20">
+    <g stroke="currentColor" fill="none" stroke-width="1">
+      <path d="M0 20 V6" stroke-width="1.5"/>
+      <path d="M40 20 V13 M80 20 V13 M120 20 V13 M160 20 V13" opacity="0.55"/>
+      <path d="M0 20 H200" opacity="0.35"/>
+    </g>
+  </symbol>
+
+  <!-- Carrier waveform. Deterministic noise, 240x60, baseline 30. -->
+  <symbol id="spr-waveform" viewBox="0 0 240 60">
+    <path d="M0 39.2 L3 26.0 L6 19.7 L9 21.9 L12 31.3 L15 21.9 L18 20.0 L21 24.1 L24 38.6 L27 28.2 L30 35.5 L33 41.7 L36 29.0 L39 39.8 L42 13.9 L45 28.0 L48 40.4 L51 37.4 L54 38.9 L57 41.2 L60 40.9 L63 36.1 L66 25.9 L69 46.4 L72 22.3 L75 22.6 L78 15.0 L81 34.8 L84 37.0 L87 13.1 L90 47.1 L93 41.2 L96 22.7 L99 11.6 L102 23.6 L105 41.8 L108 35.8 L111 46.8 L114 32.3 L117 24.7 L120 34.5 L123 40.0 L126 31.5 L129 24.6 L132 21.9 L135 31.8 L138 38.2 L141 17.7 L144 18.5 L147 34.3 L150 34.0 L153 33.3 L156 45.0 L159 20.8 L162 19.8 L165 46.7 L168 31.6 L171 14.8 L174 36.5 L177 38.1 L180 44.2 L183 36.5 L186 43.9 L189 34.1 L192 16.4 L195 35.7 L198 23.3 L201 45.6 L204 41.8 L207 37.5 L210 42.3 L213 18.5 L216 22.5 L219 23.4 L222 17.0 L225 17.9 L228 27.7 L231 27.3 L234 39.3 L237 18.3 L240 32.9" fill="none" stroke="currentColor" stroke-width="1.25"
+          stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+  </symbol>
+
+  <!-- Real signal. Filled lozenge — the shape that means "this counts". -->
+  <symbol id="spr-signal" viewBox="0 0 32 32">
+    <rect x="12" y="4" width="8" height="24" rx="4" fill="currentColor"/>
+    <path d="M6 16 H2 M30 16 H26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+
+  <!-- Phantom. Hollow dashed diamond — never filled, never a lozenge. -->
+  <symbol id="spr-phantom" viewBox="0 0 32 32">
+    <path d="M16 4 L28 16 L16 28 L4 16 Z" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-dasharray="4 4" stroke-linejoin="round"/>
+    <circle cx="16" cy="16" r="1.6" fill="currentColor"/>
+  </symbol>
+
+  <!-- Spark. The logo mark reduced to eight rays; fires on a lock. -->
+  <symbol id="spr-spark" viewBox="0 0 48 48">
+    <path d="M24 0 L27.5 17 L38 6 L31 20 L48 24 L31 28 L38 42 L27.5 31 L24 48 L20.5 31 L10 42 L17 28 L0 24 L17 20 L10 6 L20.5 17 Z"
+          fill="currentColor"/>
+  </symbol>
+
+  <!-- Lock window. Bracket pair; scales horizontally as the window shrinks. -->
+  <symbol id="spr-lockwindow" viewBox="0 0 64 96">
+    <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square">
+      <path d="M2 14 V2 H16 M48 2 H62 V14 M62 82 V94 H48 M16 94 H2 V82"/>
+    </g>
+  </symbol>
+
+  <!-- ===================== HUD icons — 24px grid ===================== -->
+  <symbol id="spr-sound-on" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/><path d="M19.5 6.5a7.5 7.5 0 0 1 0 11"/>
+    </g>
+  </symbol>
+  <symbol id="spr-sound-off" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 10l5 4M22 10l-5 4"/>
+    </g>
+  </symbol>
+  <symbol id="spr-pause" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+      <path d="M9 5v14M15 5v14"/>
+    </g>
+  </symbol>
+  <symbol id="spr-play" viewBox="0 0 24 24">
+    <path d="M7 4.5 L19.5 12 L7 19.5 Z" fill="none" stroke="currentColor"
+          stroke-width="1.75" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="spr-fx-on" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 12h3l2.5-6 3 12 3-9 2.5 3h6"/>
+    </g>
+  </symbol>
+  <symbol id="spr-fx-off" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 12h20"/><path d="M5.5 8.5v7M18.5 8.5v7" opacity="0.45"/>
+    </g>
+  </symbol>
+  <symbol id="spr-left" viewBox="0 0 24 24">
+    <path d="M15 5 L8 12 L15 19" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="spr-right" viewBox="0 0 24 24">
+    <path d="M9 5 L16 12 L9 19" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>

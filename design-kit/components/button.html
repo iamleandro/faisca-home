@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>button — Faisca design kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ---------- demo chrome (not shipped) ---------- */
+
+    body { margin: 0; background: var(--color-bg); color: var(--color-text);
+      font-family: var(--font-text); font-size: var(--step-0); line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased; }
+    .kit { max-width: 1440px; margin: 0 auto; padding: var(--space-2xl) var(--gutter) var(--space-4xl); }
+    .kit-head { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-2xl);
+      justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-lg); }
+    .kit-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-accent); }
+    .kit-h1 { margin: var(--space-lg) 0 0; font-family: var(--font-display); font-size: var(--step-6);
+      font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+      letter-spacing: var(--track-display); color: var(--color-text-hi); }
+    .kit-lede { margin: var(--space-sm) 0 0; max-width: 68ch; color: var(--color-text-mute);
+      font-size: var(--step-0); text-wrap: pretty; }
+    .kit-block { margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md); }
+    .kit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-mute); }
+    .kit-note { font-family: var(--font-mono); font-size: 11.5px; line-height: 1.65;
+      color: var(--color-text-dim); max-width: 84ch; }
+    .kit-note b { color: var(--color-text-mute); font-weight: 400; }
+    .kit-frame { border: 1px solid var(--color-line); background: var(--color-panel); overflow: hidden; }
+    .kit-grid { display: grid; gap: var(--space-lg); }
+    .kit-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .kit-state { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-dim); }
+
+/* ---------- button — SHIP THIS BLOCK ---------- */
+/* States double up: .x:hover and .x.is-hover share one rule, so the static
+   demo below shows exactly what the browser renders. Drop the .is-* classes
+   when porting; keep the pseudo-classes. */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs);
+  height: var(--control-md); padding: 0 var(--space-lg); border: 0; cursor: pointer;
+  font-family: var(--font-display); font-size: var(--step-1); font-weight: var(--weight-display);
+  letter-spacing: var(--track-wide); white-space: nowrap; text-decoration: none;
+  clip-path: var(--clip-button);
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out); }
+.btn:focus-visible, .btn.is-focus { outline: var(--focus-ring); outline-offset: 3px; }
+.btn svg { width: 1em; height: 1em; flex: none; }
+
+.btn--lg { height: var(--control-lg); font-size: var(--step-2); padding: 0 var(--space-xl); }
+.btn--sm { height: var(--control-sm); font-size: var(--step-0); padding: 0 var(--space-md); }
+/* --sm is only legal inside a wrapper that is itself >= var(--tap-min) tall. */
+
+.btn--primary { background: var(--color-accent); color: var(--color-text-on-accent); }
+.btn--primary:hover, .btn--primary.is-hover { background: var(--color-accent-hover); }
+.btn--primary:active, .btn--primary.is-active { background: var(--color-accent-press); }
+.btn--primary:disabled, .btn--primary.is-disabled {
+  background: var(--color-panel-raised); color: var(--color-text-dim); cursor: not-allowed; }
+
+.btn--secondary { background: none; border: 1px solid var(--color-line-strong); color: var(--color-text); }
+.btn--secondary:hover, .btn--secondary.is-hover { border-color: var(--color-accent); color: var(--color-accent); }
+.btn--secondary:active, .btn--secondary.is-active {
+  border-color: var(--color-accent-press); color: var(--color-accent-press);
+  background: rgba(224, 95, 38, 0.09); }
+.btn--secondary:disabled, .btn--secondary.is-disabled {
+  border-color: var(--color-panel-raised); color: var(--color-text-dim); cursor: not-allowed; }
+
+.btn--quiet { background: none; color: var(--color-text); padding: 0 var(--space-sm); clip-path: none; }
+.btn--quiet:hover, .btn--quiet.is-hover { color: var(--color-accent); }
+.btn--quiet:active, .btn--quiet.is-active { color: var(--color-accent-press); }
+.btn--quiet:disabled, .btn--quiet.is-disabled { color: var(--color-text-dim); cursor: not-allowed; }
+
+.btn--icon { width: var(--control-md); height: var(--control-md); padding: 0; background: none;
+  border: 1px solid var(--color-line-strong); color: var(--color-text-mute); }
+.btn--icon svg { width: 22px; height: 22px; }
+.btn--icon:hover, .btn--icon.is-hover { color: var(--color-text); }
+.btn--icon[aria-pressed="true"], .btn--icon.is-active {
+  color: var(--color-accent); border-color: var(--color-line-accent); }
+.btn--icon:disabled, .btn--icon.is-disabled {
+  color: var(--color-text-dim); border-color: var(--color-panel-raised); cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+</style>
+</head>
+<body>
+<div class="kit">
+  <header class="kit-head">
+    <div class="kit-name">Faisca design kit · components/button</div>
+    <div class="kit-name" style="color: var(--color-text-dim);">tokens.css required</div>
+  </header>
+  <h1 class="kit-h1">BUTTON</h1>
+  <p class="kit-lede">Four variants, five states, three sizes. The 8&nbsp;px corner cut is the one shape signature the whole site shares — it is on buttons, panels and tags, and nowhere else.</p>
+  <div class="kit-block">
+    <div class="kit-label">primary · secondary · quiet · icon &nbsp;×&nbsp; default · hover · focus · active · disabled</div>
+    <div class="kit-frame" style="padding: var(--space-xl); display: grid; gap: var(--space-lg);">
+      <div class="kit-row">
+        <button class="btn btn--primary" type="button">PLAY</button>
+        <button class="btn btn--primary is-hover" type="button">PLAY</button>
+        <button class="btn btn--primary is-focus" type="button">PLAY</button>
+        <button class="btn btn--primary is-active" type="button">PLAY</button>
+        <button class="btn btn--primary" type="button" disabled>PLAY</button>
+        <span class="kit-state">primary</span>
+      </div>
+      <div class="kit-row">
+        <button class="btn btn--secondary" type="button">DEV LOG</button>
+        <button class="btn btn--secondary is-hover" type="button">DEV LOG</button>
+        <button class="btn btn--secondary is-focus" type="button">DEV LOG</button>
+        <button class="btn btn--secondary is-active" type="button">DEV LOG</button>
+        <button class="btn btn--secondary" type="button" disabled>DEV LOG</button>
+        <span class="kit-state">secondary</span>
+      </div>
+      <div class="kit-row">
+        <button class="btn btn--quiet" type="button">SKIP</button>
+        <button class="btn btn--quiet is-hover" type="button">SKIP</button>
+        <button class="btn btn--quiet is-focus" type="button">SKIP</button>
+        <button class="btn btn--quiet is-active" type="button">SKIP</button>
+        <button class="btn btn--quiet" type="button" disabled>SKIP</button>
+        <span class="kit-state">quiet</span>
+      </div>
+      <div class="kit-row">
+        <button class="btn btn--icon" type="button" aria-label="Mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button>
+        <button class="btn btn--icon is-hover" type="button" aria-label="Mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button>
+        <button class="btn btn--icon is-focus" type="button" aria-label="Mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button>
+        <button class="btn btn--icon" type="button" aria-pressed="true" aria-label="Unmute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 10l5 4"/><path d="M22 10l-5 4"/></svg></button>
+        <button class="btn btn--icon" type="button" disabled aria-label="Mute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></button>
+        <span class="kit-state">icon · 4th is aria-pressed</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="kit-block">
+    <div class="kit-label">sizes</div>
+    <div class="kit-frame" style="padding: var(--space-xl);">
+      <div class="kit-row" style="align-items: flex-end;">
+        <button class="btn btn--primary btn--lg" type="button">PLAY SIGNAL LOCK</button>
+        <button class="btn btn--primary" type="button">PLAY</button>
+        <button class="btn btn--primary btn--sm" type="button">PLAY</button>
+        <span class="kit-state">56 · 48 · 40</span>
+      </div>
+    </div>
+  </div>
+  <div class="kit-block"><div class="kit-note">Disabled deliberately uses <b>--color-text-dim</b>, the one token below 4.5:1 — a disabled control should read as unavailable, and WCAG exempts it. Everything else on this page clears the floor. <b>--btn--sm</b> at 40&nbsp;px is under the 44&nbsp;px tap minimum on its own, so it is only legal nested inside a taller padded hit area; there is no standalone small button on the site.</div></div>
+</div>
+</body>
+</html>

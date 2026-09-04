@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hero — Faisca design kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ---------- demo chrome (not shipped) ---------- */
+
+
+    body { margin: 0; background: var(--color-bg); color: var(--color-text);
+      font-family: var(--font-text); font-size: var(--step-0); line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased; }
+    .kit { max-width: 1440px; margin: 0 auto; padding: var(--space-2xl) var(--gutter) var(--space-4xl); }
+    .kit-head { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-2xl);
+      justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-lg); }
+    .kit-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-accent); }
+    .kit-h1 { margin: var(--space-lg) 0 0; font-family: var(--font-display); font-size: var(--step-6);
+      font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+      letter-spacing: var(--track-display); color: var(--color-text-hi); }
+    .kit-lede { margin: var(--space-sm) 0 0; max-width: 68ch; color: var(--color-text-mute);
+      font-size: var(--step-0); text-wrap: pretty; }
+    .kit-block { margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md); }
+    .kit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-mute); }
+    .kit-note { font-family: var(--font-mono); font-size: 11.5px; line-height: 1.65;
+      color: var(--color-text-dim); max-width: 84ch; }
+    .kit-note b { color: var(--color-text-mute); font-weight: 400; }
+    .kit-frame { border: 1px solid var(--color-line); background: var(--color-panel); overflow: hidden; }
+    .kit-grid { display: grid; gap: var(--space-lg); }
+    .kit-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .kit-state { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-dim); }
+
+
+/* ---------- hero — SHIP THIS BLOCK ---------- */
+.hero { position: relative; display: grid; align-items: end;
+  min-height: min(100dvh, 860px); padding: var(--space-4xl) var(--gutter) var(--space-3xl);
+  padding-top: calc(var(--space-4xl) + var(--safe-t));
+  padding-left: calc(var(--gutter) + var(--safe-l));
+  padding-right: calc(var(--gutter) + var(--safe-r));
+  background: var(--color-bg); overflow: hidden; isolation: isolate; }
+.hero__art { position: absolute; inset: 0 0 auto; height: 72%; width: 100%;
+  object-fit: cover; object-position: center 42%; z-index: -2; }
+.hero__scrim { position: absolute; inset: 0 0 auto; height: 72%; z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(1,1,1,0.9) 0%, rgba(1,1,1,0.25) 46%, rgba(1,1,1,0) 72%),
+    linear-gradient(180deg, rgba(1,1,1,0.82) 0%, rgba(1,1,1,0.42) 34%,
+                    rgba(9,9,11,0.9) 84%, var(--color-bg) 100%); }
+.hero__scrim::after { content: ""; position: absolute; inset: 0; opacity: 0.42;
+  background: repeating-linear-gradient(180deg, rgba(0,0,0,0.32) 0 1px, rgba(0,0,0,0) 1px 3px); }
+
+.hero__inner { display: flex; flex-direction: column; gap: var(--space-lg);
+  max-width: 46ch; margin: 0 auto 0 0; }
+.hero__eyebrow { font-family: var(--font-mono); font-size: var(--step--1); font-weight: 500;
+  letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-signal); }
+.hero__title { margin: 0; font-family: var(--font-display); font-size: var(--step-8);
+  font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+  letter-spacing: var(--track-display); color: var(--color-text-hi); text-wrap: balance; }
+.hero__body { margin: 0; font-size: var(--step-1); line-height: var(--leading-body);
+  color: var(--color-text); max-width: 40ch; text-wrap: pretty; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); padding-top: var(--space-2xs); }
+
+.hero__title { animation: hero-rise var(--dur-scene) var(--ease-out) both; }
+.hero__body  { animation: hero-rise var(--dur-scene) var(--ease-out) 80ms both; }
+.hero__actions { animation: hero-rise var(--dur-scene) var(--ease-out) 160ms both; }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero__title, .hero__body, .hero__actions { animation: none; }
+  .hero__scrim::after { display: none; }
+}
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs);
+  height: var(--control-lg); padding: 0 var(--space-xl); border: 0; cursor: pointer;
+  font-family: var(--font-display); font-size: var(--step-2); font-weight: var(--weight-display);
+  letter-spacing: var(--track-wide); text-decoration: none; clip-path: var(--clip-button); }
+.btn svg { width: 0.75em; height: 0.75em; }
+.btn--primary { background: var(--color-accent); color: var(--color-text-on-accent); }
+.btn--primary:hover { background: var(--color-accent-hover); }
+.btn--secondary { background: none; border: 1px solid var(--color-line-strong); color: var(--color-text); }
+.btn--secondary:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.btn:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<div class="kit">
+  <header class="kit-head">
+    <div class="kit-name">Faisca design kit · components/hero</div>
+    <div class="kit-name" style="color: var(--color-text-dim);">tokens.css required</div>
+  </header>
+  <h1 class="kit-h1">HERO</h1>
+  <p class="kit-lede">One sentence, one primary action, art that stops before it eats the copy. 100dvh is capped so the fold always shows the top of the game.</p>
+  <div class="kit-block">
+    <div class="kit-label">default — resize freely, the type scale is fluid 390 → 1440</div>
+    <div class="kit-frame">
+      <section class="hero">
+        <img class="hero__art" src="../assets/dead-air-hero-1400.jpg" alt="">
+        <div class="hero__scrim"></div>
+        <div class="hero__inner">
+          <div class="hero__eyebrow">Faisca Games · Toronto</div>
+          <h1 class="hero__title">A SPARK, THEN A GAME.</h1>
+          <p class="hero__body">We make small, dark, playable things. The first one is a radio you cannot quite tune — try it right here, no download, no account. <span style="color: var(--color-text-dim);">[draft copy]</span></p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#play">PLAY SIGNAL LOCK <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12 5l7 7-7 7"/></svg></a>
+            <a class="btn btn--secondary" href="/games/dead-air/">DEAD AIR: ASHMERE</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="kit-block"><div class="kit-note">Height is <b>min(100dvh, 860px)</b> — dvh so mobile browser chrome does not clip it, capped so a tall desktop window still shows the top of the game below the fold. The art stops at 72% and fades into <b>--color-bg</b>, so the copy always sits on flat ground, never on photograph. Title only sets <b>--step-8</b>; the headline is real copy from the current site, the body line is draft.</div></div>
+</div>
+</body>
+</html>

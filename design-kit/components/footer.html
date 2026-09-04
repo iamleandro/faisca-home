@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>footer — Faisca design kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ---------- demo chrome (not shipped) ---------- */
+
+
+    body { margin: 0; background: var(--color-bg); color: var(--color-text);
+      font-family: var(--font-text); font-size: var(--step-0); line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased; }
+    .kit { max-width: 1440px; margin: 0 auto; padding: var(--space-2xl) var(--gutter) var(--space-4xl); }
+    .kit-head { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-2xl);
+      justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-lg); }
+    .kit-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-accent); }
+    .kit-h1 { margin: var(--space-lg) 0 0; font-family: var(--font-display); font-size: var(--step-6);
+      font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+      letter-spacing: var(--track-display); color: var(--color-text-hi); }
+    .kit-lede { margin: var(--space-sm) 0 0; max-width: 68ch; color: var(--color-text-mute);
+      font-size: var(--step-0); text-wrap: pretty; }
+    .kit-block { margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md); }
+    .kit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-mute); }
+    .kit-note { font-family: var(--font-mono); font-size: 11.5px; line-height: 1.65;
+      color: var(--color-text-dim); max-width: 84ch; }
+    .kit-note b { color: var(--color-text-mute); font-weight: 400; }
+    .kit-frame { border: 1px solid var(--color-line); background: var(--color-panel); overflow: hidden; }
+    .kit-grid { display: grid; gap: var(--space-lg); }
+    .kit-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .kit-state { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-dim); }
+
+
+/* ---------- footer — SHIP THIS BLOCK ---------- */
+/* .x:hover and .x.is-hover share one rule so the static demo shows exactly
+   what the browser renders. Drop the .is-* classes when porting. */
+.site-footer { background: var(--color-surface); border-top: 1px solid var(--color-line); }
+.site-footer__top { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: var(--space-2xl);
+  padding: var(--space-3xl) var(--gutter) var(--space-xl); max-width: var(--container);
+  margin: 0 auto; }
+.site-footer__brand { display: flex; flex-direction: column; gap: var(--space-md); }
+.site-footer__mark { display: flex; align-items: center; gap: var(--space-sm); }
+.site-footer__mark img { width: 40px; height: 40px; display: block; }
+.site-footer__wordmark { font-family: var(--font-mono); font-size: var(--step--1); font-weight: 600;
+  letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-text); }
+.site-footer__tagline { margin: 0; color: var(--color-text-mute); max-width: 34ch; }
+.site-footer__mail { align-self: flex-start; color: var(--color-text); text-decoration: none;
+  border-bottom: 1px solid var(--color-line-strong); padding-bottom: 2px; min-height: var(--tap-min);
+  display: inline-flex; align-items: center; }
+.site-footer__mail:hover { border-bottom-color: var(--color-signal); }
+.site-footer__mail:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+.site-footer__col { display: flex; flex-direction: column; gap: var(--space-2xs); }
+.site-footer__head { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+  text-transform: uppercase; color: var(--color-text-dim); margin-bottom: var(--space-xs); }
+.site-footer__link { display: inline-flex; align-items: center; min-height: var(--tap-min);
+  font-size: var(--step--1); color: var(--color-text-mute); text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out); }
+.site-footer__link:hover, .site-footer__link.is-hover { color: var(--color-text); }
+.site-footer__link:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+
+.site-footer__bar { display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: var(--space-md);
+  border-top: 1px solid var(--color-line); max-width: var(--container); margin: 0 auto;
+  padding: var(--space-md) var(--gutter);
+  padding-bottom: calc(var(--space-lg) + var(--safe-b)); }
+.site-footer__legal { font-family: var(--font-mono); font-size: var(--step--1); color: var(--color-text-dim); }
+
+@media (max-width: 819px) {
+  .site-footer__top { grid-template-columns: 1fr; gap: var(--space-xl); }
+}
+.social-links { display: flex; gap: var(--space-xs); list-style: none; margin: 0; padding: 0; }
+.social-links__link { display: flex; align-items: center; justify-content: center;
+  width: var(--tap-min); height: var(--tap-min); border: 1px solid var(--color-line);
+  color: var(--color-text-mute); transition: color var(--dur-fast) var(--ease-out),
+  border-color var(--dur-fast) var(--ease-out); }
+.social-links__link svg { width: 21px; height: 21px; }
+.social-links__link:hover { color: var(--color-accent); border-color: var(--color-line-accent); }
+</style>
+</head>
+<body>
+<div class="kit">
+  <header class="kit-head">
+    <div class="kit-name">Faisca design kit · components/footer</div>
+    <div class="kit-name" style="color: var(--color-text-dim);">tokens.css required</div>
+  </header>
+  <h1 class="kit-h1">FOOTER</h1>
+  <p class="kit-lede">Brand and contact, two link columns, then a rule with the copyright and the social row. Both existing URLs are kept verbatim.</p>
+  <div class="kit-block">
+    <div class="kit-label">default — resize the window to see the 819 px stack</div>
+    <div class="kit-frame">
+      <footer class="site-footer">
+        <div class="site-footer__top">
+          <div class="site-footer__brand">
+            <div class="site-footer__mark"><img src="../assets/faisca-mark-120.png" alt="Faisca Games"><span class="site-footer__wordmark">Faisca</span></div>
+            <p class="site-footer__tagline">A spark, then a game.</p>
+            <a class="site-footer__mail" href="mailto:contact@faisca.gg">contact@faisca.gg</a>
+          </div>
+          <nav class="site-footer__col" aria-label="Games">
+            <div class="site-footer__head">Games</div>
+            <a class="site-footer__link" href="/games/dead-air/">Dead Air: Ashmere</a>
+            <a class="site-footer__link" href="#play">Signal Lock</a>
+          </nav>
+          <nav class="site-footer__col" aria-label="Legal">
+            <div class="site-footer__head">Legal</div>
+            <a class="site-footer__link" href="/support/dead-air/">Dead Air Support</a>
+            <a class="site-footer__link" href="/privacy/dead-air/">Dead Air Privacy</a>
+          </nav>
+        </div>
+        <div class="site-footer__bar">
+          <div class="site-footer__legal">© Faisca Games Inc. · Toronto</div>
+          <ul class="social-links">
+          <li><a class="social-links__link" href="https://www.instagram.com/playfaisca/" target="_blank" rel="me noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg></a></li>
+          <li><a class="social-links__link" href="https://x.com/playfaisca" target="_blank" rel="me noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M5 5 L19 19"/><path d="M19 5 L5 19"/></svg></a></li>
+          <li><a class="social-links__link" href="https://www.linkedin.com/company/playfaisca/" target="_blank" rel="me noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M7.6 10.6V17"/><path d="M7.6 7.4v.6"/><path d="M11.4 17v-6.4"/><path d="M11.4 13.4a2.5 2.5 0 0 1 5 0V17"/></svg></a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <div class="kit-block"><div class="kit-note">Every footer link is a <b>44&nbsp;px min-height</b> flex item, which is why the columns look loosely spaced — that spacing is the hit target, not decoration. The bar reserves <b>env(safe-area-inset-bottom)</b> so the social row clears the home indicator on iOS.</div></div>
+</div>
+</body>
+</html>

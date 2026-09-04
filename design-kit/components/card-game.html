@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>card-game — Faisca design kit</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* ---------- demo chrome (not shipped) ---------- */
+
+
+    body { margin: 0; background: var(--color-bg); color: var(--color-text);
+      font-family: var(--font-text); font-size: var(--step-0); line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased; }
+    .kit { max-width: 1440px; margin: 0 auto; padding: var(--space-2xl) var(--gutter) var(--space-4xl); }
+    .kit-head { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-2xl);
+      justify-content: space-between; align-items: baseline;
+      border-bottom: 1px solid var(--color-line); padding-bottom: var(--space-lg); }
+    .kit-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+      letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-accent); }
+    .kit-h1 { margin: var(--space-lg) 0 0; font-family: var(--font-display); font-size: var(--step-6);
+      font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+      letter-spacing: var(--track-display); color: var(--color-text-hi); }
+    .kit-lede { margin: var(--space-sm) 0 0; max-width: 68ch; color: var(--color-text-mute);
+      font-size: var(--step-0); text-wrap: pretty; }
+    .kit-block { margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md); }
+    .kit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-mute); }
+    .kit-note { font-family: var(--font-mono); font-size: 11.5px; line-height: 1.65;
+      color: var(--color-text-dim); max-width: 84ch; }
+    .kit-note b { color: var(--color-text-mute); font-weight: 400; }
+    .kit-frame { border: 1px solid var(--color-line); background: var(--color-panel); overflow: hidden; }
+    .kit-grid { display: grid; gap: var(--space-lg); }
+    .kit-row { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+    .kit-state { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
+      text-transform: uppercase; color: var(--color-text-dim); }
+
+
+/* ---------- card-game — SHIP THIS BLOCK ---------- */
+/* .x:hover and .x.is-hover share one rule so the static demo shows exactly
+   what the browser renders. Drop the .is-* classes when porting. */
+.card-game { display: flex; flex-direction: column; background: var(--color-panel);
+  border: 1px solid var(--color-line); overflow: hidden; text-decoration: none;
+  transition: border-color var(--dur-base) var(--ease-out); }
+.card-game:hover, .card-game.is-hover { border-color: var(--color-line-accent); }
+.card-game:focus-visible, .card-game.is-focus { outline: var(--focus-ring); outline-offset: 3px; }
+
+.card-game__media { position: relative; aspect-ratio: 3 / 2; overflow: hidden;
+  background: var(--color-void); }
+.card-game__media img { width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform var(--dur-slow) var(--ease-out); }
+.card-game:hover .card-game__media img, .card-game.is-hover .card-game__media img {
+  transform: scale(1.035); }
+.card-game__media::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(1,1,1,0) 40%, rgba(18,18,21,0.94) 100%); }
+
+.card-game__tag { position: absolute; top: var(--space-sm); left: var(--space-sm); z-index: 1;
+  display: inline-flex; align-items: center; height: 26px; padding: 0 11px;
+  background: var(--color-panel-raised); color: var(--color-signal);
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: var(--track-wide); text-transform: uppercase; clip-path: var(--clip-tag); }
+
+.card-game__body { display: flex; flex-direction: column; gap: var(--space-xs);
+  padding: var(--space-lg) var(--space-lg) var(--space-xl); }
+.card-game__title { margin: 0; font-family: var(--font-display); font-size: var(--step-4);
+  font-weight: var(--weight-display); line-height: var(--leading-tight);
+  letter-spacing: var(--track-tight); color: var(--color-text-hi);
+  transition: color var(--dur-fast) var(--ease-out); }
+.card-game:hover .card-game__title, .card-game.is-hover .card-game__title { color: var(--color-accent); }
+.card-game__caption { margin: 0; font-size: var(--step--1); color: var(--color-text-mute);
+  line-height: var(--leading-body); }
+
+@media (prefers-reduced-motion: reduce) {
+  .card-game, .card-game__media img, .card-game__title { transition: none; }
+  .card-game:hover .card-game__media img, .card-game.is-hover .card-game__media img { transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="kit">
+  <header class="kit-head">
+    <div class="kit-name">Faisca design kit · components/card-game</div>
+    <div class="kit-name" style="color: var(--color-text-dim);">tokens.css required</div>
+  </header>
+  <h1 class="kit-h1">GAME CARD</h1>
+  <p class="kit-lede">The whole card is one link. Hover moves the art behind a fixed frame; reduced motion drops the movement and keeps the colour change.</p>
+  <div class="kit-block">
+    <div class="kit-label">default · hover · focus-visible</div>
+    <div class="kit-frame" style="padding: var(--space-xl); background: var(--color-bg);">
+      <div class="kit-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <a class="card-game" href="/games/dead-air/">
+          <div class="card-game__media"><img src="../assets/dead-air-card-760.jpg" alt=""><span class="card-game__tag">In development</span></div>
+          <div class="card-game__body"><h3 class="card-game__title">DEAD AIR: ASHMERE</h3><p class="card-game__caption">Listen closer. The truth is in the traffic.</p></div>
+        </a>
+        <a class="card-game is-hover" href="/games/dead-air/">
+          <div class="card-game__media"><img src="../assets/dead-air-card-760.jpg" alt=""><span class="card-game__tag">In development</span></div>
+          <div class="card-game__body"><h3 class="card-game__title">DEAD AIR: ASHMERE</h3><p class="card-game__caption">Listen closer. The truth is in the traffic.</p></div>
+        </a>
+        <a class="card-game is-focus" href="/games/dead-air/">
+          <div class="card-game__media"><img src="../assets/dead-air-card-760.jpg" alt=""><span class="card-game__tag">In development</span></div>
+          <div class="card-game__body"><h3 class="card-game__title">DEAD AIR: ASHMERE</h3><p class="card-game__caption">Listen closer. The truth is in the traffic.</p></div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="kit-block"><div class="kit-note">The art is <b>deadair.png cropped above the typewriter note</b> — the caption below it is the same sentence as real text, which is what makes the card readable to a screen reader and translatable. The <b>alt is deliberately empty</b>: the image is decorative here because the title and caption already carry the meaning. Ship the media as AVIF with a WebP and JPEG fallback in a <b>&lt;picture&gt;</b>; the JPEG here is 31&nbsp;KB at 760&nbsp;px.</div></div>
+</div>
+</body>
+</html>

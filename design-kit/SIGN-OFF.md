@@ -100,11 +100,19 @@ Design decisions are settled; these are behaviours a stylesheet cannot express.
 
 ## Content still needing a human
 
-Everything marked `[draft copy]` in the comps is mine and needs Leo's voice over
-it: the hero body line, three feature cells on `/`, three on
-`/games/dead-air/`, the studio paragraphs, and the `/about/` copy — including
-the claim that *faísca* is Portuguese for spark, which is the obvious reading of
-the studio name but is Leo's story to tell.
+The inline `[draft copy]` markers were removed at Leo's request so the comps do
+not read as unfinished. The copy behind them is still mine and still wants his
+voice over it:
+
+- `/` — hero body line, three feature cells, both studio paragraphs
+- `/games/dead-air/` — opening two paragraphs, three feature cells
+- `/about/` — all of it, including the claim that *faísca* is Portuguese for
+  spark, which is the obvious reading of the studio name but is Leo's story
+  to tell
+- `/contact/` — the press and support lines
+
+The `.draft` class is left in `comps/_site.css` so the markers can be dropped
+back in while revising.
 
 `/support/dead-air/` and `/privacy/dead-air/` carry **real, final copy** and are
 marked as such. Nothing in them is drafted.

@@ -1,0 +1,44 @@
+# Deploy faisca.gg to GitHub Pages.
+#
+# TRIGGER IS MANUAL ONLY, ON PURPOSE.
+# The live temporary site is served from iamleandro/faisca-landing (branch
+# `main`, "Deploy from a branch"). Nothing here may replace it until Leo cuts
+# over deliberately. Do not add a `push:` trigger until the CUTOVER.md
+# checklist has been worked through and Leo has approved the switch.
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; never cancel a run that is already publishing.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build with Astro
+        uses: withastro/action@v3
+        with:
+          node-version: 22
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

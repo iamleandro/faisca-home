@@ -1,0 +1,37 @@
+---
+/**
+ * /contact/ — design-kit/comps/contact.html, copy verbatim.
+ * mailto only. The kit's contact comp has no form and no endpoint.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SocialLinks from "../../components/SocialLinks.astro";
+import { SITE } from "../../data/site";
+---
+
+<BaseLayout title="Contact — Faisca Games">
+  <section class="section" style="padding-top: var(--space-3xl);">
+    <div class="wrap wrap--narrow">
+      <div class="section-heading" style="margin-bottom: var(--space-xl);">
+        <h1 class="section-heading__title">CONTACT</h1>
+        <p class="section-heading__body">One address, read by the people who make the games.</p>
+      </div>
+      <a class="bigmail" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      <div class="prose" style="margin-top: var(--space-2xl);">
+        <h3>PRESS AND CREATORS</h3>
+        <p>
+          Same address. Say what you are writing for and what you need, and we will send assets and
+          answers.
+        </p>
+        <h3>SUPPORT</h3>
+        <p>
+          If it is about Dead Air specifically, <a href="/support/dead-air/">start here</a> — it will
+          get you a faster answer.
+        </p>
+      </div>
+      <div style="margin-top: var(--space-2xl); display: flex; flex-direction: column; gap: var(--space-md);">
+        <div class="site-footer__head">Elsewhere</div>
+        <SocialLinks />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,51 @@
+---
+/**
+ * Primary nav — design-kit/components/nav.html, markup verbatim.
+ * Sticky, adds .is-stuck past 64px of scroll (motion.md items 4 and 5).
+ * Under 820px the link list is replaced by the burger, which opens
+ * MenuMobile.
+ */
+import { Image } from "astro:assets";
+import mark from "../assets/faisca-mark-120.png";
+import { NAV, SITE, isCurrent } from "../data/site";
+
+interface Props {
+  pathname: string;
+}
+const { pathname } = Astro.props;
+---
+
+<nav class="site-nav" aria-label="Primary" data-site-nav>
+  <a class="site-nav__brand" href="/">
+    <Image class="site-nav__mark" src={mark} alt={SITE.name} width={38} height={38} densities={[1, 2]} loading="eager" />
+    <span class="site-nav__wordmark">{SITE.wordmark}</span>
+  </a>
+  <ul class="site-nav__links">
+    {
+      NAV.map((link) => (
+        <li>
+          <a
+            class="site-nav__link"
+            href={link.href}
+            aria-current={isCurrent(link, pathname) ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+    <li><a class="site-nav__play" href="/#play">PLAY</a></li>
+  </ul>
+  <button
+    class="site-nav__burger"
+    type="button"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="menu"
+    data-menu-open
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 7h16M4 12h16M4 17h16"></path>
+    </svg>
+  </button>
+</nav>

@@ -4,3 +4,8 @@
 faisca-design-kit.html
 
 .DS_Store
+
+# Astro
+dist/
+.astro/
+node_modules/

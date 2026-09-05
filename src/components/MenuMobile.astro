@@ -1,0 +1,92 @@
+---
+/**
+ * Mobile menu — design-kit/components/menu-mobile.html, markup verbatim.
+ * Full-screen overlay under 820px. Behaviour the kit hands to the coder:
+ * aria-expanded on the burger, body scroll lock, Tab trapped inside, Esc
+ * closes and focus returns to the burger. See menu.ts.
+ */
+import { Image } from "astro:assets";
+import mark from "../assets/faisca-mark-120.png";
+import Chevron from "./Chevron.astro";
+import SocialLinks from "./SocialLinks.astro";
+import { NAV, SITE, isCurrent } from "../data/site";
+
+interface Props {
+  pathname: string;
+}
+const { pathname } = Astro.props;
+---
+
+<div class="menu-mobile" id="menu" hidden data-menu>
+  <div class="menu-mobile__bar">
+    <a
+      class="site-nav__brand"
+      href="/"
+      style="display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; color: var(--color-text);"
+    >
+      <Image src={mark} alt={SITE.name} width={30} height={30} densities={[1, 2]} style="width: 30px; height: 30px; display: block;" loading="lazy" />
+      <span
+        style="font-family: var(--font-mono); font-size: var(--step--1); font-weight: 600; letter-spacing: var(--track-caps); text-transform: uppercase;"
+        >{SITE.wordmark}</span
+      >
+    </a>
+    <div style="display: flex; gap: var(--space-xs); align-items: center;">
+      <a
+        href="/#play"
+        style="display: inline-flex; align-items: center; height: var(--tap-min); padding: 0 var(--space-md); border: 1px solid var(--color-accent); color: var(--color-accent); font-family: var(--font-display); font-size: var(--step-1); font-weight: var(--weight-display); letter-spacing: var(--track-wide); text-decoration: none; clip-path: var(--clip-button);"
+        >PLAY</a
+      >
+      <button
+        class="menu-mobile__close"
+        type="button"
+        aria-label="Close menu"
+        aria-expanded="true"
+        aria-controls="menu"
+        data-menu-close
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12"></path>
+          <path d="M18 6L6 18"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <ul class="menu-mobile__list">
+    {
+      NAV.map((link) => (
+        <li>
+          <a
+            class="menu-mobile__link"
+            href={link.href}
+            aria-current={isCurrent(link, pathname) ? "page" : undefined}
+          >
+            {link.label} <Chevron />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="menu-mobile__promo">
+    <div
+      style="font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-signal);"
+    >
+      In the page
+    </div>
+    <div
+      style="font-family: var(--font-display); font-size: var(--step-4); font-weight: var(--weight-display); line-height: 1; color: var(--color-text-hi);"
+    >
+      SIGNAL LOCK
+    </div>
+    <p style="margin: 0; font-size: var(--step--1); color: var(--color-text-mute);">
+      Sixty seconds on the Ashmere band.
+    </p>
+  </div>
+  <div class="menu-mobile__foot">
+    <a
+      href={`mailto:${SITE.email}`}
+      style="align-self: flex-start; color: var(--color-text); text-decoration: none; border-bottom: 1px solid var(--color-line-strong); padding-bottom: 2px;"
+      >{SITE.email}</a
+    >
+    <SocialLinks />
+  </div>
+</div>

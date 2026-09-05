@@ -1,0 +1,41 @@
+---
+/** /about/ — design-kit/comps/about.html, copy verbatim. */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE } from "../../data/site";
+---
+
+<BaseLayout title="About — Faisca Games">
+  <section class="section" style="padding-top: var(--space-3xl);">
+    <div class="wrap wrap--narrow">
+      <div class="section-heading" style="margin-bottom: var(--space-xl);">
+        <h1 class="section-heading__title">THE STUDIO</h1>
+      </div>
+      <div class="prose">
+        <p>
+          Faisca Games is an independent studio making short, atmospheric games. We are interested in
+          the kind of game you finish in a sitting and think about on the walk home.
+        </p>
+        <h3>WHY THE NAME</h3>
+        <p>
+          <em>Faísca</em> is Portuguese for spark. It is also how every project here has started — one
+          idea that refuses to go out, followed by however many months it takes to build the thing
+          around it. A spark, then a game.
+        </p>
+        <h3>WHAT WE ARE BUILDING</h3>
+        <p>
+          Right now, one thing: <a href="/games/dead-air/">Dead Air: Ashmere</a>. When there is
+          something to show, it goes on this site before it goes anywhere else.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap wrap--narrow">
+      <div class="section-heading" style="margin-bottom: var(--space-md);">
+        <h2 class="section-heading__title">GET IN TOUCH</h2>
+      </div>
+      <a class="bigmail" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+    </div>
+  </section>
+</BaseLayout>

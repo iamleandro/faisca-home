@@ -1,0 +1,26 @@
+---
+/** /404 — design-kit/comps/404.html, copy verbatim. */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Chevron from "../components/Chevron.astro";
+---
+
+<BaseLayout title="Dead air — Faisca Games" noindex>
+  <section class="section" style="padding-block: var(--space-4xl); min-height: 52vh; display: grid; align-content: center;">
+    <div class="wrap wrap--narrow">
+      <div class="section-heading" style="margin-bottom: var(--space-xl);">
+        <div class="section-heading__eyebrow">404</div>
+        <h1 class="section-heading__title" style="color: var(--game-lost); font-size: var(--step-8);">
+          DEAD AIR.
+        </h1>
+        <p class="section-heading__body">
+          That frequency is empty. The page either moved or never existed.
+        </p>
+      </div>
+      <div class="linklist">
+        <a class="linklist__item" href="/">HOME <Chevron /></a>
+        <a class="linklist__item" href="/games/dead-air/">DEAD AIR: ASHMERE <Chevron /></a>
+        <a class="linklist__item" href="/#play">PLAY SIGNAL LOCK <Chevron /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,211 @@
+/* =========================================================================
+   Signal Lock — the three "SHIP THIS BLOCK" sections of the design kit,
+   copied verbatim from:
+     design-kit/game/hud.html
+     design-kit/game/screens.html
+     design-kit/game/controls-mobile.html
+
+   Two mechanical edits, no restyling:
+     - .stage is declared once instead of three identical times
+     - screens.html's .btn is scoped to .screen. It is a different button
+       from components/button.html (44px vs 48px, step-2 vs step-1, no
+       transition) and site.css already ships that one. Scoping keeps each
+       rendering exactly as its own kit file draws it.
+   ========================================================================= */
+
+/* ---------- stage (hud.html / screens.html / controls-mobile.html) ---------- */
+.stage { position: relative; aspect-ratio: 16 / 9; background: var(--color-void);
+  border: 1px solid var(--color-line); overflow: hidden; touch-action: none;
+  -webkit-user-select: none; user-select: none; }
+.stage:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.stage--portrait { aspect-ratio: 3 / 4; }
+.stage__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.stage__scan { position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background: repeating-linear-gradient(180deg, rgba(0,0,0,0.30) 0 1px, rgba(0,0,0,0) 1px 3px); }
+.stage__vignette { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 46%, rgba(0,0,0,0) 38%, rgba(0,0,0,0.72) 100%); }
+.stage.is-reduced .stage__scan { display: none; }
+
+/* ---------- hud (design-kit/game/hud.html) ---------- */
+.hud { position: absolute; inset: 0; pointer-events: none; }
+.hud > * { pointer-events: auto; }
+
+.hud__top { position: absolute; top: 0; left: 0; right: 0; display: flex;
+  align-items: flex-start; justify-content: space-between; gap: var(--space-lg);
+  padding: var(--space-lg) var(--space-xl);
+  padding-top: calc(var(--space-lg) + var(--safe-t)); }
+.hud__stat { display: flex; flex-direction: column; gap: 5px; }
+.hud__stat--center { align-items: center; }
+.hud__stat--right { align-items: flex-end; }
+.hud__label { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-text-dim); }
+.hud__value { font-family: var(--font-display); font-weight: var(--weight-display);
+  font-size: var(--step-5); line-height: 1; font-variant-numeric: tabular-nums;
+  color: var(--color-text-hi); }
+.hud__value--score { color: var(--color-signal); }
+.hud__value--best { color: var(--color-text-mute); }
+.hud__value--time { font-size: var(--step-6); }
+.hud__value--urgent { color: var(--game-lost); }
+
+.hud__meter { display: flex; flex-direction: column; gap: 9px; }
+.hud__meter-head { display: flex; justify-content: space-between; align-items: baseline; }
+.hud__state { font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--track-caps);
+  text-transform: uppercase; }
+.hud__meter-track { height: 8px; background: var(--color-panel);
+  border: 1px solid var(--color-line); position: relative; overflow: hidden; }
+.hud__meter-fill { position: absolute; inset: 0 auto 0 0; width: 0;
+  transition: width 60ms linear; }
+
+.hud__dispatch { display: flex; align-items: center; gap: var(--space-sm); min-height: 24px; }
+.hud__dispatch-dot { width: 6px; height: 6px; flex: none; background: var(--game-locked); }
+.hud__dispatch-text { font-family: var(--font-mono); font-size: var(--step--1); color: var(--color-text); }
+.hud__dispatch--phantom .hud__dispatch-dot { background: var(--game-lost); }
+.hud__dispatch--phantom .hud__dispatch-text { color: var(--game-lost); }
+
+.hud__tools { position: absolute; right: var(--space-xl); bottom: var(--space-lg);
+  display: flex; gap: 10px; }
+.hud__tool { width: var(--tap-min); height: var(--tap-min); display: flex; align-items: center;
+  justify-content: center; padding: 0; cursor: pointer; background: rgba(18, 18, 21, 0.82);
+  border: 1px solid var(--color-line); color: var(--color-text-mute);
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+.hud__tool svg { width: 22px; height: 22px; }
+.hud__tool:hover { color: var(--color-text); border-color: var(--color-line-strong); }
+.hud__tool:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.hud__tool[aria-pressed="true"] { color: var(--color-accent); border-color: var(--color-line-accent); }
+
+.hud__hint { position: absolute; left: var(--space-xl); bottom: var(--space-lg);
+  font-family: var(--font-mono); font-size: 11px; line-height: 1.7;
+  color: var(--color-text-dim); max-width: 26ch; }
+.hud__kbd { border: 1px solid var(--color-line-strong); padding: 2px 6px;
+  background: var(--color-panel); color: var(--color-text); }
+
+@media (prefers-reduced-motion: reduce) { .hud__meter-fill, .hud__tool { transition: none; } }
+
+/* ---------- screens (design-kit/game/screens.html) ---------- */
+.screen { position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: var(--space-md); text-align: center;
+  padding: var(--space-xl); background: rgba(1, 1, 1, 0.87); }
+.screen--pause { background: rgba(1, 1, 1, 0.8); }
+.screen--fail  { background: rgba(1, 1, 1, 0.93); }
+.screen__eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--color-text-mute); }
+.screen__title { margin: 0; font-family: var(--font-display); font-size: var(--step-7);
+  font-weight: var(--weight-display-max); line-height: var(--leading-flat);
+  letter-spacing: var(--track-display); color: var(--color-text-hi); }
+.screen__title--fail { color: var(--game-lost); }
+.screen__body { margin: 0; max-width: 42ch; font-size: var(--step--1);
+  line-height: var(--leading-body); color: var(--color-text-mute); text-wrap: pretty; }
+.screen__mono { font-family: var(--font-mono); font-size: var(--step--1); color: var(--color-text-mute); }
+.screen__stats { display: flex; gap: var(--space-2xl); padding: var(--space-xs) 0; }
+.screen__stat { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.screen__actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); justify-content: center; }
+.screen__hint { font-family: var(--font-mono); font-size: 10px; color: var(--color-text-dim); }
+
+.screen .btn { display: inline-flex; align-items: center; justify-content: center; height: var(--tap-min);
+  padding: 0 var(--space-lg); border: 0; cursor: pointer; font-family: var(--font-display);
+  font-size: var(--step-2); font-weight: var(--weight-display); letter-spacing: var(--track-wide);
+  clip-path: var(--clip-button); }
+.screen .btn--primary { background: var(--color-accent); color: var(--color-text-on-accent); }
+.screen .btn--primary:hover { background: var(--color-accent-hover); }
+.screen .btn--secondary { background: none; border: 1px solid var(--color-line-strong); color: var(--color-text); }
+.screen .btn--secondary:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.screen .btn:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+
+.screen { animation: screen-in var(--dur-base) var(--ease-out) both; }
+@keyframes screen-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .screen { animation: none; } }
+
+/* ---------- mobile controls (design-kit/game/controls-mobile.html) ---------- */
+.controls { display: flex; flex-direction: column; gap: 10px;
+  padding: var(--space-md) var(--gutter) 0;
+  padding-bottom: calc(var(--space-md) + var(--safe-b)); }
+.controls__row { display: flex; gap: 10px; align-items: stretch; }
+.controls__nudge { width: 72px; height: 64px; flex: none; display: flex; align-items: center;
+  justify-content: center; padding: 0; cursor: pointer; background: var(--color-panel);
+  border: 1px solid var(--color-line); color: var(--color-text-mute); clip-path: var(--clip-button); }
+.controls__nudge svg { width: 24px; height: 24px; }
+.controls__nudge:active, .controls__nudge.is-active {
+  background: var(--color-panel-raised); color: var(--color-text); }
+.controls__nudge:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.controls__log { flex: 1; height: 64px; border: 0; cursor: pointer; touch-action: none;
+  background: var(--color-accent); color: var(--color-text-on-accent);
+  font-family: var(--font-display); font-size: var(--step-4); font-weight: var(--weight-display);
+  letter-spacing: 0.1em; clip-path: var(--clip-button); }
+.controls__log:active, .controls__log.is-held { background: var(--color-accent-press); }
+.controls__log:disabled { background: var(--color-panel-raised); color: var(--color-text-dim);
+  cursor: not-allowed; }
+.controls__log:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+.controls__hint { font-family: var(--font-mono); font-size: 10px; color: var(--color-text-dim);
+  text-align: center; }
+
+/* ---------- layout wrappers ----------------------------------------------
+   The kit expressed these positions as inline styles on demo markup, which a
+   breakpoint cannot reach. Every value below is copied from that markup; the
+   only thing added is the class to hang it on.
+
+   Landscape — design-kit/game/hud.html, the centre block:
+     left/right var(--space-3xl), top 50%, translateY(-50%),
+     flex column, gap var(--space-lg)
+   Portrait — design-kit/game/controls-mobile.html:
+     left/right 14px, band at bottom 120px (height 60), readout at bottom 16px
+     with gap 10px, .hud__state 9.5px, dispatch dot 5px, text 11.5px
+
+   .hud__band reserves the rect the kit's inline <svg> reserved (100% x 176px
+   landscape, 100% x 60px portrait). The renderer measures it and draws the
+   band into it with the kit's own viewBox, meet-scaled and centred.
+   ------------------------------------------------------------------------- */
+.signal-lock { display: block; }
+
+.hud__center { position: absolute; left: var(--space-3xl); right: var(--space-3xl);
+  top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: var(--space-lg); }
+.hud__band { width: 100%; height: 176px; flex: none; }
+.hud__readout { display: flex; flex-direction: column; gap: var(--space-lg); }
+
+/* DEVIATION D1 — see FIDELITY.md. controls-mobile.html puts the readout at
+   bottom 16px, but that demo draws no .hud__tools; at the kit's tool position
+   (right --space-xl, bottom --space-lg) the two overlap in portrait. The tools
+   keep their specified position and the readout clears them by one tool height
+   plus the kit's own 10px control gap. */
+.stage--portrait .hud__center { left: 14px; right: 14px; top: auto;
+  bottom: calc(var(--space-lg) + var(--tap-min) + 10px); transform: none; gap: 38px; }
+.stage--portrait .hud__band { height: 60px; }
+.stage--portrait .hud__readout { gap: 10px; }
+.stage--portrait .hud__meter { gap: 10px; }
+.stage--portrait .hud__state { font-size: 9.5px; }
+.stage--portrait .hud__dispatch-dot { width: 5px; height: 5px; }
+.stage--portrait .hud__dispatch-text { font-size: 11.5px; }
+
+/* The keyboard hint is keyboard-only; the thumb zone replaces it on coarse
+   pointers, where controls-mobile.html shows no in-stage hint. */
+.signal-lock.is-touch .hud__hint { display: none; }
+
+/* Screen reader only — the aria-live region the kit's HUD note requires. */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+  border: 0; }
+
+.hud__tool svg, .controls__nudge svg { display: block; }
+
+/* .screen and .controls both set `display: flex`, which outranks the UA's
+   [hidden] { display: none }. The kit ships exactly this rule for
+   .menu-mobile[hidden]; the game's two flex containers need the same or a
+   hidden screen still paints and the thumb zone still takes up space. */
+.screen[hidden] { display: none; }
+.controls[hidden] { display: none; }
+
+/* DEVIATION D3 — see FIDELITY.md. design-kit/game/hud.html sizes the HUD
+   values at --step-5 (--step-6 for the timer). At 390 the three stats do not
+   fit on one line and "00 000" wraps. The home comp draws the same row one
+   step down — design-kit/comps/index.html sets score and best at --step-4 and
+   the timer at --step-5 — so below the 820 breakpoint the row takes the
+   comp's sizes rather than the component board's. No new values.
+
+   The keyboard hint goes with it: it is anchored bottom-left and the tools
+   bottom-right, and under 820 they overlap. controls-mobile.html draws no
+   in-stage hint at that width, so it is hidden there. */
+@media (max-width: 819px) {
+  .hud__value { font-size: var(--step-4); }
+  .hud__value--time { font-size: var(--step-5); }
+  .hud__hint { display: none; }
+}

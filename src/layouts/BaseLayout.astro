@@ -1,0 +1,93 @@
+---
+/**
+ * The one layout: nav, footer, meta/OG, favicons, skip link.
+ * Styles load in the order design-kit specifies — fonts, then tokens, then
+ * the assembled site stylesheet.
+ */
+import { SITE } from "../data/site";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import MenuMobile from "../components/MenuMobile.astro";
+import ogImage from "../assets/og-base-1200x630.jpg";
+
+import "../styles/fonts.css";
+import "../styles/tokens.css";
+import "../styles/site.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Rendered into <head>; used by / to preload the game's hero art. */
+  noindex?: boolean;
+}
+
+const { title, description = SITE.description, noindex = false } = Astro.props;
+
+const pathname = Astro.url.pathname;
+const canonical = new URL(pathname, Astro.site ?? "https://www.faisca.gg");
+const ogUrl = new URL(ogImage.src, Astro.site ?? "https://www.faisca.gg");
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={ogUrl.href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl.href} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#121215" />
+
+    {/* Only the display face is preloaded — it paints the hero. fonts/README.md. */}
+    <link
+      rel="preload"
+      href="/fonts/big-shoulders-display-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteNav pathname={pathname} />
+    <MenuMobile pathname={pathname} />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+
+    <script>
+      import { initNav } from "../scripts/nav";
+      initNav();
+    </script>
+
+    <script>
+      // client:idle equivalent for a plain script: the overlay is not needed
+      // until the user reaches for it, so defer past first paint.
+      import { initMenu } from "../scripts/menu";
+      const start = () => initMenu();
+      if ("requestIdleCallback" in window) requestIdleCallback(start);
+      else setTimeout(start, 1);
+    </script>
+  </body>
+</html>

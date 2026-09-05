@@ -1,0 +1,163 @@
+---
+/**
+ * Signal Lock — the stage, the HUD, the four screens and the mobile controls.
+ *
+ * Markup is design-kit/game/hud.html, screens.html and controls-mobile.html.
+ * Everything visible is DOM except the band itself: score, timer, meter,
+ * dispatch line, toggles and every screen stay selectable, translatable and
+ * readable to a screen reader, exactly as the kit's closing note requires.
+ *
+ * The band is the one thing drawn into the bitmap. `.hud__band` is a
+ * placeholder box that reserves the same rect the kit's inline SVG did
+ * (100% x 176px landscape, 100% x 60px portrait); the renderer measures it
+ * and draws into it with the kit's own 960x176 / 330x60 viewBox, meet-scaled
+ * and centred, so the geometry matches the comp at any width.
+ */
+---
+
+<div class="signal-lock" data-signal-lock>
+  <div class="stage" tabindex="0" role="application" aria-label="Signal Lock" data-stage>
+    <canvas class="stage__canvas" data-canvas aria-hidden="true"></canvas>
+
+    <div class="hud" data-hud hidden>
+      <div class="hud__top">
+        <div class="hud__stat">
+          <span class="hud__label" id="sl-score-label">Score</span>
+          <span class="hud__value hud__value--score" data-score>00 000</span>
+        </div>
+        <div class="hud__stat hud__stat--center">
+          <span class="hud__label">Time</span>
+          <span class="hud__value hud__value--time" data-time>1:00</span>
+        </div>
+        <div class="hud__stat hud__stat--right">
+          <span class="hud__label">Best</span>
+          <span class="hud__value hud__value--best" data-best>00 000</span>
+        </div>
+      </div>
+
+      <div class="hud__center">
+        <div class="hud__band" data-band aria-hidden="true"></div>
+        <div class="hud__readout">
+        <div class="hud__meter">
+          <div class="hud__meter-head">
+            <span class="hud__label">Lock</span>
+            <span class="hud__state" data-state>idle</span>
+          </div>
+          <div class="hud__meter-track">
+            <div class="hud__meter-fill" data-meter></div>
+          </div>
+        </div>
+        <div class="hud__dispatch" data-dispatch>
+          <span class="hud__dispatch-dot"></span>
+          <span class="hud__dispatch-text" data-dispatch-text>Waiting on the band.</span>
+        </div>
+        </div>
+      </div>
+
+      <div class="hud__hint" data-hint>
+        Click the stage first.<br />
+        <span class="hud__kbd">←</span> <span class="hud__kbd">→</span> tune &nbsp;
+        <span class="hud__kbd">space</span> hold to log
+      </div>
+
+      <div class="hud__tools">
+        <button class="hud__tool" type="button" aria-label="Mute" aria-pressed="false" data-tool-mute>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/game/sprites.svg#spr-sound-on"></use></svg>
+        </button>
+        <button class="hud__tool" type="button" aria-label="Pause" aria-pressed="false" data-tool-pause>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/game/sprites.svg#spr-pause"></use></svg>
+        </button>
+        <button class="hud__tool" type="button" aria-label="Reduce effects" aria-pressed="false" data-tool-fx>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/game/sprites.svg#spr-fx-on"></use></svg>
+        </button>
+      </div>
+    </div>
+
+    {/* ---- start ---- */}
+    <div class="screen" role="dialog" aria-modal="true" aria-labelledby="sl-start-title" data-screen="idle">
+      <div class="screen__eyebrow">Dead Air: Ashmere</div>
+      <h2 class="screen__title" id="sl-start-title">SIGNAL LOCK</h2>
+      <p class="screen__body">
+        Sixty seconds on the Ashmere band. Tune the needle onto a signal, hold LOG until the window
+        closes, and log the lead. Phantoms cost you three seconds.
+      </p>
+      <div class="screen__actions">
+        <button class="btn btn--primary" type="button" data-action="start">TUNE IN</button>
+      </div>
+      <div class="screen__hint">← → tune &nbsp;·&nbsp; space to hold</div>
+    </div>
+
+    {/* ---- pause ---- */}
+    <div class="screen screen--pause" role="dialog" aria-modal="true" aria-labelledby="sl-pause-title" data-screen="paused" hidden>
+      <h2 class="screen__title" id="sl-pause-title">PAUSED</h2>
+      <div class="screen__mono">The band keeps drifting without you.</div>
+      <div class="screen__actions">
+        <button class="btn btn--primary" type="button" data-action="resume">RESUME</button>
+        <button class="btn btn--secondary" type="button" data-action="giveup">GIVE UP</button>
+      </div>
+    </div>
+
+    {/* ---- round end ---- */}
+    <div class="screen" role="dialog" aria-modal="true" aria-labelledby="sl-over-title" data-screen="roundEnd" hidden>
+      <h2 class="screen__title" id="sl-over-title">ROUND OVER</h2>
+      <div class="screen__mono">Leads filed. Ashmere goes quiet until the next shift.</div>
+      <div class="screen__stats">
+        <div class="screen__stat">
+          <span class="hud__label">Score</span>
+          <span class="hud__value hud__value--score" data-end-score>00 000</span>
+        </div>
+        <div class="screen__stat">
+          <span class="hud__label">Leads</span>
+          <span class="hud__value" data-end-leads>00</span>
+        </div>
+        <div class="screen__stat">
+          <span class="hud__label">Best</span>
+          <span class="hud__value" data-end-best>00 000</span>
+        </div>
+      </div>
+      <div class="screen__actions">
+        <button class="btn btn--primary" type="button" data-action="again">RUN IT AGAIN</button>
+        <button class="btn btn--secondary" type="button" data-action="share">BACK TO SITE</button>
+      </div>
+    </div>
+
+    {/* ---- fail: sixty seconds, nothing logged ---- */}
+    <div class="screen screen--fail" role="dialog" aria-modal="true" aria-labelledby="sl-fail-title" data-screen="fail" hidden>
+      <h2 class="screen__title screen__title--fail" id="sl-fail-title">DEAD AIR.</h2>
+      <div class="screen__mono" style="max-width: 40ch;">
+        Sixty seconds, nothing logged. The band was busy — you were not.
+      </div>
+      <div class="screen__actions">
+        <button class="btn btn--primary" type="button" data-action="again">TRY AGAIN</button>
+      </div>
+      <div class="screen__hint">Hold LOG. The window will not close on its own.</div>
+    </div>
+
+    <div class="stage__scan"></div>
+    <div class="stage__vignette"></div>
+  </div>
+
+  {/* Thumb zone — design-kit/game/controls-mobile.html. Shown on coarse pointers. */}
+  <div class="controls" data-controls hidden>
+    <div class="controls__row">
+      <button class="controls__nudge" type="button" aria-label="Tune down" data-nudge="-1">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/game/sprites.svg#spr-left"></use></svg>
+      </button>
+      <button class="controls__log" type="button" data-log>LOG</button>
+      <button class="controls__nudge" type="button" aria-label="Tune up" data-nudge="1">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/game/sprites.svg#spr-right"></use></svg>
+      </button>
+    </div>
+  </div>
+
+  {/*
+    Announces on a lock and at 10 seconds, and at round end — never every
+    frame. design-kit/game/hud.html closing note.
+  */}
+  <p class="sr-only" aria-live="polite" data-live></p>
+</div>
+
+<script>
+  import { mount } from "../game/signal-lock/index";
+  mount();
+</script>

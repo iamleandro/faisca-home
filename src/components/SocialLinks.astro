@@ -1,0 +1,40 @@
+---
+/**
+ * Social links — design-kit/components/social-links.html, markup verbatim.
+ * Icons are the kit's inline SVGs; they are not in game/sprites.svg.
+ */
+import { SOCIALS } from "../data/site";
+---
+
+<ul class="social-links">
+  {
+    SOCIALS.map((s) => (
+      <li>
+        <a class="social-links__link" href={s.href} target="_blank" rel="me noopener" aria-label={s.label}>
+          {s.key === "instagram" && (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+            </svg>
+          )}
+          {s.key === "x" && (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+              <path d="M5 5 L19 19" />
+              <path d="M19 5 L5 19" />
+            </svg>
+          )}
+          {s.key === "linkedin" && (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="2.5" />
+              <path d="M7.6 10.6V17" />
+              <path d="M7.6 7.4v.6" />
+              <path d="M11.4 17v-6.4" />
+              <path d="M11.4 13.4a2.5 2.5 0 0 1 5 0V17" />
+            </svg>
+          )}
+        </a>
+      </li>
+    ))
+  }
+</ul>

@@ -181,25 +181,27 @@ colour `.prose a` already uses, **7.49:1** on `--color-bg`. It only ever
 applies where the kit set nothing; every styled context still wins on
 specificity. **Fold this into the kit too.**
 
-### A5 — `/about/` and `/contact/` skip a heading level — **needs a decision**
+### A5 — `/about/` and `/contact/` skip a heading level — **CLOSED, won't fix**
 
-The same defect as A2 in a different component, found in the same pass. Both
-pages go `<h1>` → `<h3>`, where the `<h3>`s come from `.prose h3`.
+**Leo's decision, 2026-09-04: leave it.** Recorded here so it does not get
+raised again.
 
-**This one is not free.** `.prose h2` is `--step-4` and `.prose h3` is
-`--step-3`, so unlike A2 promoting them would make "WHY THE NAME", "WHAT WE ARE
-BUILDING", "PRESS AND CREATORS" and "SUPPORT" visibly larger — and on `/about/`
-the same size as the "GET IN TOUCH" `<h2>` below them.
+The same defect as A2 in a different component. Both pages go `<h1>` →
+`<h3>`, where the `<h3>`s come from `.prose h3`.
 
-Options, none applied:
+Unlike A2 the fix is not free: `.prose h2` is `--step-4` against `--step-3`,
+so promoting them would make "WHY THE NAME", "WHAT WE ARE BUILDING", "PRESS
+AND CREATORS" and "SUPPORT" visibly larger — and on `/about/` the same size as
+the "GET IN TOUCH" `<h2>` beneath them. The visual hierarchy the kit draws is
+correct; only the document outline is imperfect.
 
-1. Promote to `<h2>` and accept the size change.
-2. Add a `.prose h3` variant that keeps `--step-3` at `<h2>` level. New CSS,
-   so a kit change.
-3. Leave it. Both pages score 98; the outline is imperfect but the visual
-   hierarchy is the designer's.
+Both pages score **98** on mobile accessibility, above the ≥90 budget, and the
+headings are still correctly ordered *within* `.prose`. Screen-reader users
+get a flat rather than a wrong outline.
 
-Worth a designer's ruling rather than mine.
+The markup is unchanged. If it is ever revisited, the option that costs
+nothing visually is a `.prose` variant that keeps `--step-3` at `<h2>` level —
+but that is a kit change, not an implementation one.
 
 ### A3 — favicon at 16px
 

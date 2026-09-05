@@ -20,8 +20,8 @@ untested.
 |---|---|---|---|---|---|
 | `/` | 99* | **100** | 100 | 100 | none |
 | `/games/dead-air/` | 99 | **100** | 100 | 100 | none |
-| `/about/` | 97 | 98 | 100 | 100 | `heading-order` — `FIDELITY.md` A5 |
-| `/contact/` | 100 | 98 | 100 | 100 | `heading-order` — `FIDELITY.md` A5 |
+| `/about/` | 97 | 98 | 100 | 100 | `heading-order` — A5, won't fix |
+| `/contact/` | 100 | 98 | 100 | 100 | `heading-order` — A5, won't fix |
 | `/support/dead-air/` | 98 | **100** | 100 | 100 | none |
 | `/privacy/dead-air/` | 97 | **100** | 100 | 100 | none |
 
@@ -198,8 +198,9 @@ deviation D1 in `FIDELITY.md` is about exactly that overlap.
 3. ~~Links outside `.prose` rendering browser blue at 2.12:1~~ — **fixed**,
    `FIDELITY.md` A4.
 4. **`/about/` and `/contact/` skip a heading level** — same defect as A2 but
-   in `.prose`, where `h2` and `h3` are different sizes, so the fix is not
-   free. Needs a designer's call. `FIDELITY.md` A5.
+   in `.prose`, where `h2` and `h3` are different sizes, so the fix would
+   change the visual hierarchy. **Closed, won't fix** — Leo's call,
+   2026-09-04. Both pages score 98, above budget. `FIDELITY.md` A5.
 5. **Favicon at 16px is illegible** — the mark is a full lockup with a
    wordmark. `FIDELITY.md` A3.
 6. **Portrait readout was moved to clear the HUD tools** — the kit places both

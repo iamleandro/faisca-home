@@ -10,7 +10,7 @@ import { FOOTER_COLS, SITE } from "../data/site";
   <div class="site-footer__top">
     <div class="site-footer__brand">
       <div class="site-footer__mark">
-        <Image src={mark} alt={SITE.name} width={40} height={40} loading="lazy" />
+        <Image src={mark} alt={SITE.name} width={40} height={40} densities={[1, 2]} loading="lazy" />
         <span class="site-footer__wordmark">{SITE.wordmark}</span>
       </div>
       <p class="site-footer__tagline">{SITE.tagline}</p>

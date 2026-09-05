@@ -186,3 +186,26 @@
   border: 0; }
 
 .hud__tool svg, .controls__nudge svg { display: block; }
+
+/* .screen and .controls both set `display: flex`, which outranks the UA's
+   [hidden] { display: none }. The kit ships exactly this rule for
+   .menu-mobile[hidden]; the game's two flex containers need the same or a
+   hidden screen still paints and the thumb zone still takes up space. */
+.screen[hidden] { display: none; }
+.controls[hidden] { display: none; }
+
+/* DEVIATION D3 — see FIDELITY.md. design-kit/game/hud.html sizes the HUD
+   values at --step-5 (--step-6 for the timer). At 390 the three stats do not
+   fit on one line and "00 000" wraps. The home comp draws the same row one
+   step down — design-kit/comps/index.html sets score and best at --step-4 and
+   the timer at --step-5 — so below the 820 breakpoint the row takes the
+   comp's sizes rather than the component board's. No new values.
+
+   The keyboard hint goes with it: it is anchored bottom-left and the tools
+   bottom-right, and under 820 they overlap. controls-mobile.html draws no
+   in-stage hint at that width, so it is hidden there. */
+@media (max-width: 819px) {
+  .hud__value { font-size: var(--step-4); }
+  .hud__value--time { font-size: var(--step-5); }
+  .hud__hint { display: none; }
+}

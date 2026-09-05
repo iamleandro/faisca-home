@@ -12,7 +12,9 @@ export default defineConfig({
   build: {
     // /about/ -> /about/index.html, so every route keeps its trailing slash.
     format: "directory",
-    inlineStylesheets: "auto",
+    // The whole stylesheet gzips to ~5 KB. Inlining it removes a render-
+    // blocking round trip, which was costing ~720 ms of LCP on simulated 4G.
+    inlineStylesheets: "always",
   },
   image: {
     // AVIF + WebP variants come from astro:assets at build time.

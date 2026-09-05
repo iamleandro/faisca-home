@@ -24,7 +24,7 @@ const { pathname } = Astro.props;
       href="/"
       style="display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; color: var(--color-text);"
     >
-      <Image src={mark} alt={SITE.name} width={30} height={30} style="width: 30px; height: 30px; display: block;" loading="lazy" />
+      <Image src={mark} alt={SITE.name} width={30} height={30} densities={[1, 2]} style="width: 30px; height: 30px; display: block;" loading="lazy" />
       <span
         style="font-family: var(--font-mono); font-size: var(--step--1); font-weight: 600; letter-spacing: var(--track-caps); text-transform: uppercase;"
         >{SITE.wordmark}</span

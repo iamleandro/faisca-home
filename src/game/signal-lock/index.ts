@@ -346,7 +346,7 @@ export function mount(): void {
 
   // ---- helpers -----------------------------------------------------------
   function setIcon(btn: HTMLElement, id: string): void {
-    btn.querySelector("use")?.setAttribute("href", `/game/sprites.svg#${id}`);
+    btn.querySelector("use")?.setAttribute("href", `#${id}`);
   }
 }
 

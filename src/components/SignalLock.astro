@@ -13,7 +13,11 @@
  * and draws into it with the kit's own 960x176 / 330x60 viewBox, meet-scaled
  * and centred, so the geometry matches the comp at any width.
  */
+import Sprites from "./Sprites.astro";
+import "../styles/game.css";
 ---
+
+<Sprites />
 
 <div class="signal-lock" data-signal-lock>
   <div class="stage" tabindex="0" role="application" aria-label="Signal Lock" data-stage>
@@ -62,13 +66,13 @@
 
       <div class="hud__tools">
         <button class="hud__tool" type="button" aria-label="Mute" aria-pressed="false" data-tool-mute>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/game/sprites.svg#spr-sound-on"></use></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#spr-sound-on"></use></svg>
         </button>
         <button class="hud__tool" type="button" aria-label="Pause" aria-pressed="false" data-tool-pause>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/game/sprites.svg#spr-pause"></use></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#spr-pause"></use></svg>
         </button>
         <button class="hud__tool" type="button" aria-label="Reduce effects" aria-pressed="false" data-tool-fx>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/game/sprites.svg#spr-fx-on"></use></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#spr-fx-on"></use></svg>
         </button>
       </div>
     </div>
@@ -141,11 +145,11 @@
   <div class="controls" data-controls hidden>
     <div class="controls__row">
       <button class="controls__nudge" type="button" aria-label="Tune down" data-nudge="-1">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/game/sprites.svg#spr-left"></use></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#spr-left"></use></svg>
       </button>
       <button class="controls__log" type="button" data-log>LOG</button>
       <button class="controls__nudge" type="button" aria-label="Tune up" data-nudge="1">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="/game/sprites.svg#spr-right"></use></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#spr-right"></use></svg>
       </button>
     </div>
   </div>

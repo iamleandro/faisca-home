@@ -6,7 +6,7 @@
      - the trailing "demo only" note is dropped; .menu-mobile is position:
        fixed in production, which is what the rule already says
 
-   One approved colour change (Leo, 2026-09-04) — FIDELITY.md A1:
+   One approved colour change (2026-09-04):
      - .site-footer__head and .site-footer__legal took --color-text-dim,
        which measures 4.33:1 on the footer ground and which the kit's own
        README reserves for "disabled controls only, never running copy".
@@ -37,7 +37,7 @@ img { max-width: 100%; }
    is what the support page's mailto link ships as today, in the kit's own
    comp as well. This is the same colour .prose a already uses (7.49:1); it
    only ever applies where the kit set nothing. Fold it into the kit.
-   Leo approved 2026-09-04 alongside FIDELITY.md A1. */
+   Approved 2026-09-04. */
 a { color: var(--color-accent); }
 
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: 999;

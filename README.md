@@ -25,8 +25,10 @@ and `esbuild` (`npm install-scripts approve sharp esbuild`).
 ## Deployment
 
 **The site is not live from this repo and must not be deployed from here
-without following [`CUTOVER.md`](CUTOVER.md).** faisca.gg is currently served
-from `iamleandro/faisca-landing`, branch `main`, via "Deploy from a branch".
+without working through the cutover checklist.** faisca.gg is currently served
+from a separate repository. The checklist, the QA report and the
+design-fidelity review are kept out of this repository on purpose — see
+`.gitignore`.
 
 `.github/workflows/deploy.yml` ships with a `workflow_dispatch` trigger only.
 It cannot fire on a push. Adding a `push:` trigger is the last step of the
@@ -51,7 +53,6 @@ public/
   CNAME                    www.faisca.gg
   .nojekyll
   fonts/                   self-hosted WOFF2 subsets + OFL.txt
-  game/sprites.svg         kept for reference; the sheet is inlined at build
   favicon*, icon-512.png, apple-touch-icon.png, site.webmanifest
 scripts/
   build-fonts.sh           reproduces design-kit/fonts/README.md's recipe
@@ -158,6 +159,7 @@ npm run icons              # favicons + site.webmanifest from the kit's logo
 
 ## Known conflicts
 
-[`FIDELITY.md`](FIDELITY.md) lists every place the implementation departs from
-the kit and why, plus the accessibility findings that need a designer decision.
-Read it before changing anything visual.
+The implementation departs from the kit in four documented places, each
+commented at the point of change — search the stylesheets and components for
+`DEVIATION`. The full review, the accessibility findings and the QA report are
+working documents kept out of this repository; see `.gitignore`.

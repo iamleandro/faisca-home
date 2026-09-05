@@ -1,5 +1,5 @@
-// Favicon export — the one asset design-kit/SIGN-OFF.md lists as not yet
-// generated ("a mechanical export from assets/faisca-mark-120.png").
+// Favicon export — the one asset the design kit specified but did not ship
+// ("a mechanical export from assets/faisca-mark-120.png").
 //
 // Source is design-kit/assets/faisca-logo-source.png: the identical artwork
 // at 300x300 instead of 120x120, so the larger sizes are not upscaled twice.

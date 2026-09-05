@@ -9,3 +9,22 @@ faisca-design-kit.html
 dist/
 .astro/
 node_modules/
+
+# ---------------------------------------------------------------------------
+# Internal working documents. Kept on disk, deliberately not published:
+# this repo is public, and none of these are for a general audience.
+#
+#   CUTOVER.md              deployment runbook — repo and DNS layout, the
+#                           rollback plan, settings only Leo can change
+#   FIDELITY.md             design-vs-implementation review and open questions
+#   QA.md                   QA report, known issues, untested device matrix
+#   design-kit/SIGN-OFF.md  designer hand-off notes, including which page copy
+#                           is still unrevised placeholder
+#   design-kit/.canvas/     the kit's own README calls these "working sources
+#                           for the visual canvas (not a deliverable)"
+# ---------------------------------------------------------------------------
+CUTOVER.md
+FIDELITY.md
+QA.md
+design-kit/SIGN-OFF.md
+design-kit/.canvas/

@@ -2,7 +2,8 @@
 /**
  * design-kit/game/sprites.svg, inlined.
  *
- * DEVIATION D2 — see FIDELITY.md. The kit documents the sprites as external
+ * DEVIATION D2 (kit technically impossible as written). The kit documents
+ * the sprites as external
  * references (`<use href="/game/sprites.svg#spr-needle">`). No shipping
  * browser resolves `<use>` against an external document — Chrome and Safari
  * refuse it outright — so every icon renders blank. The file is read at build
@@ -12,7 +13,14 @@
 import sprites from "../../design-kit/game/sprites.svg?raw";
 
 // Drop the XML wrapper: the symbols are injected into the page's own DOM.
-const inner = sprites.replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
+// The sheet's own usage comment goes too — it documents the external-reference
+// form that does not work, and it would otherwise ship on every page.
+const inner = sprites
+  .replace(/^[\s\S]*?<svg[^>]*>/, "")
+  .replace(/<\/svg>\s*$/, "")
+  .replace(/<!--[\s\S]*?-->/g, "")
+  .replace(/\n\s*\n/g, "\n")
+  .trim();
 ---
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" set:html={inner} />

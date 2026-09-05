@@ -162,7 +162,7 @@
 .hud__band { width: 100%; height: 176px; flex: none; }
 .hud__readout { display: flex; flex-direction: column; gap: var(--space-lg); }
 
-/* DEVIATION D1 — see FIDELITY.md. controls-mobile.html puts the readout at
+/* DEVIATION D1 (kit conflict, unresolved). controls-mobile.html puts the readout at
    bottom 16px, but that demo draws no .hud__tools; at the kit's tool position
    (right --space-xl, bottom --space-lg) the two overlap in portrait. The tools
    keep their specified position and the readout clears them by one tool height
@@ -194,7 +194,7 @@
 .screen[hidden] { display: none; }
 .controls[hidden] { display: none; }
 
-/* DEVIATION D3 — see FIDELITY.md. design-kit/game/hud.html sizes the HUD
+/* DEVIATION D3 (the kit's two files disagree). design-kit/game/hud.html sizes the HUD
    values at --step-5 (--step-6 for the timer). At 390 the three stats do not
    fit on one line and "00 000" wraps. The home comp draws the same row one
    step down — design-kit/comps/index.html sets score and best at --step-4 and

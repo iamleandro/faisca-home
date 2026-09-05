@@ -3,8 +3,8 @@
 # TRIGGER IS MANUAL ONLY, ON PURPOSE.
 # The live temporary site is served from iamleandro/faisca-landing (branch
 # `main`, "Deploy from a branch"). Nothing here may replace it until Leo cuts
-# over deliberately. Do not add a `push:` trigger until the CUTOVER.md
-# checklist has been worked through and Leo has approved the switch.
+# over deliberately. Do not add a `push:` trigger until the cutover checklist
+# has been worked through and the switch has been approved.
 name: Deploy to GitHub Pages
 
 on:

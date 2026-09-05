@@ -1,0 +1,134 @@
+---
+/** / — design-kit/comps/index.html, copy verbatim. */
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SignalLock from "../components/SignalLock.astro";
+import heroArt from "../assets/dead-air-hero-1400.jpg";
+import cardArt from "../assets/dead-air-card-760.jpg";
+---
+
+<BaseLayout title="Faisca Games — A spark, then a game.">
+  <Fragment slot="head">
+    <link rel="preload" as="image" href={heroArt.src} fetchpriority="high" />
+  </Fragment>
+
+  <section class="hero">
+    <Image class="hero__art" src={heroArt} alt="" widths={[820, 1400]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="hero__scrim"></div>
+    <div class="wrap hero__inner">
+      <div class="hero__eyebrow">Faisca Games</div>
+      <h1 class="hero__title">A SPARK, THEN A GAME.</h1>
+      <p class="hero__body">
+        We make small, dark, playable things. The first one is a radio you cannot quite tune — try it
+        right here, no download, no account.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="#play">
+          PLAY SIGNAL LOCK
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h13"></path>
+            <path d="M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+        <a class="btn btn--secondary btn--lg" href="/games/dead-air/">DEAD AIR: ASHMERE</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="play">
+    <div class="wrap">
+      <div class="section-heading section-heading--center" style="margin-bottom: var(--space-2xl);">
+        <div class="section-heading__eyebrow">Playable now</div>
+        <h2 class="section-heading__title">SIGNAL LOCK</h2>
+        <p class="section-heading__body">
+          Sixty seconds on the Ashmere band. Tune the needle onto a signal, hold to log the lead, and
+          watch out for phantoms.
+        </p>
+      </div>
+      <SignalLock />
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="feature-strip">
+        <div class="feature-strip__item">
+          <div class="feature-strip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 12h3l2.5-6 3 12 3-9 2.5 3h6"></path>
+            </svg>
+          </div>
+          <h3 class="feature-strip__title">NO DOWNLOAD</h3>
+          <p class="feature-strip__body">
+            Signal Lock runs in the page. Sixty seconds, one tab, nothing installed.
+          </p>
+        </div>
+        <div class="feature-strip__item">
+          <div class="feature-strip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4z"></path>
+              <path d="M17 9a4 4 0 0 1 0 6"></path>
+            </svg>
+          </div>
+          <h3 class="feature-strip__title">PLAYS SILENT</h3>
+          <p class="feature-strip__body">
+            Audio is off until you ask for it, and nothing in the game depends on hearing it.
+          </p>
+        </div>
+        <div class="feature-strip__item">
+          <div class="feature-strip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5"></circle>
+              <path d="M12 7v5l3.2 2"></path>
+            </svg>
+          </div>
+          <h3 class="feature-strip__title">SIXTY SECONDS</h3>
+          <p class="feature-strip__body">
+            One round is shorter than the queue for a coffee. Beat your own number.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-heading" style="margin-bottom: var(--space-lg);">
+        <div class="section-heading__eyebrow">The studio</div>
+        <h2 class="section-heading__title">SMALL ROOM, LONG NIGHTS</h2>
+      </div>
+      <div class="prose">
+        <p>
+          Faisca Games is an independent studio. We build short, atmospheric games that respect your
+          evening — the kind you finish, not the kind you maintain.
+        </p>
+        <p>Everything starts the same way: one idea that will not go out. A spark, then a game.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-heading" style="margin-bottom: var(--space-lg);">
+        <div class="section-heading__eyebrow">Now in the workshop</div>
+        <h2 class="section-heading__title">DEAD AIR: ASHMERE</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg);">
+        <a class="card-game" href="/games/dead-air/">
+          <div class="card-game__media">
+            <Image src={cardArt} alt="" widths={[380, 760]} sizes="(max-width: 600px) 100vw, 380px" loading="lazy" />
+            <span class="card-game__tag">In development</span>
+          </div>
+          <div class="card-game__body">
+            <h3 class="card-game__title">DEAD AIR: ASHMERE</h3>
+            <p class="card-game__caption">Listen closer. The truth is in the traffic.</p>
+          </div>
+        </a>
+        <div class="prose" style="align-self: center;">
+          <p>A night-shift radio operator, one town, and a frequency that answers back.</p>
+          <p><a href="/games/dead-air/">Read more about Dead Air</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

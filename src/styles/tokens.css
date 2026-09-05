@@ -1,0 +1,189 @@
+/* ==========================================================================
+   Faisca Games — design tokens
+   Every brand colour below was sampled from logo.png / deadair.png.
+   Nothing in the "Extracted" blocks was invented; the neutral ramp is
+   derived from the logo plate hue so the logo never shows a seam.
+   Stack: Astro + plain custom properties. No framework, no preprocessor.
+   ========================================================================== */
+
+:root {
+  /* --- Extracted: logo.png (300x300) ----------------------------------- */
+  --brand-spark:      #FBB924; /* star core — 81% of star pixels          */
+  --brand-ember:      #FB793E; /* rays, warm                              */
+  --brand-ember-hot:  #FD6B4B; /* rays, red-leaning                       */
+  --brand-paper:      #FCF9EC; /* FAISCA wordmark                         */
+  --brand-ground:     #121215; /* logo field                              */
+
+  /* --- Extracted: deadair.png (1536x1024) ------------------------------ */
+  --art-void:         #010101; /* frame ground                            */
+  --art-grain:        #2B1401; /* desk timber                             */
+  --art-vu:           #BB7B03; /* VU meter face                           */
+  --art-amber:        #DA8D23; /* lamplit paper                           */
+  --art-lamp:         #F2B44B; /* lamp glow                               */
+  --art-lamp-hi:      #FBD483; /* lamp hotspot                            */
+  --art-crt:          #2C941B; /* oscilloscope trace                      */
+
+  /* --- Grounds (derived: hue 240, sat 8% — the logo plate family) ------ */
+  --color-void:          var(--art-void);
+  --color-bg:            #09090B;
+  --color-surface:       #0E0E11;
+  --color-panel:         var(--brand-ground);
+  --color-panel-raised:  #1E1E24;
+  --color-grain:         var(--art-grain);
+  --color-grain-deep:    #140901;
+  --color-line:          #28282F;
+  --color-line-strong:   #34343D;
+  --color-line-accent:   rgba(251, 121, 62, 0.34);
+
+  /* --- Text ------------------------------------------------------------ */
+  --color-text:          #F4EFE6;  /* 16.33:1 on panel  AAA               */
+  --color-text-hi:       var(--brand-paper);
+  --color-text-mute:     #9A9388;  /*  6.15:1 on panel  AA                */
+  --color-text-dim:      #7E7767;  /*  4.20:1 — DISABLED STATES ONLY      */
+  --color-text-on-accent:#140901;  /*  7.39:1 on --color-accent           */
+
+  /* --- Interactive ----------------------------------------------------- */
+  --color-accent:        var(--brand-ember);   /*  7.04:1 on panel  AA    */
+  --color-accent-hover:  #FD9463;              /*  8.54:1                 */
+  --color-accent-press:  #E05F26;              /*  5.19:1                 */
+  --color-signal:        var(--brand-spark);   /* 10.74:1 on panel  AAA   */
+  --color-signal-hi:     #FDD26A;
+  --color-lamp:          var(--art-lamp);
+  --color-amber:         var(--art-amber);
+  --color-crt:           var(--art-crt);       /* waveform base, UI only  */
+  --color-crt-hi:        #6BE04D;              /* bright trace / locked   */
+  --color-focus:         var(--brand-spark);
+
+  /* --- Signal Lock: game states ---------------------------------------- */
+  /* Hue is the SECOND channel. Luminance + marker shape carry the state
+     so the ramp survives deuteranopia. locked vs lost = 3.01:1 apart.    */
+  --game-idle:     #6E7A70;  /* 4.43:1 — thin needle, no glow            */
+  --game-near:     var(--color-amber);   /* 7.40 — needle warms          */
+  --game-locking:  var(--color-signal);  /* 11.43 — ring pulses inward   */
+  --game-locked:   var(--color-crt-hi);  /* 11.74 — ring solid + flash   */
+  --game-lost:     #C4402A;  /* 3.90:1 — ring breaks into dashes         */
+  --game-phantom:  #6B655C;  /* 3.24:1 — hollow diamond, dashed, jitters  */
+
+  /* --- Typefaces (self-hosted WOFF2, SIL OFL 1.1) ---------------------- */
+  --font-display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", sans-serif;
+  --font-text:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* --- Type scale: fluid 390px -> 1440px ------------------------------- */
+  --step--1: clamp(13.5px, 13.314px + 0.0476vw, 14px);
+  --step-0:  clamp(16px,   15.629px + 0.0952vw, 17px);
+  --step-1:  clamp(19px,   18.257px + 0.1905vw, 21px);
+  --step-2:  clamp(22.5px, 21.200px + 0.3333vw, 26px);
+  --step-3:  clamp(26px,   23.771px + 0.5714vw, 32px);
+  --step-4:  clamp(30px,   26.286px + 0.9524vw, 40px);
+  --step-5:  clamp(35px,   29.429px + 1.4286vw, 50px);
+  --step-6:  clamp(41px,   32.457px + 2.1905vw, 64px);
+  --step-7:  clamp(48px,   34.629px + 3.4286vw, 84px);
+  --step-8:  clamp(56px,   36.686px + 4.9524vw, 108px);
+
+  --weight-body:        400;
+  --weight-medium:      500;
+  --weight-semi:        600;
+  --weight-display:     800;
+  --weight-display-max: 900;
+
+  --leading-flat:  0.86;  /* display, step-6 and up */
+  --leading-tight: 1.06;
+  --leading-snug:  1.25;
+  --leading-body:  1.5;
+  --leading-loose: 1.65;
+
+  --track-display: -0.02em;
+  --track-tight:   -0.01em;
+  --track-normal:  0;
+  --track-wide:     0.08em;
+  --track-caps:     0.16em;  /* carried over from the live site .studio  */
+
+  /* --- Space: 4px base ------------------------------------------------- */
+  --space-2xs:   4px;
+  --space-xs:    8px;
+  --space-sm:   12px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   32px;
+  --space-2xl:  48px;
+  --space-3xl:  72px;
+  --space-4xl: 112px;
+
+  /* --- Layout ---------------------------------------------------------- */
+  --container:        1280px;
+  --container-narrow: 720px;   /* the live site's main max-width          */
+  --measure:          68ch;
+  --gutter:           clamp(20px, 5.3vw, 48px);
+  /* Breakpoints are literals in @media — CSS vars cannot be used there:
+     390 (design floor) / 820 (tablet) / 1440 (design ceiling)            */
+
+  /* --- Controls: every hit target clears 44px -------------------------- */
+  --tap-min:     44px;
+  --control-sm:  40px;  /* only inside a >=44px padded hit area           */
+  --control-md:  48px;
+  --control-lg:  56px;
+
+  /* --- Edges: clipped, not rounded ------------------------------------- */
+  --radius-none:  0;
+  --radius-sm:    2px;
+  --radius-md:    4px;
+  --radius-art:  18px;  /* art wells — carried over from the live site    */
+  --cut-sm:       8px;
+  --cut-md:      14px;
+  --cut-lg:      22px;
+  --clip-panel: polygon(0 0, calc(100% - var(--cut-md)) 0, 100% var(--cut-md), 100% 100%, var(--cut-md) 100%, 0 calc(100% - var(--cut-md)));
+  --clip-button: polygon(0 0, calc(100% - var(--cut-sm)) 0, 100% var(--cut-sm), 100% 100%, var(--cut-sm) 100%, 0 calc(100% - var(--cut-sm)));
+  --clip-tag: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+
+  /* --- Borders & glow --------------------------------------------------- */
+  --border-hair:   1px solid var(--color-line);
+  --border-strong: 1px solid var(--color-line-strong);
+  --border-accent: 1px solid var(--color-line-accent);
+  --glow-spark:  0 0 24px rgba(251, 185, 36, 0.28);
+  --glow-ember:  0 0 20px rgba(251, 121, 62, 0.26);
+  --shadow-lift: 0 18px 40px -22px rgba(0, 0, 0, 0.9);
+
+  /* --- Focus ------------------------------------------------------------ */
+  --focus-width:  2px;
+  --focus-offset: 2px;
+  --focus-ring:   var(--focus-width) solid var(--color-focus);
+
+  /* --- Motion ----------------------------------------------------------- */
+  --dur-instant: 80ms;
+  --dur-fast:    140ms;
+  --dur-base:    220ms;
+  --dur-slow:    380ms;
+  --dur-scene:   620ms;
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-snap:   cubic-bezier(0.16, 1.08, 0.38, 1); /* lock overshoot     */
+
+  /* --- Safe areas + dynamic viewport ------------------------------------ */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --stage-h: 100dvh;
+
+  /* --- Z ---------------------------------------------------------------- */
+  --z-stage:     1;
+  --z-hud:      10;
+  --z-screen:   20;
+  --z-nav:     100;
+  --z-overlay: 200;
+}
+
+/* Motion tokens collapse — every animation in motion.md honours this.     */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 0ms; --dur-fast: 0ms; --dur-base: 0ms;
+    --dur-slow: 0ms; --dur-scene: 0ms;
+  }
+}
+
+/* Focus is never removed, only restyled.                                  */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}

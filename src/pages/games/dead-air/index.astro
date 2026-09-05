@@ -1,0 +1,107 @@
+---
+/** /games/dead-air/ — design-kit/comps/games-dead-air.html, copy verbatim. */
+import { Image } from "astro:assets";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Chevron from "../../../components/Chevron.astro";
+import hero from "../../../assets/dead-air-hero-1400.jpg";
+---
+
+<BaseLayout title="Dead Air: Ashmere — Faisca Games">
+  <section class="page-hero">
+    <Image class="page-hero__art" src={hero} alt="" widths={[820, 1400]} sizes="100vw" loading="eager" fetchpriority="high" />
+    <div class="page-hero__scrim"></div>
+    <div class="wrap">
+      <span class="card-game__tag" style="position: static; display: inline-flex; margin-bottom: var(--space-md);">
+        In development
+      </span>
+      <h1 class="page-hero__title">DEAD AIR: ASHMERE</h1>
+      <p class="page-hero__line">Listen closer. The truth is in the traffic.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap wrap--narrow">
+      <div class="prose">
+        <p>
+          Ashmere is a small harbour town that stopped appearing on the shipping forecast. You work
+          the night desk at its last working transmitter, logging what comes in and passing it up the
+          line. Most nights that is weather, ferries, and someone testing a microphone.
+        </p>
+        <p>Some nights it is not.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="feature-strip">
+        <div class="feature-strip__item">
+          <div class="feature-strip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4z"></path>
+              <path d="M17 9a4 4 0 0 1 0 6"></path>
+              <path d="M19.5 6.5a7.5 7.5 0 0 1 0 11"></path>
+            </svg>
+          </div>
+          <h3 class="feature-strip__title">LISTEN, DO NOT LOOK</h3>
+          <p class="feature-strip__body">
+            The whole game is sound and a logbook. What you decide to write down is what happens next.
+          </p>
+        </div>
+        <div class="feature-strip__item">
+          <div class="feature-strip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5"></circle>
+              <path d="M12 7v5l3.2 2"></path>
+            </svg>
+          </div>
+          <h3 class="feature-strip__title">ONE SHIFT A SITTING</h3>
+          <p class="feature-strip__body">
+            Every chapter is one night on the desk, forty minutes or so. Stop when the sun comes up.
+          </p>
+        </div>
+        <div class="feature-strip__item">
+          <div class="feature-strip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v18"></path>
+              <path d="M5 8l7-5 7 5"></path>
+              <path d="M5 16l7 5 7-5"></path>
+            </svg>
+          </div>
+          <h3 class="feature-strip__title">NO WRONG ENDING</h3>
+          <p class="feature-strip__body">
+            The log you file is the story you get. There is no failure screen, only a different morning.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap wrap--narrow">
+      <div class="section-heading" style="margin-bottom: var(--space-lg);">
+        <h2 class="section-heading__title">TRY THE TUNER</h2>
+        <p class="section-heading__body">
+          Signal Lock is a small arcade piece built out of Dead Air's radio. It is playable on the home
+          page right now.
+        </p>
+      </div>
+      <a class="btn btn--primary btn--lg" href="/#play">
+        PLAY SIGNAL LOCK
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h13"></path>
+          <path d="M12 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap wrap--narrow">
+      <div class="linklist">
+        <a class="linklist__item" href="/support/dead-air/">DEAD AIR SUPPORT <Chevron /></a>
+        <a class="linklist__item" href="/privacy/dead-air/">DEAD AIR PRIVACY <Chevron /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

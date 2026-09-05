@@ -16,6 +16,7 @@ npm run dev        # http://localhost:4321
 npm run build      # -> dist/
 npm run preview    # serve dist/ exactly as it will ship
 npm run check      # astro check: types + template diagnostics
+npm test           # Signal Lock mechanics — run this after touching config.ts
 ```
 
 Node 22 or newer. `npm install` needs its install scripts approved for `sharp`
@@ -119,6 +120,12 @@ else hard-codes a constant. The knobs you are most likely to want:
 | `needle.accel` / `friction` | steering feel |
 | `scoring.base` / `perSecondLeft` | points per lead |
 | `phantomPenaltyMs` | time lost to a phantom (3 s) |
+
+`npm test` asserts the rules against the simulation directly — a 1.2 s hold
+logs a lead, a phantom costs three seconds and scores nothing, zero leads fails
+the round, the window contracts 7% → 2.5% and stops at its floor, phantoms only
+appear from lead 3, and a pause loses no time. Run it after changing any
+number above.
 
 `DISPATCH_LINES` in the same file holds the one-line radio dispatches. They are
 original, spoiler-free and carry no Case 001 plot facts — keep them that way.

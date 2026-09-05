@@ -1,7 +1,7 @@
 # QA report
 
-Build under test: branch `redesign`, commit `71a14e7`, served from `dist/` via
-`astro preview`.
+Build under test: branch `redesign`, served from `dist/` via `astro preview`.
+Updated after the approved accessibility fixes (`FIDELITY.md` A1, A2, A4).
 
 **Read the scope note first.** I verified everything below on this machine —
 macOS 15.6, headless Chrome 152, viewport and touch emulation over the
@@ -16,24 +16,54 @@ untested.
 
 ### Lighthouse — mobile, simulated throttling
 
-| Route | Perf | A11y | Best Practices | SEO | FCP | LCP | TBT | CLS |
-|---|---|---|---|---|---|---|---|---|
-| `/` | 99 | 96 | 100 | 100 | 1.4 s | 2.0 s | 0 ms | 0 |
-| `/games/dead-air/` | 99 | 94 | 100 | 100 | 1.2 s | 1.9 s | 0 ms | 0.021 |
-| `/about/` | 97 | 94 | 100 | 100 | 1.2 s | 2.5 s | 0 ms | 0 |
-| `/support/dead-air/` | 98 | 96 | 100 | 100 | 1.2 s | 2.4 s | 0 ms | 0 |
-| `/privacy/dead-air/` | 100 | 96 | 100 | 100 | 1.4 s | 1.7 s | 0 ms | 0 |
-| `/contact/` | 97 | 94 | 100 | 100 | 1.2 s | 2.5 s | 0 ms | 0 |
+| Route | Perf | A11y | Best Practices | SEO | Remaining a11y failure |
+|---|---|---|---|---|---|
+| `/` | 99* | **100** | 100 | 100 | none |
+| `/games/dead-air/` | 99 | **100** | 100 | 100 | none |
+| `/about/` | 97 | 98 | 100 | 100 | `heading-order` — `FIDELITY.md` A5 |
+| `/contact/` | 100 | 98 | 100 | 100 | `heading-order` — `FIDELITY.md` A5 |
+| `/support/dead-air/` | 98 | **100** | 100 | 100 | none |
+| `/privacy/dead-air/` | 97 | **100** | 100 | 100 | none |
 
-Every route clears the ≥90 budget in all four categories.
+Every route clears the ≥90 budget in all four categories. Accessibility went
+from 94–96 to 98–100 with the A1, A2 and A4 fixes.
+
+\* Lighthouse intermittently returns `NO_LCP` on `/` and scores performance 0
+when it does. This is a measurement artifact of the kit's hero fade-in, not a
+regression — see **Largest Contentful Paint** below.
+
+### Largest Contentful Paint — measured directly
+
+Lighthouse's simulated LCP is unreliable on this site. `motion.md` items 1–3
+fade the hero heading up from `opacity: 0`, and Chrome never admits an element
+that is transparent at first paint as an LCP candidate, so the largest thing on
+the page is invisible to the metric.
+
+Measured with a `PerformanceObserver` under 4× CPU throttling and 4G
+(150 ms RTT, 1.6 Mbps down):
+
+| Route | FCP | LCP | LCP element |
+|---|---|---|---|
+| `/` | 348 ms | **348 ms** | `IMG.hero__art` |
+| `/games/dead-air/` | 300 ms | **364 ms** | `IMG.page-hero__art` |
+| `/about/` | 296 ms | **296 ms** | first prose `<p>` |
+| `/contact/` | 304 ms | **304 ms** | first prose `<p>` |
+| `/support/dead-air/` | 300 ms | **300 ms** | `P.section-heading__body` |
+| `/privacy/dead-air/` | 320 ms | **320 ms** | first prose `<p>` |
+| `/404` | 216 ms | **216 ms** | `H1` |
+
+Under `prefers-reduced-motion` the animation is off and `H1.hero__title`
+becomes the LCP element at 344 ms, confirming the cause.
+
+Every route is an order of magnitude inside the 2.5 s budget.
 
 ### Budgets
 
 | Budget | Target | Actual | |
 |---|---|---|---|
 | Game JS, gzipped | ≤ 50 KB | 8.7 KB | pass |
-| Home LCP, mobile 4G | < 2.5 s | 2.0 s | pass |
-| Lighthouse, all four, mobile | ≥ 90 | 94–100 | pass |
+| Home LCP, throttled mobile | < 2.5 s | 0.35 s measured | pass |
+| Lighthouse, all four, mobile | ≥ 90 | 97–100 | pass |
 | Self-hosted fonts | ~95 KB | 102.1 KB | over by 7 KB |
 
 Home page: 61 KB of HTML, 13 KB gzipped (the stylesheet is inlined into it).
@@ -163,23 +193,21 @@ deviation D1 in `FIDELITY.md` is about exactly that overlap.
 
 ## Known issues
 
-1. **Footer text below the contrast floor** — `--color-text-dim` at 4.33:1 on
-   the footer ground, used for running copy against the kit's own written rule.
-   Unchanged pending a decision. `FIDELITY.md` A1.
-2. **Heading order skips `<h2>` on `/games/dead-air/`** — the kit's markup.
-   Unchanged pending a decision. `FIDELITY.md` A2.
-3. **Favicon at 16px is illegible** — the mark is a full lockup with a
+1. ~~Footer text below the contrast floor~~ — **fixed**, `FIDELITY.md` A1.
+2. ~~Heading order on `/games/dead-air/`~~ — **fixed**, `FIDELITY.md` A2.
+3. ~~Links outside `.prose` rendering browser blue at 2.12:1~~ — **fixed**,
+   `FIDELITY.md` A4.
+4. **`/about/` and `/contact/` skip a heading level** — same defect as A2 but
+   in `.prose`, where `h2` and `h3` are different sizes, so the fix is not
+   free. Needs a designer's call. `FIDELITY.md` A5.
+5. **Favicon at 16px is illegible** — the mark is a full lockup with a
    wordmark. `FIDELITY.md` A3.
-4. **Portrait readout was moved to clear the HUD tools** — the kit places both
+6. **Portrait readout was moved to clear the HUD tools** — the kit places both
    and they overlap. `FIDELITY.md` D1, the one deviation worth a ruling.
-5. **Three routes sit at the LCP line.** `/about/` and `/contact/` both
-   measure 2.5 s and `/support/dead-air/` 2.4 s, on localhost with simulated
-   throttling — at, not under, the 2.5 s budget. On all three the LCP element
-   is the first heading, waiting on the display font. `/` is the page the
-   budget names and it comes in at 2.0 s. Production is compressed and
-   CDN-served so these should land below the line, but they are the numbers to
-   re-measure after cutover.
-6. **Fonts are 102 KB, not ~95 KB** — built to the kit's recipe exactly. Under
+7. **Lighthouse cannot compute LCP on `/`** and scores performance 0 when it
+   fails. Measurement artifact of the approved hero fade-in; directly measured
+   LCP is 348 ms. Nothing to fix, but do not be alarmed by a 0.
+8. **Fonts are 102 KB, not ~95 KB** — built to the kit's recipe exactly. Under
    7 KB over an estimate, not a hard budget.
-7. **`←` `→` render in a fallback face** — outside the kit's subset range. One
+9. **`←` `→` render in a fallback face** — outside the kit's subset range. One
    line in `scripts/build-fonts.sh` if you want them in Plex Mono.

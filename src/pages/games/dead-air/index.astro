@@ -1,5 +1,15 @@
 ---
-/** /games/dead-air/ — design-kit/comps/games-dead-air.html, copy verbatim. */
+/**
+ * /games/dead-air/ — design-kit/comps/games-dead-air.html, copy verbatim.
+ *
+ * One approved markup change (Leo, 2026-09-04) — FIDELITY.md A2: the comp
+ * goes <h1> (page hero) straight to <h3> on the feature cells with no <h2>
+ * between, which skips a heading level. The three .feature-strip__title
+ * elements are <h2> here. .feature-strip__title is styled entirely by class,
+ * so this changes the document outline and nothing else. On / the same
+ * component sits under an <h2> and its <h3>s are correct there — only this
+ * page was affected.
+ */
 import { Image } from "astro:assets";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Chevron from "../../../components/Chevron.astro";
@@ -47,7 +57,7 @@ import hero from "../../../assets/dead-air-hero-1400.jpg";
               <path d="M19.5 6.5a7.5 7.5 0 0 1 0 11"></path>
             </svg>
           </div>
-          <h3 class="feature-strip__title">LISTEN, DO NOT LOOK</h3>
+          <h2 class="feature-strip__title">LISTEN, DO NOT LOOK</h2>
           <p class="feature-strip__body">
             The whole game is sound and a logbook. What you decide to write down is what happens next.
           </p>
@@ -59,7 +69,7 @@ import hero from "../../../assets/dead-air-hero-1400.jpg";
               <path d="M12 7v5l3.2 2"></path>
             </svg>
           </div>
-          <h3 class="feature-strip__title">ONE SHIFT A SITTING</h3>
+          <h2 class="feature-strip__title">ONE SHIFT A SITTING</h2>
           <p class="feature-strip__body">
             Every chapter is one night on the desk, forty minutes or so. Stop when the sun comes up.
           </p>
@@ -72,7 +82,7 @@ import hero from "../../../assets/dead-air-hero-1400.jpg";
               <path d="M5 16l7 5 7-5"></path>
             </svg>
           </div>
-          <h3 class="feature-strip__title">NO WRONG ENDING</h3>
+          <h2 class="feature-strip__title">NO WRONG ENDING</h2>
           <p class="feature-strip__body">
             The log you file is the story you get. There is no failure screen, only a different morning.
           </p>

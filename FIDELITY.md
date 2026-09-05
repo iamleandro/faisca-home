@@ -118,13 +118,13 @@ case the boards were the intent.**
 
 ---
 
-## Accessibility findings — need a decision
+## Accessibility findings
 
-The mobile Lighthouse accessibility budget (≥90) is met on every route (94–96).
-These are real failures inside that score, and all three originate in the kit,
-so **nothing has been changed.**
+Three were reported, **two are now fixed** (Leo approved 2026-09-04) and one
+new one was found and fixed alongside them. Mobile Lighthouse accessibility is
+now **100 on four routes and 98 on two**, up from 94–96.
 
-### A1 — footer text is below the contrast floor
+### A1 — footer text below the contrast floor — **FIXED**
 
 `--color-text-dim` `#7E7767` measures:
 
@@ -140,21 +140,66 @@ token under the floor. **Disabled controls only, never running copy.**"* But
 `.site-footer__legal`, and the privacy comp uses it for the "Last updated"
 line. All three are running copy. The kit contradicts its own rule.
 
-**Proposed minimal fix:** those three selectors take `--color-text-mute`
-`#9A9388` (6.34:1 on surface). An existing token, no new value, no layout
-change. Awaiting approval.
+**Applied.** `.site-footer__head`, `.site-footer__legal` and the "Last
+updated" line on both `/support/dead-air/` and `/privacy/dead-air/` now take
+`--color-text-mute` `#9A9388` (6.34:1 on surface). An existing token, no new
+value, no layout change. Each edit is noted in its file's header.
 
-### A2 — heading order skips a level on `/games/dead-air/`
+The game HUD uses the same token for `.hud__label`, `.hud__hint` and
+`.screen__hint`, but those sit on `--color-void` `#010101` and measure
+**4.69:1** — above the floor. Left alone.
+
+**Fold this back into `design-kit/components/footer.html`** so the kit stops
+disagreeing with its own README.
+
+### A2 — heading order skips a level on `/games/dead-air/` — **FIXED**
 
 `comps/games-dead-air.html` goes `<h1>` (page hero) → prose with no heading →
 `<h3>` on the three feature cells. No `<h2>`.
 
-**Proposed minimal fix:** the three `.feature-strip__title` become `<h2>`.
-`.feature-strip__title` is styled entirely by class, so this is **zero visual
-change** — purely the document outline. Awaiting approval.
+**Applied.** The three `.feature-strip__title` elements are `<h2>`.
+`.feature-strip__title` is styled entirely by class, so this changed the
+document outline and **nothing visual**. `/games/dead-air/` is now 100.
 
-(On `/` the same component sits under an `<h2>`, so its `<h3>`s are correct
-there. Only the Dead Air page is affected.)
+On `/` the same component sits under an `<h2>`, so its `<h3>`s are correct
+there and were left alone.
+
+### A4 — links outside `.prose` fell back to browser blue — **FIXED**
+
+Found while verifying A1. The kit styles `.prose a`, the nav, the footer,
+`.linklist`, `.bigmail` and `.social-links`, but **never a bare `<a>`**. Any
+link outside those contexts therefore rendered as the UA default `#0000EE` —
+**2.12:1** on `--color-bg`.
+
+It was shipping on the `support@faisca.gg` link in the support page's callout,
+which is a standalone `<p>` rather than `.prose`. The kit's own comp has the
+same bug. A second latent case is the `.card-game` anchor on `/`, where every
+child sets its own colour so nothing showed.
+
+**Applied.** One base rule, `a { color: var(--color-accent) }` — the same
+colour `.prose a` already uses, **7.49:1** on `--color-bg`. It only ever
+applies where the kit set nothing; every styled context still wins on
+specificity. **Fold this into the kit too.**
+
+### A5 — `/about/` and `/contact/` skip a heading level — **needs a decision**
+
+The same defect as A2 in a different component, found in the same pass. Both
+pages go `<h1>` → `<h3>`, where the `<h3>`s come from `.prose h3`.
+
+**This one is not free.** `.prose h2` is `--step-4` and `.prose h3` is
+`--step-3`, so unlike A2 promoting them would make "WHY THE NAME", "WHAT WE ARE
+BUILDING", "PRESS AND CREATORS" and "SUPPORT" visibly larger — and on `/about/`
+the same size as the "GET IN TOUCH" `<h2>` below them.
+
+Options, none applied:
+
+1. Promote to `<h2>` and accept the size change.
+2. Add a `.prose h3` variant that keeps `--step-3` at `<h2>` level. New CSS,
+   so a kit change.
+3. Leave it. Both pages score 98; the outline is imperfect but the visual
+   hierarchy is the designer's.
+
+Worth a designer's ruling rather than mine.
 
 ### A3 — favicon at 16px
 
@@ -177,12 +222,44 @@ and whether there is a vector or a ≥512px original to export from.
 | Budget | Target | Actual |
 |---|---|---|
 | Game JS, gzipped | ≤ 50 KB | **8.7 KB** |
-| Home LCP, simulated mobile 4G | < 2.5 s | **2.0 s** |
+| Home LCP, throttled mobile | < 2.5 s | **0.35 s** — measured, see below |
 | Lighthouse mobile, Performance | ≥ 90 | 97–100 |
-| Lighthouse mobile, Accessibility | ≥ 90 | 94–96 |
+| Lighthouse mobile, Accessibility | ≥ 90 | **98–100** |
 | Lighthouse mobile, Best Practices | ≥ 90 | **100** |
 | Lighthouse mobile, SEO | ≥ 90 | **100** |
 
-`/about/` measures LCP 2.5 s on localhost with simulated throttling — at the
-line. Production is served compressed from a CDN, so it should sit below it,
-but it is the one number worth re-checking after cutover.
+### A correction on LCP
+
+I earlier reported home LCP as 2.0 s from Lighthouse. That figure is not
+reliable and the real number is far better.
+
+Lighthouse intermittently fails on `/` with `NO_LCP`, and the cause is the
+kit's own hero animation: `motion.md` items 1–3 fade `.hero__title`,
+`.hero__body` and `.hero__actions` up from `opacity: 0`, and **Chrome excludes
+an element that is transparent at first paint from ever becoming an LCP
+candidate**. The headline — by far the largest thing on the page — is
+therefore invisible to the metric, which leaves Lantern's simulation picking
+between small leftovers and sometimes failing outright.
+
+Measured directly with a `PerformanceObserver` under 4× CPU throttling and
+4G (150 ms RTT, 1.6 Mbps):
+
+| Route | FCP | LCP | LCP element |
+|---|---|---|---|
+| `/` | 348 ms | **348 ms** | `IMG.hero__art` / `DIV.hero__eyebrow` |
+| `/games/dead-air/` | 300 ms | **364 ms** | `IMG.page-hero__art` |
+| `/about/` | 296 ms | **296 ms** | first prose `<p>` |
+| `/contact/` | 304 ms | **304 ms** | first prose `<p>` |
+| `/support/dead-air/` | 300 ms | **300 ms** | `P.section-heading__body` |
+| `/privacy/dead-air/` | 320 ms | **320 ms** | first prose `<p>` |
+| `/404` | 216 ms | **216 ms** | `H1` |
+
+Under `prefers-reduced-motion` the animation is off and `H1.hero__title`
+becomes the LCP element at 344 ms, which confirms the diagnosis.
+
+Every route is an order of magnitude inside the 2.5 s budget. The earlier
+worry that `/about/` and `/contact/` were "at the line" was a simulation
+artifact — they paint in under 310 ms.
+
+**Nothing was changed to chase this.** The animation is approved motion and
+the site is fast; only the measurement is awkward.

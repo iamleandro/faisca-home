@@ -5,6 +5,14 @@
        real .stage, exactly as design-kit/game/hud.html ships it
      - the trailing "demo only" note is dropped; .menu-mobile is position:
        fixed in production, which is what the rule already says
+
+   One approved colour change (Leo, 2026-09-04) — FIDELITY.md A1:
+     - .site-footer__head and .site-footer__legal took --color-text-dim,
+       which measures 4.33:1 on the footer ground and which the kit's own
+       README reserves for "disabled controls only, never running copy".
+       Both now take --color-text-mute (6.34:1). Fold this back into
+       design-kit/components/footer.html so the kit stops disagreeing
+       with itself.
    Everything else is byte-for-byte the kit.
    ========================================================================= */
 
@@ -23,6 +31,15 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text);
   font-family: var(--font-text); font-size: var(--step-0);
   line-height: var(--leading-body); -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; }
+/* The kit styles .prose a, the nav, the footer, .linklist, .bigmail and
+   .social-links, but never a bare <a> — so a link outside those contexts
+   falls to the UA default #0000EE, which measures 2.12:1 on --color-bg. That
+   is what the support page's mailto link ships as today, in the kit's own
+   comp as well. This is the same colour .prose a already uses (7.49:1); it
+   only ever applies where the kit set nothing. Fold it into the kit.
+   Leo approved 2026-09-04 alongside FIDELITY.md A1. */
+a { color: var(--color-accent); }
+
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: 999;
   background: var(--color-signal); color: var(--color-text-on-accent);
   padding: var(--space-sm) var(--space-md); font-weight: var(--weight-semi); }
@@ -282,7 +299,7 @@ img { max-width: 100%; }
 
 .site-footer__col { display: flex; flex-direction: column; gap: var(--space-2xs); }
 .site-footer__head { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--track-wide);
-  text-transform: uppercase; color: var(--color-text-dim); margin-bottom: var(--space-xs); }
+  text-transform: uppercase; color: var(--color-text-mute); margin-bottom: var(--space-xs); }
 .site-footer__link { display: inline-flex; align-items: center; min-height: var(--tap-min);
   font-size: var(--step--1); color: var(--color-text-mute); text-decoration: none;
   transition: color var(--dur-fast) var(--ease-out); }
@@ -294,7 +311,7 @@ img { max-width: 100%; }
   border-top: 1px solid var(--color-line); max-width: var(--container); margin: 0 auto;
   padding: var(--space-md) var(--gutter);
   padding-bottom: calc(var(--space-lg) + var(--safe-b)); }
-.site-footer__legal { font-family: var(--font-mono); font-size: var(--step--1); color: var(--color-text-dim); }
+.site-footer__legal { font-family: var(--font-mono); font-size: var(--step--1); color: var(--color-text-mute); }
 
 @media (max-width: 819px) {
   .site-footer__top { grid-template-columns: 1fr; gap: var(--space-xl); }

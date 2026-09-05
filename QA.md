@@ -42,6 +42,35 @@ Home page: 61 KB of HTML, 13 KB gzipped (the stylesheet is inlined into it).
 
 ## Behaviour verified
 
+### Game mechanics — `npm test`, 22 assertions, all passing
+
+The simulation is pure, so every rule in the brief is asserted by stepping it
+at a fixed timestep rather than inferred from play: a 1.2 s hold logs a lead;
+score is `100 + 2 × seconds left`; a phantom logs nothing, scores nothing and
+costs three seconds; sixty seconds with nothing logged is a fail while one lead
+ends the round normally; the window contracts 7% → 2.5% and stops at its
+playable floor; drift speed and jitter ramp per lead and stop at their
+ceilings; phantoms only respawn from lead 3; a pause loses no time and does not
+survive a held key.
+
+### Full round, played end to end
+
+Driven through the real UI in the browser, tracking the signal by reading the
+band out of the canvas:
+
+```
+LOGGED  score=00 190  t=0:45  "Ashmere docks. Two voices, one radio."
+LOGGED  score=00 374  t=0:43  "Somebody is counting numbers on the harbour band."
+LOGGED  score=00 544  t=0:36  "The night bus driver called it in. Nobody answered."
+round over -> screen: roundEnd | score 00 544 | leads 03 | best 00 544
+aria-live: "Round over. Score 544, 3 leads."
+localStorage["faisca.signalLock.best"] = 544
+```
+
+Scoring matches the formula exactly, dispatch lines advance in order, the
+round-end screen carries the right stats and the best score persists under the
+key the brief specifies.
+
 ### Game loop
 | Check | Result |
 |---|---|

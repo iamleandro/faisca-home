@@ -10,7 +10,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "fonts": "node scripts/build-fonts.mjs",
-    "icons": "node scripts/build-icons.mjs"
+    "icons": "node scripts/build-icons.mjs",
+    "test": "esbuild test/sim.test.ts --bundle --format=esm --platform=node --outfile=node_modules/.cache/sim.test.mjs --log-level=error && node node_modules/.cache/sim.test.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "esbuild": "^0.25.12",
     "typescript": "^5.9.3"
   },
   "allowScripts": {

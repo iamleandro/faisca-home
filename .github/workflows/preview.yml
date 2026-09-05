@@ -1,0 +1,45 @@
+# Staging preview that cannot touch production.
+#
+# Builds the site and uploads dist/ as a downloadable workflow artifact.
+# There is no GitHub Pages surface here at all — no deploy step, no
+# environment, no pages permission. Download the artifact from the run
+# summary, unzip it, and serve it locally:
+#
+#   npx serve faisca-site-preview
+#
+# See README.md → "Staging preview".
+name: Build preview artifact
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: faisca-site-preview
+          path: dist/
+          retention-days: 14

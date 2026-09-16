@@ -24,17 +24,16 @@ and `esbuild` (`npm install-scripts approve sharp esbuild`).
 
 ## Deployment
 
-**The site is not live from this repo and must not be deployed from here
-without working through the cutover checklist.** faisca.gg is currently served
-from a separate repository. The checklist, the QA report and the
+**The cutover is done: this repo is live.** `.github/workflows/deploy.yml`
+runs on every push to `main` (and on demand via `workflow_dispatch`), builds
+with Astro, and publishes to GitHub Pages, which serves the custom domain
+`www.faisca.gg` directly. Once a PR is merged to `main`, it ships — there is
+no separate staging deploy in between. `iamleandro/faisca-landing` was the
+pre-cutover placeholder and is no longer what's live. The QA report and
 design-fidelity review are kept out of this repository on purpose — see
 `.gitignore`.
 
-`.github/workflows/deploy.yml` ships with a `workflow_dispatch` trigger only.
-It cannot fire on a push. Adding a `push:` trigger is the last step of the
-cutover checklist, not the first.
-
-### Staging preview
+### PR previews
 
 `.github/workflows/preview.yml` runs on every PR to `main` and on demand. It
 builds the site and uploads `dist/` as a workflow artifact. It has no `pages:`

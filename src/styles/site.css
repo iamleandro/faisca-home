@@ -103,11 +103,14 @@ a { color: var(--color-accent); }
 .linklist__item:focus-visible { outline: var(--focus-ring); outline-offset: -2px; }
 
 /* ---------- big mail ---------- */
+/* Sized to fit playfaiscagames@gmail.com on one line down to a 320px
+   viewport; step-6 was tuned for the shorter contact@faisca.gg address
+   and wrapped mid-word once the address got longer. */
 .bigmail { display: inline-block; font-family: var(--font-display);
-  font-size: var(--step-6); font-weight: var(--weight-display);
+  font-size: clamp(20px, 5.5vw, 42px); font-weight: var(--weight-display);
   letter-spacing: var(--track-tight); color: var(--color-text-hi);
   text-decoration: none; border-bottom: 2px solid var(--color-line-strong);
-  padding-bottom: var(--space-2xs); word-break: break-word; }
+  padding-bottom: var(--space-2xs); white-space: nowrap; }
 .bigmail:hover { color: var(--color-accent); border-bottom-color: var(--color-accent); }
 .bigmail:focus-visible { outline: var(--focus-ring); outline-offset: 4px; }
 

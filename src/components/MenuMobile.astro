@@ -8,7 +8,6 @@
 import { Image } from "astro:assets";
 import mark from "../assets/faisca-mark-120.png";
 import Chevron from "./Chevron.astro";
-import SocialLinks from "./SocialLinks.astro";
 import { NAV, SITE, isCurrent } from "../data/site";
 
 interface Props {
@@ -87,6 +86,5 @@ const { pathname } = Astro.props;
       style="align-self: flex-start; color: var(--color-text); text-decoration: none; border-bottom: 1px solid var(--color-line-strong); padding-bottom: 2px;"
       >{SITE.email}</a
     >
-    <SocialLinks />
   </div>
 </div>

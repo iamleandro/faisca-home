@@ -58,9 +58,9 @@ scripts/
   build-fonts.sh           reproduces design-kit/fonts/README.md's recipe
   build-icons.mjs          favicon export from the kit's logo source
 src/
-  data/site.ts             nav, footer, socials, tagline, email
+  data/site.ts             nav, footer, tagline, email
   layouts/BaseLayout.astro nav, footer, meta/OG, favicons, skip link
-  components/              SiteNav, SiteFooter, MenuMobile, SocialLinks,
+  components/              SiteNav, SiteFooter, MenuMobile,
                            SignalLock, Sprites, Chevron
   pages/                   one file per route
   scripts/                 nav.ts (sticky), menu.ts (overlay + focus trap)
@@ -74,10 +74,8 @@ src/
 
 ### Routes
 
-`/`, `/games/dead-air/`, `/about/`, `/support/dead-air/`, `/privacy/dead-air/`,
-`/contact/`, `/404`. Trailing slashes are enforced, so
-**`/support/dead-air/` and `/privacy/dead-air/` keep the exact URLs they have
-today.** Sitemap and `robots.txt` are generated at build.
+`/`, `/about/`, `/contact/`, `/404`. Trailing slashes are enforced. Sitemap
+and `robots.txt` are generated at build.
 
 ---
 
@@ -85,14 +83,10 @@ today.** Sitemap and `robots.txt` are generated at build.
 
 | What | Where |
 |---|---|
-| Nav labels and order, footer columns, social links, tagline, email, copyright | `src/data/site.ts` |
+| Nav labels and order, footer columns, tagline, email, copyright | `src/data/site.ts` |
 | Page prose | the `.astro` file for that route in `src/pages/` |
 | Game dispatch lines, screen copy | `src/game/signal-lock/config.ts` and `src/components/SignalLock.astro` |
 | Page titles and meta descriptions | the `<BaseLayout title=... description=...>` call on each page |
-
-`/support/dead-air/` and `/privacy/dead-air/` carry **real, final, legally
-meaningful copy**, extracted word for word from the approved comps. Do not
-reword them without Leo.
 
 ## Editing styles
 

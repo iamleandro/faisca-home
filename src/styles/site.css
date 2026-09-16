@@ -31,13 +31,11 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text);
   font-family: var(--font-text); font-size: var(--step-0);
   line-height: var(--leading-body); -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; }
-/* The kit styles .prose a, the nav, the footer, .linklist, .bigmail and
-   .social-links, but never a bare <a> — so a link outside those contexts
-   falls to the UA default #0000EE, which measures 2.12:1 on --color-bg. That
-   is what the support page's mailto link ships as today, in the kit's own
-   comp as well. This is the same colour .prose a already uses (7.49:1); it
-   only ever applies where the kit set nothing. Fold it into the kit.
-   Approved 2026-09-04. */
+/* The kit styles .prose a, the nav, the footer, .linklist and .bigmail, but
+   never a bare <a> — so a link outside those contexts falls to the UA
+   default #0000EE, which measures 2.12:1 on --color-bg. This is the same
+   colour .prose a already uses (7.49:1); it only ever applies where the kit
+   set nothing. Fold it into the kit. Approved 2026-09-04. */
 a { color: var(--color-accent); }
 
 .skip-link { position: absolute; left: -9999px; top: 0; z-index: 999;
@@ -175,22 +173,6 @@ a { color: var(--color-accent); }
 .section-heading__body { margin: 0; max-width: 52ch; color: var(--color-text-mute);
   line-height: var(--leading-body); text-wrap: pretty; }
 .section-heading--center { align-items: center; text-align: center; }
-
-/* States double up: .x:hover and .x.is-hover share one rule, so the static
-   demo below shows exactly what the browser renders. Drop the .is-* classes
-   when porting; keep the pseudo-classes. */
-.social-links { display: flex; gap: var(--space-xs); list-style: none; margin: 0; padding: 0; }
-.social-links__link { display: flex; align-items: center; justify-content: center;
-  width: var(--tap-min); height: var(--tap-min); border: 1px solid var(--color-line);
-  color: var(--color-text-mute);
-  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
-.social-links__link svg { width: 21px; height: 21px; }
-.social-links__link:hover, .social-links__link.is-hover {
-  color: var(--color-accent); border-color: var(--color-line-accent); }
-.social-links__link:focus-visible, .social-links__link.is-focus {
-  outline: var(--focus-ring); outline-offset: var(--focus-offset); }
-.social-links__link:active, .social-links__link.is-active { color: var(--color-accent-press); }
-@media (prefers-reduced-motion: reduce) { .social-links__link { transition: none; } }
 
 .hero { position: relative; display: grid; align-items: end;
   min-height: min(100dvh, 860px); padding: var(--space-4xl) var(--gutter) var(--space-3xl);
